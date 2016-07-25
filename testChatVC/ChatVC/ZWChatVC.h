@@ -30,4 +30,8 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *mmoremoreview;
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *minputbarconsth;
+
+
 @end

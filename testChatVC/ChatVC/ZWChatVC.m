@@ -128,6 +128,9 @@
     
     CGFloat         _moreXpoint;
     CGFloat         _gitXpoint;
+    
+    CGFloat         _lastInputH;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -151,7 +154,8 @@
     self.minputtext.layer.cornerRadius = 3.0f;
     
     self.minputtext.delegate = self;
-
+    
+    _lastInputH = 31.0f;
     
     self.mvoicebtpress.layer.borderColor = [UIColor colorWithRed:0.788 green:0.792 blue:0.804 alpha:1.000].CGColor;
     self.mvoicebtpress.layer.borderWidth = 1.0f;
@@ -302,7 +306,44 @@
 
 -(void)moreItemClicked:(UIButton*)sender
 {
-    NSLog(@"xx:%d",sender.tag);
+    if( sender.tag == -1 )
+    {
+        if( self.minputtext.text.length > 0 )
+        {
+            self.minputtext.text = [self.minputtext.text substringToIndex: self.minputtext.text.length - 2 ];
+            [self textViewDidChange:self.minputtext];
+        }
+    }
+    else if( sender.tag == -2 )
+    {
+        
+    }
+    else
+    if( sender.tag < 1000 )
+    {
+        self.minputtext.text = [self.minputtext.text stringByAppendingString:[NSString stringWithFormat:@"[face%ld]",sender.tag]];
+        [self textViewDidChange:self.minputtext];
+    }
+    else
+    {
+        
+    }
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if( textView.contentSize.height > _lastInputH )
+    {
+        _lastInputH = textView.contentSize.height;
+        self.minputbarconsth.constant = _lastInputH + self.minputtext.textContainerInset.top + self.minputtext.textContainerInset.bottom ;
+        [self.view layoutIfNeeded];
+    }
+    else if( textView.contentSize.height < _lastInputH )
+    {
+        _lastInputH = textView.contentSize.height;
+        self.minputbarconsth.constant = _lastInputH + self.minputtext.textContainerInset.top + self.minputtext.textContainerInset.bottom;
+        [self.view layoutIfNeeded];
+    }
 }
 
 - (IBAction)onTouchRecordBtnDown:(id)sender {
@@ -425,7 +466,6 @@
     [self.mmoremoreview setContentOffset:CGPointMake(_moreXpoint, 0)];
     
 }
-
 
 
 

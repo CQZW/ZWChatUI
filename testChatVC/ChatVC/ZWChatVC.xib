@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZWChatVC">
             <connections>
                 <outlet property="mfacebt" destination="PA0-14-Ipf" id="22l-Nq-4nH"/>
+                <outlet property="minputbarconsth" destination="v6d-A0-XIy" id="ruv-rX-OGW"/>
                 <outlet property="minputtext" destination="Ls3-DZ-gCY" id="Rxf-1E-h56"/>
                 <outlet property="minputview" destination="n5U-Rc-MA0" id="eFs-ar-hCO"/>
                 <outlet property="mleftvoicebt" destination="law-a8-FuX" id="6zb-ev-3Xs"/>
