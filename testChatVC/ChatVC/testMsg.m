@@ -69,6 +69,10 @@
                           @[
                               @"http://d.hiphotos.baidu.com/image/pic/item/caef76094b36acaf9da262e37ed98d1001e99c6b.jpg",
                               @(620),@(891)
+                              ],
+                          @[
+                              @"http://www.pp3.cn/uploads/201509/2015091008.jpg",
+                              @(1440),@(900)
                               ]
                           ];
         

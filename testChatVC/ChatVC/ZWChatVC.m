@@ -283,6 +283,8 @@
     return cell;
 }
 
+
+
 -(void)dealFace:(M80AttributedLabel*)mal str:(NSString*)str
 {
     NSRange searchFrom;
