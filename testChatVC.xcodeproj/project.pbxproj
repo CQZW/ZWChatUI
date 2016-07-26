@@ -66,6 +66,10 @@
 		16191D601D476D1F00ED4149 /* ZWMsgPicCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D5E1D476D1F00ED4149 /* ZWMsgPicCellLeft.xib */; };
 		16191D641D476D3A00ED4149 /* ZWMsgPicCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */; };
 		16191D651D476D3A00ED4149 /* ZWMsgPicCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */; };
+		16191D691D4794C600ED4149 /* ZWMsgGiftCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D671D4794C600ED4149 /* ZWMsgGiftCellLeft.m */; };
+		16191D6A1D4794C600ED4149 /* ZWMsgGiftCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D681D4794C600ED4149 /* ZWMsgGiftCellLeft.xib */; };
+		16191D6E1D4794D800ED4149 /* ZWMsgGiftCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D6C1D4794D800ED4149 /* ZWMsgGiftCellRight.m */; };
+		16191D6F1D4794D800ED4149 /* ZWMsgGiftCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D6D1D4794D800ED4149 /* ZWMsgGiftCellRight.xib */; };
 		16EEE13B1D45F0D3007A2B07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13A1D45F0D3007A2B07 /* main.m */; };
 		16EEE13E1D45F0D3007A2B07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13D1D45F0D3007A2B07 /* AppDelegate.m */; };
 		16EEE1411D45F0D3007A2B07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE1401D45F0D3007A2B07 /* ViewController.m */; };
@@ -313,6 +317,12 @@
 		16191D611D476D3A00ED4149 /* ZWMsgPicCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgPicCellRight.h; sourceTree = "<group>"; };
 		16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgPicCellRight.m; sourceTree = "<group>"; };
 		16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgPicCellRight.xib; sourceTree = "<group>"; };
+		16191D661D4794C600ED4149 /* ZWMsgGiftCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgGiftCellLeft.h; sourceTree = "<group>"; };
+		16191D671D4794C600ED4149 /* ZWMsgGiftCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgGiftCellLeft.m; sourceTree = "<group>"; };
+		16191D681D4794C600ED4149 /* ZWMsgGiftCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgGiftCellLeft.xib; sourceTree = "<group>"; };
+		16191D6B1D4794D800ED4149 /* ZWMsgGiftCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgGiftCellRight.h; sourceTree = "<group>"; };
+		16191D6C1D4794D800ED4149 /* ZWMsgGiftCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgGiftCellRight.m; sourceTree = "<group>"; };
+		16191D6D1D4794D800ED4149 /* ZWMsgGiftCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgGiftCellRight.xib; sourceTree = "<group>"; };
 		16EEE1361D45F0D3007A2B07 /* testChatVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testChatVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EEE13A1D45F0D3007A2B07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16EEE13C1D45F0D3007A2B07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -506,6 +516,12 @@
 				16191D611D476D3A00ED4149 /* ZWMsgPicCellRight.h */,
 				16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */,
 				16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */,
+				16191D661D4794C600ED4149 /* ZWMsgGiftCellLeft.h */,
+				16191D671D4794C600ED4149 /* ZWMsgGiftCellLeft.m */,
+				16191D681D4794C600ED4149 /* ZWMsgGiftCellLeft.xib */,
+				16191D6B1D4794D800ED4149 /* ZWMsgGiftCellRight.h */,
+				16191D6C1D4794D800ED4149 /* ZWMsgGiftCellRight.m */,
+				16191D6D1D4794D800ED4149 /* ZWMsgGiftCellRight.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -1079,6 +1095,7 @@
 				16EEE1FF1D460FC9007A2B07 /* face11.png in Resources */,
 				16EEE26A1D463182007A2B07 /* face110.png in Resources */,
 				16EEE2441D460FC9007A2B07 /* face74.png in Resources */,
+				16191D6A1D4794C600ED4149 /* ZWMsgGiftCellLeft.xib in Resources */,
 				16191D5B1D475DE800ED4149 /* ZWMsgVoiceCellRight.xib in Resources */,
 				16EEE25F1D460FC9007A2B07 /* face99.png in Resources */,
 				16EEE24B1D460FC9007A2B07 /* face80.png in Resources */,
@@ -1106,6 +1123,7 @@
 				16EEE20C1D460FC9007A2B07 /* face23.png in Resources */,
 				16EEE22D1D460FC9007A2B07 /* face53.png in Resources */,
 				16EEE2001D460FC9007A2B07 /* face12.png in Resources */,
+				16191D6F1D4794D800ED4149 /* ZWMsgGiftCellRight.xib in Resources */,
 				16EEE2361D460FC9007A2B07 /* face61.png in Resources */,
 				16EEE2461D460FC9007A2B07 /* face76.png in Resources */,
 				16EEE2261D460FC9007A2B07 /* face47.png in Resources */,
@@ -1144,6 +1162,7 @@
 				16EEE2781D46462F007A2B07 /* ZWMsgCellLeft.m in Sources */,
 				16191D641D476D3A00ED4149 /* ZWMsgPicCellRight.m in Sources */,
 				16EEE13B1D45F0D3007A2B07 /* main.m in Sources */,
+				16191D691D4794C600ED4149 /* ZWMsgGiftCellLeft.m in Sources */,
 				16191C841D46FA4E00ED4149 /* MJRefreshComponent.m in Sources */,
 				16191D4B1D473BDC00ED4149 /* UIImage+GIF.m in Sources */,
 				16191D411D473BDC00ED4149 /* NSData+ImageContentType.m in Sources */,
@@ -1179,6 +1198,7 @@
 				16191D451D473BDC00ED4149 /* SDWebImageDownloader.m in Sources */,
 				16191C921D46FA4E00ED4149 /* MJRefreshConst.m in Sources */,
 				16191C871D46FA4E00ED4149 /* MJRefreshAutoGifFooter.m in Sources */,
+				16191D6E1D4794D800ED4149 /* ZWMsgGiftCellRight.m in Sources */,
 				16191C851D46FA4E00ED4149 /* MJRefreshFooter.m in Sources */,
 				16EEE1541D45F201007A2B07 /* ZWChatVC.m in Sources */,
 				16191C8C1D46FA4E00ED4149 /* MJRefreshBackStateFooter.m in Sources */,

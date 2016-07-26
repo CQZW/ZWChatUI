@@ -234,6 +234,11 @@
 @end
 
 
+@implementation ZWMsgObjGift
+
+
+@end
+
 
 
 

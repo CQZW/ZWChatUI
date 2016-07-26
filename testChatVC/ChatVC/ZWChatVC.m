@@ -17,6 +17,7 @@
 #import "ZWMsgVoiceCellRight.h"
 #import "ZWMsgPicCellLeft.h"
 #import "ZWMsgPicCellRight.h"
+#import "ZWMsgGiftCellLeft.h"
 
 #import "testMsg.h"
 #import "ZWChatSomeDepend.h"
@@ -114,6 +115,8 @@
     nib = [UINib nibWithNibName:@"ZWMsgPicCellRight" bundle:nil];
     [self.mtableview registerNib:nib forCellReuseIdentifier:@"picrightcell"];
     
+    nib = [UINib nibWithNibName:@"ZWMsgGiftCellLeft" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"gifleftcell"];
     
     self.mtableview.delegate = self;
     self.mtableview.dataSource =  self;
@@ -272,6 +275,23 @@
             vcell.mlongrateconstW.constant = ff;
             
             retcell = vcell;
+        }
+        else if( msgobj.mMsgType == 4 )
+        {
+            ZWMsgObjGift* gifobj = (ZWMsgObjGift*)msgobj;
+            ZWMsgGiftCellLeft* giftcell = nil;
+            if( gifobj.mIsSendOut )
+            {
+                
+            }
+            else{
+                giftcell = [tableView dequeueReusableCellWithIdentifier:@"gifleftcell"];
+                
+            }
+            [giftcell.mgificon sd_setImageWithURL:[NSURL URLWithString:gifobj.mGiftIconURL] placeholderImage:nil];
+            giftcell.mgifdesc.text = gifobj.mGiftDesc;
+            
+            retcell = giftcell;
         }
         
         [retcell.mheadimg sd_setImageWithURL:[NSURL URLWithString:msgobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];

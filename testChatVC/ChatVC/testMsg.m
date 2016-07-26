@@ -93,6 +93,17 @@
             [tt addObject:mmm];
         }
         
+        ZWMsgObjGift* mmm = ZWMsgObjGift.new;
+        mmm.mIsSendOut = NO;
+        mmm.mHeadImgUrl = ss[ 0 ];
+        mmm.mMsgType = 4;
+        mmm.mMsgDate = [NSDate date];
+    
+        mmm.mGiftDesc = @"收到一个什么礼物,好多钱,去查看详情吧";
+        mmm.mGiftIconURL = @"http://gb.cri.cn/mmsource/images/2007/08/21/ee070821009.jpg";
+        
+        [tt addObject:mmm];
+        
         
         dispatch_async(dispatch_get_main_queue(), ^{
            

@@ -76,6 +76,14 @@
 
 @end
 
+@interface ZWMsgObjGift : ZWMsgObj
+
+@property (nonatomic,strong)    NSString*       mGiftIconURL;//礼物小图标URL
+@property (nonatomic,strong)    NSString*       mGiftDesc;
+@property (nonatomic,strong)    NSString*       mDetailURL;//详情URL
+
+@end
+
 
 
 
