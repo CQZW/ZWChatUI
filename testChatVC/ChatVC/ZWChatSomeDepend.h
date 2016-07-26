@@ -60,6 +60,14 @@
 
 @end
 
+@interface ZWMsgObjPic : ZWMsgObj
+
+@property (nonatomic,assign)    CGFloat     mPicW;
+@property (nonatomic,assign)    CGFloat     mPicH;
+@property (nonatomic,strong)    NSString*   mPicURL;//图片URL
+
+@end
+
 @interface ZWMsgObjVoice : ZWMsgObj
 
 @property (nonatomic,assign)    int             mDurlong;//11秒

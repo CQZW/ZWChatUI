@@ -221,6 +221,11 @@
 @end
 
 
+@implementation ZWMsgObjPic
+
+
+@end
+
 
 @implementation ZWMsgObjVoice
 
