@@ -58,6 +58,8 @@
 		16191D4F1D473BDC00ED4149 /* UIImageView+MJWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D3A1D473BDC00ED4149 /* UIImageView+MJWebCache.m */; };
 		16191D501D473BDC00ED4149 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D3C1D473BDC00ED4149 /* UIImageView+WebCache.m */; };
 		16191D511D473BDC00ED4149 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D3E1D473BDC00ED4149 /* UIView+WebCacheOperation.m */; };
+		16191D551D47473800ED4149 /* ZWMsgVoiceCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D531D47473800ED4149 /* ZWMsgVoiceCellLeft.m */; };
+		16191D561D47473800ED4149 /* ZWMsgVoiceCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D541D47473800ED4149 /* ZWMsgVoiceCellLeft.xib */; };
 		16EEE13B1D45F0D3007A2B07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13A1D45F0D3007A2B07 /* main.m */; };
 		16EEE13E1D45F0D3007A2B07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13D1D45F0D3007A2B07 /* AppDelegate.m */; };
 		16EEE1411D45F0D3007A2B07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE1401D45F0D3007A2B07 /* ViewController.m */; };
@@ -293,6 +295,9 @@
 		16191D3C1D473BDC00ED4149 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		16191D3D1D473BDC00ED4149 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		16191D3E1D473BDC00ED4149 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		16191D521D47473800ED4149 /* ZWMsgVoiceCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgVoiceCellLeft.h; sourceTree = "<group>"; };
+		16191D531D47473800ED4149 /* ZWMsgVoiceCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgVoiceCellLeft.m; sourceTree = "<group>"; };
+		16191D541D47473800ED4149 /* ZWMsgVoiceCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgVoiceCellLeft.xib; sourceTree = "<group>"; };
 		16EEE1361D45F0D3007A2B07 /* testChatVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testChatVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EEE13A1D45F0D3007A2B07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16EEE13C1D45F0D3007A2B07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -474,6 +479,9 @@
 				16191CD31D4711FD00ED4149 /* ZWMsgTimeCell.h */,
 				16191CD41D4711FD00ED4149 /* ZWMsgTimeCell.m */,
 				16191CD51D4711FD00ED4149 /* ZWMsgTimeCell.xib */,
+				16191D521D47473800ED4149 /* ZWMsgVoiceCellLeft.h */,
+				16191D531D47473800ED4149 /* ZWMsgVoiceCellLeft.m */,
+				16191D541D47473800ED4149 /* ZWMsgVoiceCellLeft.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -980,6 +988,7 @@
 				16EEE2061D460FC9007A2B07 /* face18.png in Resources */,
 				16EEE2471D460FC9007A2B07 /* face77.png in Resources */,
 				16EEE2251D460FC9007A2B07 /* face46.png in Resources */,
+				16191D561D47473800ED4149 /* ZWMsgVoiceCellLeft.xib in Resources */,
 				16EEE2581D460FC9007A2B07 /* face92.png in Resources */,
 				16EEE2281D460FC9007A2B07 /* face49.png in Resources */,
 				16EEE2181D460FC9007A2B07 /* face34.png in Resources */,
@@ -1097,6 +1106,7 @@
 				16EEE1861D45FE7A007A2B07 /* IQTextView.m in Sources */,
 				16191D491D473BDC00ED4149 /* SDWebImagePrefetcher.m in Sources */,
 				16191C941D46FA4E00ED4149 /* UIScrollView+MJExtension.m in Sources */,
+				16191D551D47473800ED4149 /* ZWMsgVoiceCellLeft.m in Sources */,
 				16191D4D1D473BDC00ED4149 /* UIImage+WebP.m in Sources */,
 				16191C821D46FA4E00ED4149 /* MJRefreshAutoFooter.m in Sources */,
 				16EEE1411D45F0D3007A2B07 /* ViewController.m in Sources */,

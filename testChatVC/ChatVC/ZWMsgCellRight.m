@@ -16,7 +16,7 @@
     self.mmsglabel.font = [UIFont systemFontOfSize:14];
     self.mmsglabel.textColor = [UIColor blackColor];
     self.mmsglabel.backgroundColor = [UIColor clearColor];
-    self.mmsglabel.textAlignment =  kCTTextAlignmentRight;
+    self.mmsglabel.textAlignment =  kCTTextAlignmentLeft;
     
 }
 

@@ -43,12 +43,20 @@
 {
     [super viewDidAppear:animated];
     
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    
+    
 }
 
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
+    [IQKeyboardManager sharedManager].enable = NO;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+
+
 }
 
 - (void)viewDidLoad {
@@ -184,8 +192,7 @@
         {
             ZWMsgCellRight* cellsend = [tableView dequeueReusableCellWithIdentifier:@"rightcell"];
             [cellsend.mheadimg sd_setImageWithURL:[NSURL URLWithString:textobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
-            cellsend.mmsglabel.text =  textobj.mTextMsg;
-            [cellsend.mmsglabel appendImage:[UIImage imageNamed:@"face1.png"] maxSize:CGSizeMake(20, 20)];
+            [self dealFace:cellsend.mmsglabel str:textobj.mTextMsg];
             
             CGSize ss = [cellsend.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 68 - 50, CGFLOAT_MAX)];
             cellsend.mlabelconstH.constant = ss.height;
@@ -195,8 +202,7 @@
         else{
             ZWMsgCellLeft* cellrecv = [tableView dequeueReusableCellWithIdentifier:@"leftcell"];
             [cellrecv.mheadimg sd_setImageWithURL:[NSURL URLWithString:textobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
-            cellrecv.mmsglabel.text =  textobj.mTextMsg;
-            [cellrecv.mmsglabel appendImage:[UIImage imageNamed:@"face1.png"] maxSize:CGSizeMake(20, 20)];
+            [self dealFace:cellrecv.mmsglabel str:textobj.mTextMsg];
             
             CGSize ss = [cellrecv.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 73 - 50, CGFLOAT_MAX)];
             cellrecv.mlabelconstH.constant = ss.height;
@@ -208,6 +214,36 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+}
+
+-(void)dealFace:(M80AttributedLabel*)mal str:(NSString*)str
+{
+    NSRange searchFrom;
+    searchFrom.length = str.length;
+    searchFrom.location = 0;
+    
+    mal.text = nil;
+    
+    do
+    {
+        NSRange find = [str rangeOfString:@"\\[[a-z]+[0-9]+\\]" options:NSRegularExpressionSearch range:searchFrom];
+        if( find.location == NSNotFound )
+        {//最好一次么有找到..
+            [mal appendText:[str substringWithRange:NSMakeRange(searchFrom.location, str.length - searchFrom.location - 1 )]];
+            break;
+        }
+        
+        NSString* facename = [str substringWithRange:find];
+        facename = [facename substringWithRange:NSMakeRange(1, facename.length-2)];
+        
+        [mal appendText:[str substringWithRange:NSMakeRange(searchFrom.location, find.location - searchFrom.location)]];
+        [mal appendImage:[UIImage imageNamed:facename] maxSize:CGSizeMake(18, 18)];
+
+        searchFrom.location =   find.location + find.length+1;
+        searchFrom.length   =   str.length - searchFrom.location;
+        
+    }while( searchFrom.location < str.length );
+    
 }
 
 -(void)cfgmoremoreview
