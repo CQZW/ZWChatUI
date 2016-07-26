@@ -115,7 +115,7 @@
             for ( NSInteger j = all.count-1 ; j >=0; j-- ) {
                 ZWMsgObj* one  = all[ j ];
                 [_msgdata insertObject:one atIndex:0];
-                if( _msgdata.count % 5 )
+                if( (_msgdata.count % 8) == 0 )
                 {//每5个就显示一个时间..
                     ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
                     [_msgdata insertObject:timemsg atIndex:1];
@@ -139,7 +139,7 @@
             for ( NSInteger j = 0 ; j < all.count; j++ ) {
                 ZWMsgObj* one  = all[ j ];
                 [_msgdata addObject:one];
-                if( (_msgdata.count % 5) ==  0)
+                if( (_msgdata.count % 8) ==  0)
                 {//每5个就显示一个时间..
                     ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
                     [_msgdata addObject:timemsg];
