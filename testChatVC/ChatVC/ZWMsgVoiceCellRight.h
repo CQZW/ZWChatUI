@@ -1,5 +1,5 @@
 //
-//  ZWMsgVoiceCellLeft.h
+//  ZWMsgVoiceCellRight.h
 //  testChatVC
 //
 //  Created by zzl on 16/7/26.
@@ -8,15 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZWMsgVoiceCellLeft : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UIImageView *mheadimg;
-
-@property (weak, nonatomic) IBOutlet UIImageView *mvoiceicon;
-
-@property (weak, nonatomic) IBOutlet UILabel *mlonglabel;
-
+@interface ZWMsgVoiceCellRight : UITableViewCell
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mlongrateconstW;
-
+@property (weak, nonatomic) IBOutlet UIImageView *mheadimg;
+@property (weak, nonatomic) IBOutlet UILabel *mlonglabel;
+@property (weak, nonatomic) IBOutlet UIImageView *mvoiceicon;
 
 @end

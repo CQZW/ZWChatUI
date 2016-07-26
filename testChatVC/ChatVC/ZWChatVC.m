@@ -13,6 +13,9 @@
 #import "ZWMsgCellLeft.h"
 #import "ZWMsgCellRight.h"
 #import "ZWMsgTimeCell.h"
+#import "ZWMsgVoiceCellLeft.h"
+#import "ZWMsgVoiceCellRight.h"
+
 #import "testMsg.h"
 #import "ZWChatSomeDepend.h"
 #import "UIImageView+WebCache.h"
@@ -96,6 +99,12 @@
     
     nib = [UINib nibWithNibName:@"ZWMsgTimeCell" bundle:nil];
     [self.mtableview registerNib:nib forCellReuseIdentifier:@"timecell"];
+    
+    nib = [UINib nibWithNibName:@"ZWMsgVoiceCellRight" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"voicerightcell"];
+    
+    nib = [UINib nibWithNibName:@"ZWMsgVoiceCellLeft" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"voiceleftcell"];
     
     self.mtableview.delegate = self;
     self.mtableview.dataSource =  self;
@@ -185,32 +194,56 @@
         timecell.mtimelabel.text = [timeobj getTimeStr];
         cell =  timecell;
     }
-    else if( msgobj.mMsgType == 1 )
-    {//文字消息
-        ZWMsgObjText * textobj = (ZWMsgObjText*)msgobj;
-        if( textobj.mIsSendOut )
-        {
-            ZWMsgCellRight* cellsend = [tableView dequeueReusableCellWithIdentifier:@"rightcell"];
-            [cellsend.mheadimg sd_setImageWithURL:[NSURL URLWithString:textobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
-            [self dealFace:cellsend.mmsglabel str:textobj.mTextMsg];
+    else{
+        ZWMsgCellRight* retcell = nil;
+        if( msgobj.mMsgType == 1 )
+        {//文字消息
+            ZWMsgObjText * textobj = (ZWMsgObjText*)msgobj;
+            if( textobj.mIsSendOut )
+            {
+                retcell = [tableView dequeueReusableCellWithIdentifier:@"rightcell"];
+            }
+            else{
+                retcell = [tableView dequeueReusableCellWithIdentifier:@"leftcell"];
+            }
             
-            CGSize ss = [cellsend.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 68 - 50, CGFLOAT_MAX)];
-            cellsend.mlabelconstH.constant = ss.height;
-            cellsend.mlabelconstW.constant = ss.width;
-            cell = cellsend;
-        }
-        else{
-            ZWMsgCellLeft* cellrecv = [tableView dequeueReusableCellWithIdentifier:@"leftcell"];
-            [cellrecv.mheadimg sd_setImageWithURL:[NSURL URLWithString:textobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
-            [self dealFace:cellrecv.mmsglabel str:textobj.mTextMsg];
+            [self dealFace:retcell.mmsglabel str:textobj.mTextMsg];
             
-            CGSize ss = [cellrecv.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 73 - 50, CGFLOAT_MAX)];
-            cellrecv.mlabelconstH.constant = ss.height;
-            cellrecv.mlabelconstW.constant = ss.width;
-            cell = cellrecv;
+            CGSize ss = [retcell.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 73 - 50, CGFLOAT_MAX)];
+            retcell.mlabelconstH.constant = ss.height;
+            retcell.mlabelconstW.constant = ss.width;
+            
         }
+        else if(  msgobj.mMsgType == 2 )
+        {//图片
+            
+        }
+        else if ( msgobj.mMsgType == 3 )
+        {//语音
+            ZWMsgObjVoice* voiceobj = (ZWMsgObjVoice*)msgobj;
+            ZWMsgVoiceCellRight* vcell = nil;
+            if( voiceobj.mIsSendOut )
+            {
+                vcell = [tableView dequeueReusableCellWithIdentifier:@"voicerightcell"];
+            }
+            else
+            {
+                vcell = [tableView dequeueReusableCellWithIdentifier:@"voiceleftcell"];
+            }
+            
+            vcell.mlonglabel.text = [NSString stringWithFormat:@"%d''",voiceobj.mDurlong];
+            CGFloat ff = (voiceobj.mDurlong / 60.0f ) * 150.0f;
+            ff = ff < 40.0f?40.0f:ff;
+            ff = ff > 150.0f?150.0f:ff;
+            vcell.mlongrateconstW.constant = ff;
+            
+            retcell = vcell;
+        }
+        
+        [retcell.mheadimg sd_setImageWithURL:[NSURL URLWithString:msgobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
+        cell = retcell;
     }
-    
+
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;

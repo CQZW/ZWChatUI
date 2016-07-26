@@ -17,6 +17,11 @@
     self.mmsglabel.textColor = [UIColor blackColor];
     self.mmsglabel.backgroundColor = [UIColor clearColor];
     self.mmsglabel.textAlignment =  kCTTextAlignmentLeft;
+    
+    self.mheadimg.layer.borderColor = [UIColor clearColor].CGColor;
+    self.mheadimg.layer.borderWidth = 1.0f;
+    self.mheadimg.layer.cornerRadius = 20.0f;
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

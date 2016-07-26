@@ -222,6 +222,11 @@
 
 
 
+@implementation ZWMsgObjVoice
+
+
+
+@end
 
 
 

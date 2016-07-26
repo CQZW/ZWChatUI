@@ -60,3 +60,24 @@
 
 @end
 
+@interface ZWMsgObjVoice : ZWMsgObj
+
+@property (nonatomic,assign)    int             mDurlong;//11秒
+@property (nonatomic,strong)    NSData*         mVoiceData;
+
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

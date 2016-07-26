@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="57" id="KGk-i7-Jjw" customClass="ZWMsgVoiceCellRight">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hM3-tB-Znc">
+                        <rect key="frame" x="272" y="8" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="GD6-X3-5KW"/>
+                            <constraint firstAttribute="width" constant="40" id="W6b-IN-2PJ"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2.0_sixin_lt_me_" translatesAutoresizingMaskIntoConstraints="NO" id="Sdh-LE-Iw4">
+                        <rect key="frame" x="127" y="8" width="137" height="40"/>
+                        <rect key="contentStretch" x="0.20000000000000001" y="0.83999999999999997" width="0.01" height="0.01"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="137" id="9BV-zt-sXZ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12''" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsz-0N-aUR">
+                        <rect key="frame" x="100" y="27" width="22" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="2re-cD-pPQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_play_voice_right0" translatesAutoresizingMaskIntoConstraints="NO" id="cLi-iu-RUl">
+                        <rect key="frame" x="226" y="18" width="23" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="THu-um-483"/>
+                            <constraint firstAttribute="width" constant="23" id="xdS-GR-9vN"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Sdh-LE-Iw4" firstAttribute="leading" secondItem="Tsz-0N-aUR" secondAttribute="trailing" constant="5" id="9Ij-wt-S2H"/>
+                    <constraint firstItem="cLi-iu-RUl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="IoZ-eJ-Dbl"/>
+                    <constraint firstItem="Sdh-LE-Iw4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="NhE-Nu-y2f"/>
+                    <constraint firstItem="hM3-tB-Znc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="XDd-Aa-ux8"/>
+                    <constraint firstAttribute="bottom" secondItem="Tsz-0N-aUR" secondAttribute="bottom" constant="8" id="e1a-GE-sS4"/>
+                    <constraint firstItem="hM3-tB-Znc" firstAttribute="leading" secondItem="cLi-iu-RUl" secondAttribute="trailing" constant="23" id="e2E-Lr-qqV"/>
+                    <constraint firstItem="hM3-tB-Znc" firstAttribute="leading" secondItem="Sdh-LE-Iw4" secondAttribute="trailing" constant="8" id="oT3-DX-DT4"/>
+                    <constraint firstAttribute="trailing" secondItem="hM3-tB-Znc" secondAttribute="trailing" constant="8" id="tr6-0Q-AQg"/>
+                    <constraint firstAttribute="bottom" secondItem="Sdh-LE-Iw4" secondAttribute="bottom" constant="8" id="vlW-aG-fyD"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="mheadimg" destination="hM3-tB-Znc" id="SyZ-mN-GjR"/>
+                <outlet property="mlonglabel" destination="Tsz-0N-aUR" id="6bv-y1-0oL"/>
+                <outlet property="mlongrateconstW" destination="9BV-zt-sXZ" id="UYk-HC-3RG"/>
+                <outlet property="mvoiceicon" destination="cLi-iu-RUl" id="mCz-T4-Qq8"/>
+            </connections>
+            <point key="canvasLocation" x="337" y="296.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="2.0_sixin_lt_me_" width="25" height="35"/>
+        <image name="ic_play_voice_right0" width="72" height="72"/>
+    </resources>
+</document>

@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TxN-cX-MXV">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TxN-cX-MXV">
                         <rect key="frame" x="8" y="8" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="EWt-gq-7fp"/>
@@ -38,21 +38,37 @@
                         <color key="textColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_play_voice_left0" translatesAutoresizingMaskIntoConstraints="NO" id="noc-wv-AjG">
+                        <rect key="frame" x="71" y="18" width="23" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Gp4-7t-D3M"/>
+                            <constraint firstAttribute="width" constant="23" id="pRT-Oj-V7j"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="HWU-fO-uBe" firstAttribute="leading" secondItem="GeQ-wG-D0x" secondAttribute="trailing" constant="8" id="FaS-UJ-LAi"/>
+                    <constraint firstItem="noc-wv-AjG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="M4n-ze-jYn"/>
                     <constraint firstAttribute="bottom" secondItem="HWU-fO-uBe" secondAttribute="bottom" constant="8" id="YbH-Iw-r0q"/>
                     <constraint firstItem="TxN-cX-MXV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="baP-io-gSh"/>
+                    <constraint firstItem="noc-wv-AjG" firstAttribute="leading" secondItem="TxN-cX-MXV" secondAttribute="trailing" constant="23" id="cDa-Sp-6qM"/>
                     <constraint firstItem="TxN-cX-MXV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="e7Z-HM-CgN"/>
                     <constraint firstAttribute="bottom" secondItem="GeQ-wG-D0x" secondAttribute="bottom" constant="8" id="ub8-Mq-HaM"/>
                     <constraint firstItem="GeQ-wG-D0x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="usb-oE-QxL"/>
                     <constraint firstItem="GeQ-wG-D0x" firstAttribute="leading" secondItem="TxN-cX-MXV" secondAttribute="trailing" constant="8" id="vsU-XN-d78"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="mheadimg" destination="TxN-cX-MXV" id="H60-ly-wpi"/>
+                <outlet property="mlonglabel" destination="HWU-fO-uBe" id="lk2-lK-UrS"/>
+                <outlet property="mlongrateconstW" destination="aJD-pZ-LWh" id="6r4-oc-hZs"/>
+                <outlet property="mvoiceicon" destination="noc-wv-AjG" id="yyo-jl-MQR"/>
+            </connections>
             <point key="canvasLocation" x="250" y="334.5"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="2.0_sixin_lt_other_" width="25" height="35"/>
+        <image name="ic_play_voice_left0" width="72" height="72"/>
     </resources>
 </document>
