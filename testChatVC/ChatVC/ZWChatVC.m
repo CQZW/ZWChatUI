@@ -269,10 +269,42 @@
             if( voiceobj.mIsSendOut )
             {
                 vcell = [tableView dequeueReusableCellWithIdentifier:@"voicerightcell"];
+                if( voiceobj.mIsPlaying )
+                {
+                    vcell.mvoiceicon.image = nil;
+                    vcell.mvoiceicon.image =
+                    [UIImage animatedImageWithImages:@[
+                        [UIImage imageNamed:@"ic_play_voice_right0"],
+                        [UIImage imageNamed:@"ic_play_voice_right1"],
+                        [UIImage imageNamed:@"ic_play_voice_right2"],
+                        [UIImage imageNamed:@"ic_play_voice_right3"],
+                        [UIImage imageNamed:@"ic_play_voice_right4"],
+                        [UIImage imageNamed:@"ic_play_voice_right5"],
+                        ] duration:1.8f];
+                }
+                else{
+                    vcell.mvoiceicon.image = [UIImage imageNamed:@"ic_play_voice_right0"];
+                }
             }
             else
             {
                 vcell = [tableView dequeueReusableCellWithIdentifier:@"voiceleftcell"];
+                if( voiceobj.mIsPlaying )
+                {
+                    vcell.mvoiceicon.image = nil;
+                    vcell.mvoiceicon.image =
+                    [UIImage animatedImageWithImages:@[
+                        [UIImage imageNamed:@"ic_play_voice_left0"],
+                        [UIImage imageNamed:@"ic_play_voice_left1"],
+                        [UIImage imageNamed:@"ic_play_voice_left2"],
+                        [UIImage imageNamed:@"ic_play_voice_left3"],
+                        [UIImage imageNamed:@"ic_play_voice_left4"],
+                        [UIImage imageNamed:@"ic_play_voice_left5"],
+                                                       ] duration:1.8f];
+                }
+                else{
+                    vcell.mvoiceicon.image = [UIImage imageNamed:@"ic_play_voice_left0"];
+                }
             }
             
             vcell.mlonglabel.text = [NSString stringWithFormat:@"%d''",voiceobj.mDurlong];
@@ -282,6 +314,7 @@
             ff = ff > 150.0f?150.0f:ff;
             
             vcell.mlongrateconstW.constant = ff;
+           
             
             retcell = vcell;
         }
@@ -312,6 +345,23 @@
     
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ZWMsgObj* msgobj = _msgdata[ indexPath.row ];
+    if( msgobj.mMsgType == 3 )
+    {//播放语音消息
+        
+        [((ZWMsgObjVoice*)msgobj) startPlayVoice];
+        
+        [tableView reloadRowsAtIndexPaths:@[ indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+    }
+    
+    
+}
+
 
 
 

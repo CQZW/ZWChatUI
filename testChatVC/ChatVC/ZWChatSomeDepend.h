@@ -73,6 +73,11 @@
 @property (nonatomic,assign)    int             mDurlong;//11秒
 @property (nonatomic,strong)    NSData*         mVoiceData;
 
+@property (nonatomic,assign)    BOOL            mIsPlaying;
+
+//开始播放
+-(void)startPlayVoice;
+
 
 @end
 
