@@ -8,113 +8,16 @@
 
 #import "ZWChatVC.h"
 #import "IQKeyboardManager.h"
+#import "MJRefresh.h"
 
-@interface ZWFaceBT : UIView
-
-@property (nonatomic,weak) ZWChatVC* mtagvc;
-
-@property (nonatomic,assign)    NSInteger   mIndex;
-
-
-@end
-
-@interface ZWMoreBT : ZWFaceBT
-
-
-@end
-
-@implementation ZWMoreBT
-{
-    UILabel*    _bottomlabel;
-    UIImageView*    _itimg;
-}
--(id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    
-    _bottomlabel = [[UILabel alloc]initWithFrame:CGRectMake(0, frame.size.height-25, frame.size.width, 20.0f)];
-    _bottomlabel.font = [UIFont systemFontOfSize:14];
-    _bottomlabel.textAlignment = NSTextAlignmentCenter;
-    _bottomlabel.textColor = [UIColor colorWithWhite:0.518 alpha:1.000];
-    [self addSubview:_bottomlabel];
-    
-    return self;
-}
-
--(void)setTxt:(NSString*)text
-{
-    _bottomlabel.text = text;
-}
--(void)setImg:(UIImage*)img
-{
-    _itimg = [[UIImageView alloc]initWithImage:img];
-    [self addSubview:_itimg];
-
-    CGRect ff = _itimg.frame;
-    ff.size.width = img.size.width*0.6f;
-    ff.size.height = img.size.height*0.6f;
-    _itimg.frame = ff;
-    
-    _itimg.center = CGPointMake( self.bounds.size.width/2.0f , self.bounds.size.height/2.0f );
-
-    _bottomlabel.center = CGPointMake( _itimg.center.x ,  ff.origin.y + ff.size.height + 25.0f );
-    
-    
-}
-
-@end
-
-@implementation ZWFaceBT
-{
-    UIImageView*    _imgv;
-    UIButton*       _bt;
-    
-
-    
-}
-
-
--(id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    
-    _bt = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-    [self addSubview:_bt];
-    [_bt addTarget:self action:@selector(ZWFaceBTclicked:) forControlEvents:UIControlEventTouchUpInside];
-    return self;
-}
-
--(void)ZWFaceBTclicked:(UIButton*)sender
-{
-    if( self.mtagvc )
-    {
-        sender.tag = _mIndex;
-        [self.mtagvc performSelector:@selector(moreItemClicked:) withObject:sender];
-    }
-}
--(void)setImg:(UIImage*)img
-{
-    [self setImg:img sss:0.6f];
-    
-}
-
--(void)setImg:(UIImage*)img sss:(CGFloat)sss
-{
-    _imgv = [[UIImageView alloc]initWithImage:img];
-    [self addSubview:_imgv];
-    
-    CGRect ff = _imgv.frame;
-    ff.size.width = img.size.width*sss;
-    ff.size.height = img.size.height*sss;
-    _imgv.frame = ff;
-    
-    _imgv.center = CGPointMake( self.bounds.size.width/2.0f , self.bounds.size.height/2.0f );
-
-}
-
-@end
-
-@interface ZWChatVC ()<UITextViewDelegate>
+#import "ZWMsgCellLeft.h"
+#import "ZWMsgCellRight.h"
+#import "ZWMsgTimeCell.h"
+#import "testMsg.h"
+#import "ZWChatSomeDepend.h"
+#import "UIImageView+WebCache.h"
+#import "M80AttributedLabel.h"
+@interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @end
 
@@ -130,6 +33,9 @@
     CGFloat         _gitXpoint;
     
     CGFloat         _lastInputH;
+    
+    NSMutableArray* _msgdata;
+
     
 }
 
@@ -167,12 +73,151 @@
     [self.mvoicebtpress addTarget:self action:@selector(onTouchRecordBtnUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self.mvoicebtpress addTarget:self action:@selector(onTouchRecordBtnUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
     
+    
+    _msgdata = NSMutableArray.new;
+    
+    self.mtableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerStartRefresh)];
+
+    self.mtableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerStartRefresh)];
+    
+    UINib* nib = [UINib nibWithNibName:@"ZWMsgCellLeft" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"leftcell"];
+    
+    nib = [UINib nibWithNibName:@"ZWMsgCellRight" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"rightcell"];
+    
+    nib = [UINib nibWithNibName:@"ZWMsgTimeCell" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"timecell"];
+    
+    self.mtableview.delegate = self;
+    self.mtableview.dataSource =  self;
+    
+    self.mtableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+#pragma mark 消息数据获取主要修改这里开始
+//获取消息,修改这里
+-(void)headerStartRefresh
+{
+    [testMsg getMsgList:_msgdata.firstObject block:^(NSArray *all) {
+    
+        [self.mtableview.mj_header endRefreshing];
+        if( all.count )
+        {
+            for ( NSInteger j = all.count-1 ; j >=0; j-- ) {
+                ZWMsgObj* one  = all[ j ];
+                [_msgdata insertObject:one atIndex:0];
+                if( _msgdata.count % 5 )
+                {//每5个就显示一个时间..
+                    ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
+                    [_msgdata insertObject:timemsg atIndex:1];
+                }
+            }
+        }
+        
+        [self.mtableview reloadData];
+
+    }];
+    
+}
+
+-(void)footerStartRefresh
+{
+    [testMsg getMsgList:_msgdata.lastObject block:^(NSArray *all) {
+        
+        [self.mtableview.mj_footer endRefreshing];
+        if( all.count )
+        {
+            for ( NSInteger j = 0 ; j < all.count; j++ ) {
+                ZWMsgObj* one  = all[ j ];
+                [_msgdata addObject:one];
+                if( (_msgdata.count % 5) ==  0)
+                {//每5个就显示一个时间..
+                    ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
+                    [_msgdata addObject:timemsg];
+                }
+            }
+        }
+        
+        [self.mtableview reloadData];
+        
+    }];
+}
+
+-(ZWMsgObj*)makeTimeMsgObj:(ZWMsgObj*)msg
+{
+    ZWMsgObjTime* tt = ZWMsgObjTime.new;
+    tt.mMsgDate = msg.mMsgDate;
+    return tt;
+}
+
+//获取消息,修改这里
+#pragma mark 消息数据获取主要修改这里结束
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return _msgdata.count;
+}
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell* cell = nil;
+    ZWMsgObj* msgobj = _msgdata[ indexPath.row ];
+    if( msgobj.mMsgType == 0 )
+    {//时间
+        ZWMsgObjTime* timeobj = (ZWMsgObjTime*)msgobj;
+        ZWMsgTimeCell* timecell = [tableView dequeueReusableCellWithIdentifier:@"timecell"];
+        
+        timecell.mtimelabel.text = [timeobj getTimeStr];
+        cell =  timecell;
+    }
+    else if( msgobj.mMsgType == 1 )
+    {//文字消息
+        ZWMsgObjText * textobj = (ZWMsgObjText*)msgobj;
+        if( textobj.mIsSendOut )
+        {
+            ZWMsgCellRight* cellsend = [tableView dequeueReusableCellWithIdentifier:@"rightcell"];
+            [cellsend.mheadimg sd_setImageWithURL:[NSURL URLWithString:textobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
+            cellsend.mmsglabel.text =  textobj.mTextMsg;
+            [cellsend.mmsglabel appendImage:[UIImage imageNamed:@"face1.png"] maxSize:CGSizeMake(20, 20)];
+            
+            CGSize ss = [cellsend.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 68 - 50, CGFLOAT_MAX)];
+            cellsend.mlabelconstH.constant = ss.height;
+            cellsend.mlabelconstW.constant = ss.width;
+            cell = cellsend;
+        }
+        else{
+            ZWMsgCellLeft* cellrecv = [tableView dequeueReusableCellWithIdentifier:@"leftcell"];
+            [cellrecv.mheadimg sd_setImageWithURL:[NSURL URLWithString:textobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
+            cellrecv.mmsglabel.text =  textobj.mTextMsg;
+            [cellrecv.mmsglabel appendImage:[UIImage imageNamed:@"face1.png"] maxSize:CGSizeMake(20, 20)];
+            
+            CGSize ss = [cellrecv.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 73 - 50, CGFLOAT_MAX)];
+            cellrecv.mlabelconstH.constant = ss.height;
+            cellrecv.mlabelconstW.constant = ss.width;
+            cell = cellrecv;
+        }
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return cell;
 }
 
 -(void)cfgmoremoreview
 {
     if( _cgfok ) return;
     _cgfok = YES;
+    
+    
+    //这里逻辑很简单,就是一行一行的摆放控件.....
+    
     
     //face 目录下面有105个PNG图片
     int maxface = 105;
@@ -325,7 +370,7 @@
         [self textViewDidChange:self.minputtext];
     }
     else
-    {
+    {//相册,照片,礼物什么的
         
     }
 }
@@ -466,6 +511,7 @@
     [self.mmoremoreview setContentOffset:CGPointMake(_moreXpoint, 0)];
     
 }
+
 
 
 
