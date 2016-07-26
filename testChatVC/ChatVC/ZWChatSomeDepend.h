@@ -82,6 +82,9 @@
 @property (nonatomic,strong)    NSString*       mGiftDesc;
 @property (nonatomic,strong)    NSString*       mDetailURL;//详情URL
 
+@property (nonatomic,strong)    NSString*       mJyStr;
+
+
 @end
 
 

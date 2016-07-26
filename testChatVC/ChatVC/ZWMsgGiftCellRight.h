@@ -10,5 +10,7 @@
 
 @interface ZWMsgGiftCellRight : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *mheadimg;
-
+@property (weak, nonatomic) IBOutlet UIImageView *mgificon;
+@property (weak, nonatomic) IBOutlet UILabel *mgifdesc;
+@property (weak, nonatomic) IBOutlet UILabel *mjy;
 @end
