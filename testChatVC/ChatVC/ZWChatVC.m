@@ -256,7 +256,7 @@
             
             CGFloat picShowH = ( picobj.mPicH / picobj.mPicW ) * picShowW;
             
-            [piccell.mtagimg sd_setImageWithURL:[NSURL URLWithString:picobj.mPicURL] placeholderImage:[UIImage imageNamed:@""]];
+            [piccell.mtagimg sd_setImageWithURL:[NSURL URLWithString:picobj.mPicURL] placeholderImage:[UIImage imageNamed:@"DefaultImg"]];
             piccell.mimgconstH.constant = picShowH;
             piccell.mimgconstW.constant = picShowW;
          
