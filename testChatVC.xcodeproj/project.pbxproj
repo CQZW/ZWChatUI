@@ -62,6 +62,10 @@
 		16191D561D47473800ED4149 /* ZWMsgVoiceCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D541D47473800ED4149 /* ZWMsgVoiceCellLeft.xib */; };
 		16191D5A1D475DE800ED4149 /* ZWMsgVoiceCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D581D475DE800ED4149 /* ZWMsgVoiceCellRight.m */; };
 		16191D5B1D475DE800ED4149 /* ZWMsgVoiceCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D591D475DE800ED4149 /* ZWMsgVoiceCellRight.xib */; };
+		16191D5F1D476D1F00ED4149 /* ZWMsgPicCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D5D1D476D1F00ED4149 /* ZWMsgPicCellLeft.m */; };
+		16191D601D476D1F00ED4149 /* ZWMsgPicCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D5E1D476D1F00ED4149 /* ZWMsgPicCellLeft.xib */; };
+		16191D641D476D3A00ED4149 /* ZWMsgPicCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */; };
+		16191D651D476D3A00ED4149 /* ZWMsgPicCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */; };
 		16EEE13B1D45F0D3007A2B07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13A1D45F0D3007A2B07 /* main.m */; };
 		16EEE13E1D45F0D3007A2B07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13D1D45F0D3007A2B07 /* AppDelegate.m */; };
 		16EEE1411D45F0D3007A2B07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE1401D45F0D3007A2B07 /* ViewController.m */; };
@@ -303,6 +307,12 @@
 		16191D571D475DE800ED4149 /* ZWMsgVoiceCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgVoiceCellRight.h; sourceTree = "<group>"; };
 		16191D581D475DE800ED4149 /* ZWMsgVoiceCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgVoiceCellRight.m; sourceTree = "<group>"; };
 		16191D591D475DE800ED4149 /* ZWMsgVoiceCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgVoiceCellRight.xib; sourceTree = "<group>"; };
+		16191D5C1D476D1F00ED4149 /* ZWMsgPicCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgPicCellLeft.h; sourceTree = "<group>"; };
+		16191D5D1D476D1F00ED4149 /* ZWMsgPicCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgPicCellLeft.m; sourceTree = "<group>"; };
+		16191D5E1D476D1F00ED4149 /* ZWMsgPicCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgPicCellLeft.xib; sourceTree = "<group>"; };
+		16191D611D476D3A00ED4149 /* ZWMsgPicCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgPicCellRight.h; sourceTree = "<group>"; };
+		16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgPicCellRight.m; sourceTree = "<group>"; };
+		16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgPicCellRight.xib; sourceTree = "<group>"; };
 		16EEE1361D45F0D3007A2B07 /* testChatVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testChatVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EEE13A1D45F0D3007A2B07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16EEE13C1D45F0D3007A2B07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -490,6 +500,12 @@
 				16191D571D475DE800ED4149 /* ZWMsgVoiceCellRight.h */,
 				16191D581D475DE800ED4149 /* ZWMsgVoiceCellRight.m */,
 				16191D591D475DE800ED4149 /* ZWMsgVoiceCellRight.xib */,
+				16191D5C1D476D1F00ED4149 /* ZWMsgPicCellLeft.h */,
+				16191D5D1D476D1F00ED4149 /* ZWMsgPicCellLeft.m */,
+				16191D5E1D476D1F00ED4149 /* ZWMsgPicCellLeft.xib */,
+				16191D611D476D3A00ED4149 /* ZWMsgPicCellRight.h */,
+				16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */,
+				16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -1008,6 +1024,7 @@
 				16EEE2791D46462F007A2B07 /* ZWMsgCellLeft.xib in Resources */,
 				16EEE2391D460FC9007A2B07 /* face64.png in Resources */,
 				16EEE24D1D460FC9007A2B07 /* face82.png in Resources */,
+				16191D601D476D1F00ED4149 /* ZWMsgPicCellLeft.xib in Resources */,
 				16EEE24F1D460FC9007A2B07 /* face84.png in Resources */,
 				16EEE2041D460FC9007A2B07 /* face16.png in Resources */,
 				16EEE2561D460FC9007A2B07 /* face90.png in Resources */,
@@ -1095,6 +1112,7 @@
 				16EEE20A1D460FC9007A2B07 /* face21.png in Resources */,
 				16191C911D46FA4E00ED4149 /* MJRefresh.bundle in Resources */,
 				16EEE2121D460FC9007A2B07 /* face29.png in Resources */,
+				16191D651D476D3A00ED4149 /* ZWMsgPicCellRight.xib in Resources */,
 				16EEE2551D460FC9007A2B07 /* face9.png in Resources */,
 				16EEE2331D460FC9007A2B07 /* face59.png in Resources */,
 				16EEE21D1D460FC9007A2B07 /* face39.png in Resources */,
@@ -1124,6 +1142,7 @@
 				16EEE17F1D45FE7A007A2B07 /* IQUIScrollView+Additions.m in Sources */,
 				16EEE13E1D45F0D3007A2B07 /* AppDelegate.m in Sources */,
 				16EEE2781D46462F007A2B07 /* ZWMsgCellLeft.m in Sources */,
+				16191D641D476D3A00ED4149 /* ZWMsgPicCellRight.m in Sources */,
 				16EEE13B1D45F0D3007A2B07 /* main.m in Sources */,
 				16191C841D46FA4E00ED4149 /* MJRefreshComponent.m in Sources */,
 				16191D4B1D473BDC00ED4149 /* UIImage+GIF.m in Sources */,
@@ -1141,6 +1160,7 @@
 				16191D401D473BDC00ED4149 /* NSData+GIF.m in Sources */,
 				16191CD61D4711FD00ED4149 /* ZWMsgTimeCell.m in Sources */,
 				16191D4E1D473BDC00ED4149 /* UIImageView+HighlightedWebCache.m in Sources */,
+				16191D5F1D476D1F00ED4149 /* ZWMsgPicCellLeft.m in Sources */,
 				16191C8B1D46FA4E00ED4149 /* MJRefreshBackNormalFooter.m in Sources */,
 				16191D4A1D473BDC00ED4149 /* UIButton+WebCache.m in Sources */,
 				16191C991D47015E00ED4149 /* testMsg.m in Sources */,

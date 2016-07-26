@@ -49,6 +49,47 @@
             [tt addObject:mmm];
         }
         
+        NSArray* pppp = @[
+                          @[
+                          @"http://b.hiphotos.baidu.com/image/pic/item/d058ccbf6c81800a30063c13b33533fa838b47cf.jpg",
+                          @(500),@(700)],
+                          @[
+                              @"http://e.hiphotos.baidu.com/image/pic/item/64380cd7912397dd25024f305c82b2b7d0a2878f.jpg",
+                              @(594),@(891)
+                              ],
+                          @[
+                              @"http://c.hiphotos.baidu.com/image/pic/item/6a600c338744ebf8a05ade3bdbf9d72a6059a78f.jpg",
+                              @(463),@(690)
+                              ],
+                          @[
+                              @"http://c.hiphotos.baidu.com/image/pic/item/f31fbe096b63f62431b8e7078544ebf81b4ca3c9.jpg",
+                              @(456),
+                              @(646)
+                              ],
+                          @[
+                              @"http://d.hiphotos.baidu.com/image/pic/item/caef76094b36acaf9da262e37ed98d1001e99c6b.jpg",
+                              @(620),@(891)
+                              ]
+                          ];
+        
+        for ( int j = 0; j<5; j++) {
+            
+            ZWMsgObjPic* mmm = ZWMsgObjPic.new;
+            mmm.mIsSendOut = arc4random() % 2;
+            mmm.mHeadImgUrl = ss[ mmm.mIsSendOut ];
+            mmm.mMsgType = 2;
+            mmm.mMsgDate = [NSDate date];
+            
+            NSArray*bbbb= pppp[ arc4random() % pppp.count ];
+            mmm.mPicURL = bbbb[0];
+            mmm.mPicW = [bbbb[1] intValue];
+            mmm.mPicH = [bbbb[2] intValue];
+            
+            [NSThread sleepForTimeInterval:0.1];
+            [tt addObject:mmm];
+        }
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
            
             block( tt );
@@ -56,6 +97,9 @@
         });
         
     });
+    
+    
+    
     
 }
 @end

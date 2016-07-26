@@ -15,6 +15,8 @@
 #import "ZWMsgTimeCell.h"
 #import "ZWMsgVoiceCellLeft.h"
 #import "ZWMsgVoiceCellRight.h"
+#import "ZWMsgPicCellLeft.h"
+#import "ZWMsgPicCellRight.h"
 
 #import "testMsg.h"
 #import "ZWChatSomeDepend.h"
@@ -105,6 +107,13 @@
     
     nib = [UINib nibWithNibName:@"ZWMsgVoiceCellLeft" bundle:nil];
     [self.mtableview registerNib:nib forCellReuseIdentifier:@"voiceleftcell"];
+    
+    nib = [UINib nibWithNibName:@"ZWMsgPicCellLeft" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"picleftcell"];
+    
+    nib = [UINib nibWithNibName:@"ZWMsgPicCellRight" bundle:nil];
+    [self.mtableview registerNib:nib forCellReuseIdentifier:@"picrightcell"];
+    
     
     self.mtableview.delegate = self;
     self.mtableview.dataSource =  self;
@@ -216,7 +225,30 @@
         }
         else if(  msgobj.mMsgType == 2 )
         {//图片
+            ZWMsgObjPic* picobj = (ZWMsgObjPic*)msgobj;
             
+            ZWMsgPicCellRight* piccell = nil;
+            if( picobj.mIsSendOut )
+            {
+                piccell = [tableView dequeueReusableCellWithIdentifier:@"picrightcell"];
+            }
+            else{
+                piccell = [tableView dequeueReusableCellWithIdentifier:@"picleftcell"];
+            }
+#pragma mark 图片最宽
+            CGFloat picShowW = tableView.bounds.size.width - 150.0f;//这是最大的
+            
+            picShowW = picobj.mPicW > picShowW ? picShowW  :  picobj.mPicW;
+            
+            picobj.mPicW = picobj.mPicW == 0.0f ? (picobj.mPicH +1):picobj.mPicW;
+            
+            CGFloat picShowH = ( picobj.mPicH / picobj.mPicW ) * picShowW;
+            
+            [piccell.mtagimg sd_setImageWithURL:[NSURL URLWithString:picobj.mPicURL] placeholderImage:[UIImage imageNamed:@""]];
+            piccell.mimgconstH.constant = picShowH;
+            piccell.mimgconstW.constant = picShowW;
+         
+            retcell = piccell;
         }
         else if ( msgobj.mMsgType == 3 )
         {//语音
@@ -233,8 +265,10 @@
             
             vcell.mlonglabel.text = [NSString stringWithFormat:@"%d''",voiceobj.mDurlong];
             CGFloat ff = (voiceobj.mDurlong / 60.0f ) * 150.0f;
-            ff = ff < 40.0f?40.0f:ff;
+#pragma mark 声音cell最宽,最窄
+            ff = ff < 50?50.0f:ff;
             ff = ff > 150.0f?150.0f:ff;
+            
             vcell.mlongrateconstW.constant = ff;
             
             retcell = vcell;
