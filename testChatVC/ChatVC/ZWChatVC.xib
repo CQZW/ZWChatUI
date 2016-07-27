@@ -45,7 +45,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rtv-Eg-cxq">
-                            <rect key="frame" x="0.0" y="0.0" width="60" height="63"/>
+                            <rect key="frame" x="0.0" y="5" width="60" height="58"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="vrh-9E-IYo"/>
                             </constraints>
@@ -61,7 +61,7 @@
                         <constraint firstItem="nj8-8k-k4X" firstAttribute="top" secondItem="Rtv-Eg-cxq" secondAttribute="bottom" id="DOw-XY-Jit"/>
                         <constraint firstItem="nj8-8k-k4X" firstAttribute="leading" secondItem="HJT-9B-ZGU" secondAttribute="leading" id="E7v-9u-Mq7"/>
                         <constraint firstAttribute="height" constant="64" id="POL-3f-NyZ"/>
-                        <constraint firstItem="Rtv-Eg-cxq" firstAttribute="top" secondItem="HJT-9B-ZGU" secondAttribute="top" id="RWf-a0-GZ5"/>
+                        <constraint firstItem="Rtv-Eg-cxq" firstAttribute="top" secondItem="HJT-9B-ZGU" secondAttribute="top" constant="5" id="RWf-a0-GZ5"/>
                         <constraint firstItem="5l6-Dx-giN" firstAttribute="centerX" secondItem="HJT-9B-ZGU" secondAttribute="centerX" id="Wnz-4U-rXl"/>
                         <constraint firstItem="5l6-Dx-giN" firstAttribute="centerY" secondItem="HJT-9B-ZGU" secondAttribute="centerY" id="bL3-6E-bMj"/>
                         <constraint firstItem="Rtv-Eg-cxq" firstAttribute="leading" secondItem="HJT-9B-ZGU" secondAttribute="leading" id="gIs-UI-LGL"/>

@@ -27,6 +27,8 @@
 #import "SVProgressHUD.h"
 #import "NIMInputAudioRecordIndicatorView.h"
 #import <AVFoundation/AVFoundation.h>
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
 
 @interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 
@@ -172,6 +174,11 @@
         
         [self.mtableview reloadData];
     
+        if( all.count )
+        {
+            [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:all.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+        
     }];
     
 }
@@ -196,6 +203,11 @@
         
         [self.mtableview reloadData];
  
+        if( all.count )
+        {
+            [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:all.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+        
     }];
     
    
@@ -246,7 +258,7 @@
     if( [self isKindOfClass:[ZWChatVC class]] )
     {
         //for test
-        [self sendOneMsg:[testMsg makeTestTextMsg:txt]];
+        [self addOneMsg:[testMsg makeTestTextMsg:txt]];
     }
 }
 
@@ -255,7 +267,7 @@
     if( [self isKindOfClass:[ZWChatVC class]] )
     {
         //for test
-        [self sendOneMsg:[testMsg makeTestPicMsg:img]];
+        [self addOneMsg:[testMsg makeTestPicMsg:img]];
     }
     
 }
@@ -265,12 +277,12 @@
     if( [self isKindOfClass:[ZWChatVC class]] )
     {
         //for test
-        [self sendOneMsg:[testMsg makeTestVoiceMsg:voicepath duration:duration]];
+        [self addOneMsg:[testMsg makeTestVoiceMsg:voicepath duration:duration]];
         
     }
 }
 
--(void)sendOneMsg:(ZWMsgObj*)sendMsg
+-(void)addOneMsg:(ZWMsgObj*)sendMsg
 {
     [self.mmsgdata addObject:sendMsg];
     [self.mtableview beginUpdates];
@@ -278,12 +290,25 @@
     [self.mtableview insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.mmsgdata.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.mtableview endUpdates];
     
+    [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.mmsgdata.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     
-    [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+}
+//删除一条消息
+-(void)delOneMsg:(ZWMsgObj*)delMsg
+{
+    NSUInteger xx = [self.mmsgdata indexOfObject:delMsg];
+    if( xx == NSNotFound ) return;
+    
+    [self.mmsgdata removeObjectAtIndex:xx];
+    [self.mtableview beginUpdates];
+    
+    [self.mtableview deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:xx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.mtableview endUpdates];
 }
 
 //获取消息,修改这里
 #pragma mark 消息数据获取主要修改这里结束
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.mmsgdata.count;
@@ -460,7 +485,19 @@
         [tableView reloadRowsAtIndexPaths:@[ indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
     }
-    
+    else if( msgobj.mMsgType == 2 )
+    {//查看大图
+        
+        MJPhoto* pp =  MJPhoto.new;
+        pp.url = [NSURL URLWithString:  ((ZWMsgObjPic*)msgobj).mPicURL  ];
+        pp.srcImageView = nil;
+        
+        MJPhotoBrowser* browser = [[MJPhotoBrowser alloc]init];
+        browser.currentPhotoIndex = 0;
+        browser.photos  = @[pp];
+        [browser show];
+        
+    }
 }
 
 -(void)playVoiceMsg:(ZWMsgObjVoice*)msg

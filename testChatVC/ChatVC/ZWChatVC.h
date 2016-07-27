@@ -50,6 +50,7 @@
 //加载之后的消息
 -(void)footerStartRefresh;
 
+#pragma mark 继承主要看这里开始
 
 //获取 msg 之前的消息,,,子类实现
 -(void)getMsgBefor:(ZWMsgObj*)msg block:(void(^)(NSArray*all))block;
@@ -57,7 +58,7 @@
 //获取 msg 之后的消息,,子类实现
 -(void)getMsgAfter:(ZWMsgObj*)msg block:(void(^)(NSArray*all))block;
 
-//这几个 will 函数,自己实现了,然后调用 sendOneMsg 就好了
+//这几个 will 函数,自己实现了,然后调用 addOneMsg 就好了
 
 //将要发送一个文字了,,,,..子类实现了
 -(void)willSendThisText:(NSString*)txt;
@@ -68,8 +69,14 @@
 //将要发送一个语音...,,这个函数一返回 voicepath 的文件机会被删除
 -(void)willSendThisVoice:(NSURL*)voicepath duration:(NSTimeInterval)duration;
 
+//添加条消息到后面
+-(void)addOneMsg:(ZWMsgObj*)sendMsg;
 
--(void)sendOneMsg:(ZWMsgObj*)sendMsg;
+//删除一条消息
+-(void)delOneMsg:(ZWMsgObj*)delMsg;
+
+
+#pragma mark 继承主要看这里结束
 
 
 @end
