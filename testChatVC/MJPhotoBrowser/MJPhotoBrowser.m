@@ -10,7 +10,7 @@
 #import "MJPhotoView.h"
 #import "MJPhotoToolbar.h"
 #import "SDWebImageManager.h"
-#import "SDWebImageManager+MJ.h"
+
 #define kPadding 10
 #define kPhotoViewTagOffset 1000
 #define kPhotoViewIndex(photoView) ([photoView tag] - kPhotoViewTagOffset)
@@ -223,12 +223,22 @@
 {
     if (index > 0) {
         MJPhoto *photo = _photos[index - 1];
-        [SDWebImageManager downloadWithURL:photo.url];
+        
+        [[SDWebImageManager sharedManager] downloadImageWithURL:photo.url options:SDWebImageLowPriority|SDWebImageRetryFailed  progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            
+        }];
     }
     
     if (index < _photos.count - 1) {
         MJPhoto *photo = _photos[index + 1];
-        [SDWebImageManager downloadWithURL:photo.url];
+        
+        [[SDWebImageManager sharedManager] downloadImageWithURL:photo.url options:SDWebImageLowPriority|SDWebImageRetryFailed  progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            
+        }];
     }
 }
 
