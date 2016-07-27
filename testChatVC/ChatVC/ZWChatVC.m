@@ -161,6 +161,8 @@
         [self.mtableview.mj_header endRefreshing];
         if( all.count )
         {
+            int timecellcount =0;
+            int ss = self.mmsgdata.count;
             for ( NSInteger j = all.count-1 ; j >= 0; j-- ) {
                 ZWMsgObj* one  = all[ j ];
                 [self.mmsgdata insertObject:one atIndex:0];
@@ -168,20 +170,27 @@
                 {//每5个就显示一个时间..
                     ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
                     [self.mmsgdata insertObject:timemsg atIndex:1];
+                    timecellcount++;
                 }
             }
-        }
-        
-        [self.mtableview reloadData];
-    
-        if( all.count )
-        {
-            [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:all.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+       
+            [self.mtableview reloadData];
+            if( ss == 0 )
+            {
+                [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:all.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            }
+            else{
+                NSInteger aaa = all.count + timecellcount + 1;
+                aaa = aaa >= self.mmsgdata.count ? (self.mmsgdata.count - 1) :aaa;
+                
+                [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:aaa inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            }
         }
         
     }];
     
 }
+
 
 -(void)footerStartRefresh
 {
@@ -190,6 +199,8 @@
         [self.mtableview.mj_footer endRefreshing];
         if( all.count )
         {
+            int timecellcount =0;
+            int ss = self.mmsgdata.count;
             for ( NSInteger j = 0 ; j < all.count; j++ ) {
                 ZWMsgObj* one  = all[ j ];
                 [self.mmsgdata addObject:one];
@@ -197,20 +208,18 @@
                 {//每5个就显示一个时间..
                     ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
                     [self.mmsgdata addObject:timemsg];
+                    timecellcount++;
                 }
             }
+            
+            [self.mtableview reloadData];
+            
+            if( ss == 0  )
+            {
+                [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.mmsgdata.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+            }
         }
-        
-        [self.mtableview reloadData];
- 
-        if( all.count )
-        {
-            [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:all.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        }
-        
     }];
-    
-   
 }
 
 //获取 msg 之前的消息,,,

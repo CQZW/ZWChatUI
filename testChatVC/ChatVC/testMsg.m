@@ -23,7 +23,7 @@
         NSArray* aa = @[@"asdfad[face1]",@"[face1]阿萨德[face1]发的事",@"[face1]啊撒旦发射点法啊上的浪费那啊 [face1]",@"啧啧啧啧[face1]去啊额烦",@"啊的身份垃圾;啦卷帘大将fl;a家拉屎的风景垃圾谁了解对方拉屎都放假啊是大幅拉升多方了解啊塑料袋积分[face1]拉丝机练腹肌阿隆索多久发啦[face1]姐啊斯蒂芬阿斯蒂芬啊是"];
         NSMutableArray* tt =NSMutableArray.new;
         int msgid = 1;
-        for ( int j = 0; j<5; j++) {
+        for ( int j = 0; j<10; j++) {
             
             ZWMsgObjText* mmm = ZWMsgObjText.new;
             
@@ -36,9 +36,12 @@
             mmm.mMsgDate = [NSDate date];
             mmm.mTextMsg = aa[ arc4random()% aa.count  ];
             
-            [NSThread sleepForTimeInterval:0.1];
+            [NSThread sleepForTimeInterval:0.01];
             [tt addObject:mmm];
         }
+       
+        
+         
         
         for ( int j = 0; j<5; j++) {
             

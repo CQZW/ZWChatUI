@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		16191C501D46F1AE00ED4149 /* ZWMsgCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C4E1D46F1AE00ED4149 /* ZWMsgCellRight.m */; };
-		16191C511D46F1AE00ED4149 /* ZWMsgCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191C4F1D46F1AE00ED4149 /* ZWMsgCellRight.xib */; };
 		16191C821D46FA4E00ED4149 /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C551D46FA4D00ED4149 /* MJRefreshAutoFooter.m */; };
 		16191C831D46FA4E00ED4149 /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C571D46FA4D00ED4149 /* MJRefreshBackFooter.m */; };
 		16191C841D46FA4E00ED4149 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C591D46FA4D00ED4149 /* MJRefreshComponent.m */; };
@@ -31,10 +29,7 @@
 		16191C951D46FA4E00ED4149 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C7F1D46FA4E00ED4149 /* UIScrollView+MJRefresh.m */; };
 		16191C961D46FA4E00ED4149 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C811D46FA4E00ED4149 /* UIView+MJExtension.m */; };
 		16191C991D47015E00ED4149 /* testMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C981D47015E00ED4149 /* testMsg.m */; };
-		16191C9D1D47095200ED4149 /* ZWChatSomeDepend.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191C9C1D47095200ED4149 /* ZWChatSomeDepend.m */; };
 		16191C9F1D470A7700ED4149 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16191C9E1D470A7700ED4149 /* UIKit.framework */; };
-		16191CD61D4711FD00ED4149 /* ZWMsgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191CD41D4711FD00ED4149 /* ZWMsgTimeCell.m */; };
-		16191CD71D4711FD00ED4149 /* ZWMsgTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191CD51D4711FD00ED4149 /* ZWMsgTimeCell.xib */; };
 		16191CF01D47393000ED4149 /* M80AttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191CE81D47393000ED4149 /* M80AttributedLabel.m */; };
 		16191CF11D47393000ED4149 /* M80AttributedLabelAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191CEA1D47393000ED4149 /* M80AttributedLabelAttachment.m */; };
 		16191CF21D47393000ED4149 /* M80AttributedLabelURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191CED1D47393000ED4149 /* M80AttributedLabelURL.m */; };
@@ -58,18 +53,6 @@
 		16191D4F1D473BDC00ED4149 /* UIImageView+MJWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D3A1D473BDC00ED4149 /* UIImageView+MJWebCache.m */; };
 		16191D501D473BDC00ED4149 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D3C1D473BDC00ED4149 /* UIImageView+WebCache.m */; };
 		16191D511D473BDC00ED4149 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D3E1D473BDC00ED4149 /* UIView+WebCacheOperation.m */; };
-		16191D551D47473800ED4149 /* ZWMsgVoiceCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D531D47473800ED4149 /* ZWMsgVoiceCellLeft.m */; };
-		16191D561D47473800ED4149 /* ZWMsgVoiceCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D541D47473800ED4149 /* ZWMsgVoiceCellLeft.xib */; };
-		16191D5A1D475DE800ED4149 /* ZWMsgVoiceCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D581D475DE800ED4149 /* ZWMsgVoiceCellRight.m */; };
-		16191D5B1D475DE800ED4149 /* ZWMsgVoiceCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D591D475DE800ED4149 /* ZWMsgVoiceCellRight.xib */; };
-		16191D5F1D476D1F00ED4149 /* ZWMsgPicCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D5D1D476D1F00ED4149 /* ZWMsgPicCellLeft.m */; };
-		16191D601D476D1F00ED4149 /* ZWMsgPicCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D5E1D476D1F00ED4149 /* ZWMsgPicCellLeft.xib */; };
-		16191D641D476D3A00ED4149 /* ZWMsgPicCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */; };
-		16191D651D476D3A00ED4149 /* ZWMsgPicCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */; };
-		16191D691D4794C600ED4149 /* ZWMsgGiftCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D671D4794C600ED4149 /* ZWMsgGiftCellLeft.m */; };
-		16191D6A1D4794C600ED4149 /* ZWMsgGiftCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D681D4794C600ED4149 /* ZWMsgGiftCellLeft.xib */; };
-		16191D6E1D4794D800ED4149 /* ZWMsgGiftCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16191D6C1D4794D800ED4149 /* ZWMsgGiftCellRight.m */; };
-		16191D6F1D4794D800ED4149 /* ZWMsgGiftCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16191D6D1D4794D800ED4149 /* ZWMsgGiftCellRight.xib */; };
 		16CB7D561D48B270008104DA /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D4A1D48B270008104DA /* MJPhoto.m */; };
 		16CB7D571D48B270008104DA /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D4B1D48B270008104DA /* MJPhotoBrowser.bundle */; };
 		16CB7D581D48B270008104DA /* MJPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D4D1D48B270008104DA /* MJPhotoBrowser.m */; };
@@ -77,6 +60,26 @@
 		16CB7D5A1D48B270008104DA /* MJPhotoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D511D48B270008104DA /* MJPhotoProgressView.m */; };
 		16CB7D5B1D48B270008104DA /* MJPhotoToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D531D48B270008104DA /* MJPhotoToolbar.m */; };
 		16CB7D5C1D48B270008104DA /* MJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D551D48B270008104DA /* MJPhotoView.m */; };
+		16CB7D621D48BA65008104DA /* NIMInputAudioRecordIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D5F1D48BA65008104DA /* NIMInputAudioRecordIndicatorView.m */; };
+		16CB7D631D48BA65008104DA /* ZWChatSomeDepend.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D611D48BA65008104DA /* ZWChatSomeDepend.m */; };
+		16CB7D801D48BA6A008104DA /* ZWMsgCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D661D48BA6A008104DA /* ZWMsgCellLeft.m */; };
+		16CB7D811D48BA6A008104DA /* ZWMsgCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D671D48BA6A008104DA /* ZWMsgCellLeft.xib */; };
+		16CB7D821D48BA6A008104DA /* ZWMsgCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D691D48BA6A008104DA /* ZWMsgCellRight.m */; };
+		16CB7D831D48BA6A008104DA /* ZWMsgCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D6A1D48BA6A008104DA /* ZWMsgCellRight.xib */; };
+		16CB7D841D48BA6A008104DA /* ZWMsgGiftCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D6C1D48BA6A008104DA /* ZWMsgGiftCellLeft.m */; };
+		16CB7D851D48BA6A008104DA /* ZWMsgGiftCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D6D1D48BA6A008104DA /* ZWMsgGiftCellLeft.xib */; };
+		16CB7D861D48BA6A008104DA /* ZWMsgGiftCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D6F1D48BA6A008104DA /* ZWMsgGiftCellRight.m */; };
+		16CB7D871D48BA6A008104DA /* ZWMsgGiftCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D701D48BA6A008104DA /* ZWMsgGiftCellRight.xib */; };
+		16CB7D881D48BA6A008104DA /* ZWMsgPicCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D721D48BA6A008104DA /* ZWMsgPicCellLeft.m */; };
+		16CB7D891D48BA6A008104DA /* ZWMsgPicCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D731D48BA6A008104DA /* ZWMsgPicCellLeft.xib */; };
+		16CB7D8A1D48BA6A008104DA /* ZWMsgPicCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D751D48BA6A008104DA /* ZWMsgPicCellRight.m */; };
+		16CB7D8B1D48BA6A008104DA /* ZWMsgPicCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D761D48BA6A008104DA /* ZWMsgPicCellRight.xib */; };
+		16CB7D8C1D48BA6A008104DA /* ZWMsgTimeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D781D48BA6A008104DA /* ZWMsgTimeCell.m */; };
+		16CB7D8D1D48BA6A008104DA /* ZWMsgTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D791D48BA6A008104DA /* ZWMsgTimeCell.xib */; };
+		16CB7D8E1D48BA6A008104DA /* ZWMsgVoiceCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D7B1D48BA6A008104DA /* ZWMsgVoiceCellLeft.m */; };
+		16CB7D8F1D48BA6A008104DA /* ZWMsgVoiceCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D7C1D48BA6A008104DA /* ZWMsgVoiceCellLeft.xib */; };
+		16CB7D901D48BA6A008104DA /* ZWMsgVoiceCellRight.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CB7D7E1D48BA6A008104DA /* ZWMsgVoiceCellRight.m */; };
+		16CB7D911D48BA6A008104DA /* ZWMsgVoiceCellRight.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16CB7D7F1D48BA6A008104DA /* ZWMsgVoiceCellRight.xib */; };
 		16EEE13B1D45F0D3007A2B07 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13A1D45F0D3007A2B07 /* main.m */; };
 		16EEE13E1D45F0D3007A2B07 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE13D1D45F0D3007A2B07 /* AppDelegate.m */; };
 		16EEE1411D45F0D3007A2B07 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE1401D45F0D3007A2B07 /* ViewController.m */; };
@@ -207,20 +210,14 @@
 		16EEE25E1D460FC9007A2B07 /* face98.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EEE1F51D460FC9007A2B07 /* face98.png */; };
 		16EEE25F1D460FC9007A2B07 /* face99.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EEE1F61D460FC9007A2B07 /* face99.png */; };
 		16EEE26A1D463182007A2B07 /* face110.png in Resources */ = {isa = PBXBuildFile; fileRef = 16EEE2681D463182007A2B07 /* face110.png */; };
-		16EEE2781D46462F007A2B07 /* ZWMsgCellLeft.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EEE2761D46462F007A2B07 /* ZWMsgCellLeft.m */; };
-		16EEE2791D46462F007A2B07 /* ZWMsgCellLeft.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16EEE2771D46462F007A2B07 /* ZWMsgCellLeft.xib */; };
 		16EF71931D485A88002A1E6D /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EF718A1D485A88002A1E6D /* SVIndefiniteAnimatedView.m */; };
 		16EF71941D485A88002A1E6D /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EF718C1D485A88002A1E6D /* SVProgressAnimatedView.m */; };
 		16EF71951D485A88002A1E6D /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 16EF718E1D485A88002A1E6D /* SVProgressHUD.bundle */; };
 		16EF71961D485A88002A1E6D /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EF71901D485A88002A1E6D /* SVProgressHUD.m */; };
 		16EF71971D485A88002A1E6D /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EF71921D485A88002A1E6D /* SVRadialGradientLayer.m */; };
-		16EF719A1D485E6B002A1E6D /* NIMInputAudioRecordIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16EF71991D485E6B002A1E6D /* NIMInputAudioRecordIndicatorView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		16191C4D1D46F1AE00ED4149 /* ZWMsgCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgCellRight.h; sourceTree = "<group>"; };
-		16191C4E1D46F1AE00ED4149 /* ZWMsgCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgCellRight.m; sourceTree = "<group>"; };
-		16191C4F1D46F1AE00ED4149 /* ZWMsgCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgCellRight.xib; sourceTree = "<group>"; };
 		16191C541D46FA4D00ED4149 /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		16191C551D46FA4D00ED4149 /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		16191C561D46FA4D00ED4149 /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -264,12 +261,7 @@
 		16191C811D46FA4E00ED4149 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		16191C971D47015E00ED4149 /* testMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testMsg.h; sourceTree = "<group>"; };
 		16191C981D47015E00ED4149 /* testMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testMsg.m; sourceTree = "<group>"; };
-		16191C9B1D47095200ED4149 /* ZWChatSomeDepend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWChatSomeDepend.h; sourceTree = "<group>"; };
-		16191C9C1D47095200ED4149 /* ZWChatSomeDepend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWChatSomeDepend.m; sourceTree = "<group>"; };
 		16191C9E1D470A7700ED4149 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		16191CD31D4711FD00ED4149 /* ZWMsgTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgTimeCell.h; sourceTree = "<group>"; };
-		16191CD41D4711FD00ED4149 /* ZWMsgTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgTimeCell.m; sourceTree = "<group>"; };
-		16191CD51D4711FD00ED4149 /* ZWMsgTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgTimeCell.xib; sourceTree = "<group>"; };
 		16191CE71D47393000ED4149 /* M80AttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabel.h; sourceTree = "<group>"; };
 		16191CE81D47393000ED4149 /* M80AttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M80AttributedLabel.m; sourceTree = "<group>"; };
 		16191CE91D47393000ED4149 /* M80AttributedLabelAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M80AttributedLabelAttachment.h; sourceTree = "<group>"; };
@@ -318,24 +310,6 @@
 		16191D3C1D473BDC00ED4149 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		16191D3D1D473BDC00ED4149 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		16191D3E1D473BDC00ED4149 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		16191D521D47473800ED4149 /* ZWMsgVoiceCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgVoiceCellLeft.h; sourceTree = "<group>"; };
-		16191D531D47473800ED4149 /* ZWMsgVoiceCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgVoiceCellLeft.m; sourceTree = "<group>"; };
-		16191D541D47473800ED4149 /* ZWMsgVoiceCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgVoiceCellLeft.xib; sourceTree = "<group>"; };
-		16191D571D475DE800ED4149 /* ZWMsgVoiceCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgVoiceCellRight.h; sourceTree = "<group>"; };
-		16191D581D475DE800ED4149 /* ZWMsgVoiceCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgVoiceCellRight.m; sourceTree = "<group>"; };
-		16191D591D475DE800ED4149 /* ZWMsgVoiceCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgVoiceCellRight.xib; sourceTree = "<group>"; };
-		16191D5C1D476D1F00ED4149 /* ZWMsgPicCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgPicCellLeft.h; sourceTree = "<group>"; };
-		16191D5D1D476D1F00ED4149 /* ZWMsgPicCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgPicCellLeft.m; sourceTree = "<group>"; };
-		16191D5E1D476D1F00ED4149 /* ZWMsgPicCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgPicCellLeft.xib; sourceTree = "<group>"; };
-		16191D611D476D3A00ED4149 /* ZWMsgPicCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgPicCellRight.h; sourceTree = "<group>"; };
-		16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgPicCellRight.m; sourceTree = "<group>"; };
-		16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgPicCellRight.xib; sourceTree = "<group>"; };
-		16191D661D4794C600ED4149 /* ZWMsgGiftCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgGiftCellLeft.h; sourceTree = "<group>"; };
-		16191D671D4794C600ED4149 /* ZWMsgGiftCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgGiftCellLeft.m; sourceTree = "<group>"; };
-		16191D681D4794C600ED4149 /* ZWMsgGiftCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgGiftCellLeft.xib; sourceTree = "<group>"; };
-		16191D6B1D4794D800ED4149 /* ZWMsgGiftCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgGiftCellRight.h; sourceTree = "<group>"; };
-		16191D6C1D4794D800ED4149 /* ZWMsgGiftCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgGiftCellRight.m; sourceTree = "<group>"; };
-		16191D6D1D4794D800ED4149 /* ZWMsgGiftCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgGiftCellRight.xib; sourceTree = "<group>"; };
 		16CB7D491D48B270008104DA /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
 		16CB7D4A1D48B270008104DA /* MJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhoto.m; sourceTree = "<group>"; };
 		16CB7D4B1D48B270008104DA /* MJPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJPhotoBrowser.bundle; sourceTree = "<group>"; };
@@ -349,6 +323,37 @@
 		16CB7D531D48B270008104DA /* MJPhotoToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhotoToolbar.m; sourceTree = "<group>"; };
 		16CB7D541D48B270008104DA /* MJPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhotoView.h; sourceTree = "<group>"; };
 		16CB7D551D48B270008104DA /* MJPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPhotoView.m; sourceTree = "<group>"; };
+		16CB7D5E1D48BA65008104DA /* NIMInputAudioRecordIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIMInputAudioRecordIndicatorView.h; sourceTree = "<group>"; };
+		16CB7D5F1D48BA65008104DA /* NIMInputAudioRecordIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIMInputAudioRecordIndicatorView.m; sourceTree = "<group>"; };
+		16CB7D601D48BA65008104DA /* ZWChatSomeDepend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWChatSomeDepend.h; sourceTree = "<group>"; };
+		16CB7D611D48BA65008104DA /* ZWChatSomeDepend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWChatSomeDepend.m; sourceTree = "<group>"; };
+		16CB7D651D48BA6A008104DA /* ZWMsgCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgCellLeft.h; sourceTree = "<group>"; };
+		16CB7D661D48BA6A008104DA /* ZWMsgCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgCellLeft.m; sourceTree = "<group>"; };
+		16CB7D671D48BA6A008104DA /* ZWMsgCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgCellLeft.xib; sourceTree = "<group>"; };
+		16CB7D681D48BA6A008104DA /* ZWMsgCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgCellRight.h; sourceTree = "<group>"; };
+		16CB7D691D48BA6A008104DA /* ZWMsgCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgCellRight.m; sourceTree = "<group>"; };
+		16CB7D6A1D48BA6A008104DA /* ZWMsgCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgCellRight.xib; sourceTree = "<group>"; };
+		16CB7D6B1D48BA6A008104DA /* ZWMsgGiftCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgGiftCellLeft.h; sourceTree = "<group>"; };
+		16CB7D6C1D48BA6A008104DA /* ZWMsgGiftCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgGiftCellLeft.m; sourceTree = "<group>"; };
+		16CB7D6D1D48BA6A008104DA /* ZWMsgGiftCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgGiftCellLeft.xib; sourceTree = "<group>"; };
+		16CB7D6E1D48BA6A008104DA /* ZWMsgGiftCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgGiftCellRight.h; sourceTree = "<group>"; };
+		16CB7D6F1D48BA6A008104DA /* ZWMsgGiftCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgGiftCellRight.m; sourceTree = "<group>"; };
+		16CB7D701D48BA6A008104DA /* ZWMsgGiftCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgGiftCellRight.xib; sourceTree = "<group>"; };
+		16CB7D711D48BA6A008104DA /* ZWMsgPicCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgPicCellLeft.h; sourceTree = "<group>"; };
+		16CB7D721D48BA6A008104DA /* ZWMsgPicCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgPicCellLeft.m; sourceTree = "<group>"; };
+		16CB7D731D48BA6A008104DA /* ZWMsgPicCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgPicCellLeft.xib; sourceTree = "<group>"; };
+		16CB7D741D48BA6A008104DA /* ZWMsgPicCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgPicCellRight.h; sourceTree = "<group>"; };
+		16CB7D751D48BA6A008104DA /* ZWMsgPicCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgPicCellRight.m; sourceTree = "<group>"; };
+		16CB7D761D48BA6A008104DA /* ZWMsgPicCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgPicCellRight.xib; sourceTree = "<group>"; };
+		16CB7D771D48BA6A008104DA /* ZWMsgTimeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgTimeCell.h; sourceTree = "<group>"; };
+		16CB7D781D48BA6A008104DA /* ZWMsgTimeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgTimeCell.m; sourceTree = "<group>"; };
+		16CB7D791D48BA6A008104DA /* ZWMsgTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgTimeCell.xib; sourceTree = "<group>"; };
+		16CB7D7A1D48BA6A008104DA /* ZWMsgVoiceCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgVoiceCellLeft.h; sourceTree = "<group>"; };
+		16CB7D7B1D48BA6A008104DA /* ZWMsgVoiceCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgVoiceCellLeft.m; sourceTree = "<group>"; };
+		16CB7D7C1D48BA6A008104DA /* ZWMsgVoiceCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgVoiceCellLeft.xib; sourceTree = "<group>"; };
+		16CB7D7D1D48BA6A008104DA /* ZWMsgVoiceCellRight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgVoiceCellRight.h; sourceTree = "<group>"; };
+		16CB7D7E1D48BA6A008104DA /* ZWMsgVoiceCellRight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgVoiceCellRight.m; sourceTree = "<group>"; };
+		16CB7D7F1D48BA6A008104DA /* ZWMsgVoiceCellRight.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgVoiceCellRight.xib; sourceTree = "<group>"; };
 		16EEE1361D45F0D3007A2B07 /* testChatVC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testChatVC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16EEE13A1D45F0D3007A2B07 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		16EEE13C1D45F0D3007A2B07 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -501,9 +506,6 @@
 		16EEE1F51D460FC9007A2B07 /* face98.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face98.png; sourceTree = "<group>"; };
 		16EEE1F61D460FC9007A2B07 /* face99.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face99.png; sourceTree = "<group>"; };
 		16EEE2681D463182007A2B07 /* face110.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face110.png; sourceTree = "<group>"; };
-		16EEE2751D46462F007A2B07 /* ZWMsgCellLeft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWMsgCellLeft.h; sourceTree = "<group>"; };
-		16EEE2761D46462F007A2B07 /* ZWMsgCellLeft.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWMsgCellLeft.m; sourceTree = "<group>"; };
-		16EEE2771D46462F007A2B07 /* ZWMsgCellLeft.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZWMsgCellLeft.xib; sourceTree = "<group>"; };
 		16EF71891D485A88002A1E6D /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		16EF718A1D485A88002A1E6D /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		16EF718B1D485A88002A1E6D /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
@@ -514,8 +516,6 @@
 		16EF71901D485A88002A1E6D /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		16EF71911D485A88002A1E6D /* SVRadialGradientLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVRadialGradientLayer.h; sourceTree = "<group>"; };
 		16EF71921D485A88002A1E6D /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
-		16EF71981D485E6B002A1E6D /* NIMInputAudioRecordIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIMInputAudioRecordIndicatorView.h; sourceTree = "<group>"; };
-		16EF71991D485E6B002A1E6D /* NIMInputAudioRecordIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIMInputAudioRecordIndicatorView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -530,40 +530,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		16191C4C1D46F0B700ED4149 /* cell */ = {
-			isa = PBXGroup;
-			children = (
-				16EEE2751D46462F007A2B07 /* ZWMsgCellLeft.h */,
-				16EEE2761D46462F007A2B07 /* ZWMsgCellLeft.m */,
-				16EEE2771D46462F007A2B07 /* ZWMsgCellLeft.xib */,
-				16191C4D1D46F1AE00ED4149 /* ZWMsgCellRight.h */,
-				16191C4E1D46F1AE00ED4149 /* ZWMsgCellRight.m */,
-				16191C4F1D46F1AE00ED4149 /* ZWMsgCellRight.xib */,
-				16191CD31D4711FD00ED4149 /* ZWMsgTimeCell.h */,
-				16191CD41D4711FD00ED4149 /* ZWMsgTimeCell.m */,
-				16191CD51D4711FD00ED4149 /* ZWMsgTimeCell.xib */,
-				16191D521D47473800ED4149 /* ZWMsgVoiceCellLeft.h */,
-				16191D531D47473800ED4149 /* ZWMsgVoiceCellLeft.m */,
-				16191D541D47473800ED4149 /* ZWMsgVoiceCellLeft.xib */,
-				16191D571D475DE800ED4149 /* ZWMsgVoiceCellRight.h */,
-				16191D581D475DE800ED4149 /* ZWMsgVoiceCellRight.m */,
-				16191D591D475DE800ED4149 /* ZWMsgVoiceCellRight.xib */,
-				16191D5C1D476D1F00ED4149 /* ZWMsgPicCellLeft.h */,
-				16191D5D1D476D1F00ED4149 /* ZWMsgPicCellLeft.m */,
-				16191D5E1D476D1F00ED4149 /* ZWMsgPicCellLeft.xib */,
-				16191D611D476D3A00ED4149 /* ZWMsgPicCellRight.h */,
-				16191D621D476D3A00ED4149 /* ZWMsgPicCellRight.m */,
-				16191D631D476D3A00ED4149 /* ZWMsgPicCellRight.xib */,
-				16191D661D4794C600ED4149 /* ZWMsgGiftCellLeft.h */,
-				16191D671D4794C600ED4149 /* ZWMsgGiftCellLeft.m */,
-				16191D681D4794C600ED4149 /* ZWMsgGiftCellLeft.xib */,
-				16191D6B1D4794D800ED4149 /* ZWMsgGiftCellRight.h */,
-				16191D6C1D4794D800ED4149 /* ZWMsgGiftCellRight.m */,
-				16191D6D1D4794D800ED4149 /* ZWMsgGiftCellRight.xib */,
-			);
-			name = cell;
-			sourceTree = "<group>";
-		};
 		16191C521D46FA4D00ED4149 /* MJRefresh */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,17 +626,6 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
-		16191C9A1D47093900ED4149 /* somedep */ = {
-			isa = PBXGroup;
-			children = (
-				16EF71981D485E6B002A1E6D /* NIMInputAudioRecordIndicatorView.h */,
-				16EF71991D485E6B002A1E6D /* NIMInputAudioRecordIndicatorView.m */,
-				16191C9B1D47095200ED4149 /* ZWChatSomeDepend.h */,
-				16191C9C1D47095200ED4149 /* ZWChatSomeDepend.m */,
-			);
-			name = somedep;
-			sourceTree = "<group>";
-		};
 		16191CE61D47393000ED4149 /* M80AttributedLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,6 +708,51 @@
 			path = MJPhotoBrowser;
 			sourceTree = "<group>";
 		};
+		16CB7D5D1D48BA65008104DA /* somedep */ = {
+			isa = PBXGroup;
+			children = (
+				16CB7D5E1D48BA65008104DA /* NIMInputAudioRecordIndicatorView.h */,
+				16CB7D5F1D48BA65008104DA /* NIMInputAudioRecordIndicatorView.m */,
+				16CB7D601D48BA65008104DA /* ZWChatSomeDepend.h */,
+				16CB7D611D48BA65008104DA /* ZWChatSomeDepend.m */,
+			);
+			path = somedep;
+			sourceTree = "<group>";
+		};
+		16CB7D641D48BA6A008104DA /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				16CB7D651D48BA6A008104DA /* ZWMsgCellLeft.h */,
+				16CB7D661D48BA6A008104DA /* ZWMsgCellLeft.m */,
+				16CB7D671D48BA6A008104DA /* ZWMsgCellLeft.xib */,
+				16CB7D681D48BA6A008104DA /* ZWMsgCellRight.h */,
+				16CB7D691D48BA6A008104DA /* ZWMsgCellRight.m */,
+				16CB7D6A1D48BA6A008104DA /* ZWMsgCellRight.xib */,
+				16CB7D6B1D48BA6A008104DA /* ZWMsgGiftCellLeft.h */,
+				16CB7D6C1D48BA6A008104DA /* ZWMsgGiftCellLeft.m */,
+				16CB7D6D1D48BA6A008104DA /* ZWMsgGiftCellLeft.xib */,
+				16CB7D6E1D48BA6A008104DA /* ZWMsgGiftCellRight.h */,
+				16CB7D6F1D48BA6A008104DA /* ZWMsgGiftCellRight.m */,
+				16CB7D701D48BA6A008104DA /* ZWMsgGiftCellRight.xib */,
+				16CB7D711D48BA6A008104DA /* ZWMsgPicCellLeft.h */,
+				16CB7D721D48BA6A008104DA /* ZWMsgPicCellLeft.m */,
+				16CB7D731D48BA6A008104DA /* ZWMsgPicCellLeft.xib */,
+				16CB7D741D48BA6A008104DA /* ZWMsgPicCellRight.h */,
+				16CB7D751D48BA6A008104DA /* ZWMsgPicCellRight.m */,
+				16CB7D761D48BA6A008104DA /* ZWMsgPicCellRight.xib */,
+				16CB7D771D48BA6A008104DA /* ZWMsgTimeCell.h */,
+				16CB7D781D48BA6A008104DA /* ZWMsgTimeCell.m */,
+				16CB7D791D48BA6A008104DA /* ZWMsgTimeCell.xib */,
+				16CB7D7A1D48BA6A008104DA /* ZWMsgVoiceCellLeft.h */,
+				16CB7D7B1D48BA6A008104DA /* ZWMsgVoiceCellLeft.m */,
+				16CB7D7C1D48BA6A008104DA /* ZWMsgVoiceCellLeft.xib */,
+				16CB7D7D1D48BA6A008104DA /* ZWMsgVoiceCellRight.h */,
+				16CB7D7E1D48BA6A008104DA /* ZWMsgVoiceCellRight.m */,
+				16CB7D7F1D48BA6A008104DA /* ZWMsgVoiceCellRight.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		16EEE12D1D45F0D3007A2B07 = {
 			isa = PBXGroup;
 			children = (
@@ -799,8 +799,8 @@
 		16EEE1501D45F1A9007A2B07 /* ChatVC */ = {
 			isa = PBXGroup;
 			children = (
-				16191C9A1D47093900ED4149 /* somedep */,
-				16191C4C1D46F0B700ED4149 /* cell */,
+				16CB7D641D48BA6A008104DA /* cell */,
+				16CB7D5D1D48BA65008104DA /* somedep */,
 				16EEE18D1D460FC9007A2B07 /* face */,
 				16EEE1511D45F201007A2B07 /* ZWChatVC.h */,
 				16EEE1521D45F201007A2B07 /* ZWChatVC.m */,
@@ -1101,6 +1101,7 @@
 				16EEE2401D460FC9007A2B07 /* face70.png in Resources */,
 				16EEE2201D460FC9007A2B07 /* face41.png in Resources */,
 				16EEE21B1D460FC9007A2B07 /* face37.png in Resources */,
+				16CB7D811D48BA6A008104DA /* ZWMsgCellLeft.xib in Resources */,
 				16EEE2191D460FC9007A2B07 /* face35.png in Resources */,
 				16EEE2231D460FC9007A2B07 /* face44.png in Resources */,
 				16EEE21F1D460FC9007A2B07 /* face40.png in Resources */,
@@ -1108,25 +1109,25 @@
 				16EEE2061D460FC9007A2B07 /* face18.png in Resources */,
 				16EEE2471D460FC9007A2B07 /* face77.png in Resources */,
 				16EEE2251D460FC9007A2B07 /* face46.png in Resources */,
-				16191D561D47473800ED4149 /* ZWMsgVoiceCellLeft.xib in Resources */,
 				16EEE2581D460FC9007A2B07 /* face92.png in Resources */,
 				16EEE2281D460FC9007A2B07 /* face49.png in Resources */,
 				16EEE2181D460FC9007A2B07 /* face34.png in Resources */,
 				16EEE1491D45F0D3007A2B07 /* LaunchScreen.storyboard in Resources */,
+				16CB7D891D48BA6A008104DA /* ZWMsgPicCellLeft.xib in Resources */,
 				16EEE2371D460FC9007A2B07 /* face62.png in Resources */,
 				16EEE1FE1D460FC9007A2B07 /* face105.png in Resources */,
 				16EEE25D1D460FC9007A2B07 /* face97.png in Resources */,
+				16CB7D8B1D48BA6A008104DA /* ZWMsgPicCellRight.xib in Resources */,
 				16EEE20D1D460FC9007A2B07 /* face24.png in Resources */,
-				16EEE2791D46462F007A2B07 /* ZWMsgCellLeft.xib in Resources */,
 				16EEE2391D460FC9007A2B07 /* face64.png in Resources */,
 				16EEE24D1D460FC9007A2B07 /* face82.png in Resources */,
-				16191D601D476D1F00ED4149 /* ZWMsgPicCellLeft.xib in Resources */,
 				16EEE24F1D460FC9007A2B07 /* face84.png in Resources */,
 				16EEE2041D460FC9007A2B07 /* face16.png in Resources */,
 				16EEE2561D460FC9007A2B07 /* face90.png in Resources */,
 				16EEE2501D460FC9007A2B07 /* face85.png in Resources */,
 				16EEE20F1D460FC9007A2B07 /* face26.png in Resources */,
 				16EEE21E1D460FC9007A2B07 /* face4.png in Resources */,
+				16CB7D8F1D48BA6A008104DA /* ZWMsgVoiceCellLeft.xib in Resources */,
 				16EEE2141D460FC9007A2B07 /* face30.png in Resources */,
 				16EEE1461D45F0D3007A2B07 /* Assets.xcassets in Resources */,
 				16EEE2271D460FC9007A2B07 /* face48.png in Resources */,
@@ -1145,17 +1146,19 @@
 				16EEE2511D460FC9007A2B07 /* face86.png in Resources */,
 				16EEE1FD1D460FC9007A2B07 /* face104.png in Resources */,
 				16EEE2481D460FC9007A2B07 /* face78.png in Resources */,
-				16191CD71D4711FD00ED4149 /* ZWMsgTimeCell.xib in Resources */,
 				16EEE20E1D460FC9007A2B07 /* face25.png in Resources */,
+				16CB7D831D48BA6A008104DA /* ZWMsgCellRight.xib in Resources */,
+				16CB7D851D48BA6A008104DA /* ZWMsgGiftCellLeft.xib in Resources */,
 				16EEE2341D460FC9007A2B07 /* face6.png in Resources */,
 				16EEE1FC1D460FC9007A2B07 /* face103.png in Resources */,
 				16EEE24A1D460FC9007A2B07 /* face8.png in Resources */,
 				16EEE1571D45F268007A2B07 /* ChatRes.xcassets in Resources */,
-				16191C511D46F1AE00ED4149 /* ZWMsgCellRight.xib in Resources */,
 				16EEE24C1D460FC9007A2B07 /* face81.png in Resources */,
 				16EEE2321D460FC9007A2B07 /* face58.png in Resources */,
 				16EEE2491D460FC9007A2B07 /* face79.png in Resources */,
 				16EEE2431D460FC9007A2B07 /* face73.png in Resources */,
+				16CB7D871D48BA6A008104DA /* ZWMsgGiftCellRight.xib in Resources */,
+				16CB7D8D1D48BA6A008104DA /* ZWMsgTimeCell.xib in Resources */,
 				16EEE1441D45F0D3007A2B07 /* Main.storyboard in Resources */,
 				16EEE1F81D460FC9007A2B07 /* face10.png in Resources */,
 				16EEE1F71D460FC9007A2B07 /* face1.png in Resources */,
@@ -1165,6 +1168,7 @@
 				16EEE21C1D460FC9007A2B07 /* face38.png in Resources */,
 				16EEE25A1D460FC9007A2B07 /* face94.png in Resources */,
 				16EEE1551D45F201007A2B07 /* ZWChatVC.xib in Resources */,
+				16CB7D911D48BA6A008104DA /* ZWMsgVoiceCellRight.xib in Resources */,
 				16EEE2221D460FC9007A2B07 /* face43.png in Resources */,
 				16EEE20B1D460FC9007A2B07 /* face22.png in Resources */,
 				16EEE22B1D460FC9007A2B07 /* face51.png in Resources */,
@@ -1175,8 +1179,6 @@
 				16EEE1FF1D460FC9007A2B07 /* face11.png in Resources */,
 				16EEE26A1D463182007A2B07 /* face110.png in Resources */,
 				16EEE2441D460FC9007A2B07 /* face74.png in Resources */,
-				16191D6A1D4794C600ED4149 /* ZWMsgGiftCellLeft.xib in Resources */,
-				16191D5B1D475DE800ED4149 /* ZWMsgVoiceCellRight.xib in Resources */,
 				16EEE25F1D460FC9007A2B07 /* face99.png in Resources */,
 				16EEE24B1D460FC9007A2B07 /* face80.png in Resources */,
 				16EEE23C1D460FC9007A2B07 /* face67.png in Resources */,
@@ -1204,14 +1206,12 @@
 				16EEE22D1D460FC9007A2B07 /* face53.png in Resources */,
 				16EEE2001D460FC9007A2B07 /* face12.png in Resources */,
 				16EF71951D485A88002A1E6D /* SVProgressHUD.bundle in Resources */,
-				16191D6F1D4794D800ED4149 /* ZWMsgGiftCellRight.xib in Resources */,
 				16EEE2361D460FC9007A2B07 /* face61.png in Resources */,
 				16EEE2461D460FC9007A2B07 /* face76.png in Resources */,
 				16EEE2261D460FC9007A2B07 /* face47.png in Resources */,
 				16EEE20A1D460FC9007A2B07 /* face21.png in Resources */,
 				16191C911D46FA4E00ED4149 /* MJRefresh.bundle in Resources */,
 				16EEE2121D460FC9007A2B07 /* face29.png in Resources */,
-				16191D651D476D3A00ED4149 /* ZWMsgPicCellRight.xib in Resources */,
 				16EEE2551D460FC9007A2B07 /* face9.png in Resources */,
 				16EEE2331D460FC9007A2B07 /* face59.png in Resources */,
 				16EEE21D1D460FC9007A2B07 /* face39.png in Resources */,
@@ -1229,10 +1229,10 @@
 				16191D441D473BDC00ED4149 /* SDWebImageDecoder.m in Sources */,
 				16191D481D473BDC00ED4149 /* SDWebImageManager.m in Sources */,
 				16191D4F1D473BDC00ED4149 /* UIImageView+MJWebCache.m in Sources */,
+				16CB7D631D48BA65008104DA /* ZWChatSomeDepend.m in Sources */,
 				16EEE1861D45FE7A007A2B07 /* IQTextView.m in Sources */,
 				16191D491D473BDC00ED4149 /* SDWebImagePrefetcher.m in Sources */,
 				16191C941D46FA4E00ED4149 /* UIScrollView+MJExtension.m in Sources */,
-				16191D551D47473800ED4149 /* ZWMsgVoiceCellLeft.m in Sources */,
 				16191D4D1D473BDC00ED4149 /* UIImage+WebP.m in Sources */,
 				16191C821D46FA4E00ED4149 /* MJRefreshAutoFooter.m in Sources */,
 				16EEE1411D45F0D3007A2B07 /* ViewController.m in Sources */,
@@ -1241,17 +1241,16 @@
 				16191CF11D47393000ED4149 /* M80AttributedLabelAttachment.m in Sources */,
 				16EEE17F1D45FE7A007A2B07 /* IQUIScrollView+Additions.m in Sources */,
 				16EEE13E1D45F0D3007A2B07 /* AppDelegate.m in Sources */,
-				16EEE2781D46462F007A2B07 /* ZWMsgCellLeft.m in Sources */,
-				16191D641D476D3A00ED4149 /* ZWMsgPicCellRight.m in Sources */,
 				16EEE13B1D45F0D3007A2B07 /* main.m in Sources */,
-				16191D691D4794C600ED4149 /* ZWMsgGiftCellLeft.m in Sources */,
 				16191C841D46FA4E00ED4149 /* MJRefreshComponent.m in Sources */,
+				16CB7D8C1D48BA6A008104DA /* ZWMsgTimeCell.m in Sources */,
 				16191D4B1D473BDC00ED4149 /* UIImage+GIF.m in Sources */,
 				16191D411D473BDC00ED4149 /* NSData+ImageContentType.m in Sources */,
 				16CB7D581D48B270008104DA /* MJPhotoBrowser.m in Sources */,
 				16191C951D46FA4E00ED4149 /* UIScrollView+MJRefresh.m in Sources */,
 				16EEE1841D45FE7A007A2B07 /* IQKeyboardManager.m in Sources */,
 				16191C8A1D46FA4E00ED4149 /* MJRefreshBackGifFooter.m in Sources */,
+				16CB7D821D48BA6A008104DA /* ZWMsgCellRight.m in Sources */,
 				16EEE18B1D45FE7A007A2B07 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				16CB7D591D48B270008104DA /* MJPhotoLoadingView.m in Sources */,
 				16191D471D473BDC00ED4149 /* SDWebImageManager+MJ.m in Sources */,
@@ -1262,35 +1261,34 @@
 				16CB7D5A1D48B270008104DA /* MJPhotoProgressView.m in Sources */,
 				16191D511D473BDC00ED4149 /* UIView+WebCacheOperation.m in Sources */,
 				16191D401D473BDC00ED4149 /* NSData+GIF.m in Sources */,
-				16191CD61D4711FD00ED4149 /* ZWMsgTimeCell.m in Sources */,
 				16EF71971D485A88002A1E6D /* SVRadialGradientLayer.m in Sources */,
+				16CB7D901D48BA6A008104DA /* ZWMsgVoiceCellRight.m in Sources */,
 				16191D4E1D473BDC00ED4149 /* UIImageView+HighlightedWebCache.m in Sources */,
-				16191D5F1D476D1F00ED4149 /* ZWMsgPicCellLeft.m in Sources */,
 				16191C8B1D46FA4E00ED4149 /* MJRefreshBackNormalFooter.m in Sources */,
 				16191D4A1D473BDC00ED4149 /* UIButton+WebCache.m in Sources */,
 				16191C991D47015E00ED4149 /* testMsg.m in Sources */,
 				16191C881D46FA4E00ED4149 /* MJRefreshAutoNormalFooter.m in Sources */,
 				16EEE1801D45FE7A007A2B07 /* IQUITextFieldView+Additions.m in Sources */,
-				16EF719A1D485E6B002A1E6D /* NIMInputAudioRecordIndicatorView.m in Sources */,
 				16191C931D46FA4E00ED4149 /* NSBundle+MJRefresh.m in Sources */,
 				16191CF01D47393000ED4149 /* M80AttributedLabel.m in Sources */,
 				16191D431D473BDC00ED4149 /* SDWebImageCompat.m in Sources */,
+				16CB7D801D48BA6A008104DA /* ZWMsgCellLeft.m in Sources */,
 				16191C961D46FA4E00ED4149 /* UIView+MJExtension.m in Sources */,
 				16191C8F1D46FA4E00ED4149 /* MJRefreshNormalHeader.m in Sources */,
 				16191C891D46FA4E00ED4149 /* MJRefreshAutoStateFooter.m in Sources */,
 				16191C831D46FA4E00ED4149 /* MJRefreshBackFooter.m in Sources */,
 				16191D501D473BDC00ED4149 /* UIImageView+WebCache.m in Sources */,
 				16191C8D1D46FA4E00ED4149 /* MJRefreshGifHeader.m in Sources */,
-				16191C501D46F1AE00ED4149 /* ZWMsgCellRight.m in Sources */,
+				16CB7D841D48BA6A008104DA /* ZWMsgGiftCellLeft.m in Sources */,
 				16191D451D473BDC00ED4149 /* SDWebImageDownloader.m in Sources */,
 				16191C921D46FA4E00ED4149 /* MJRefreshConst.m in Sources */,
+				16CB7D621D48BA65008104DA /* NIMInputAudioRecordIndicatorView.m in Sources */,
 				16191C871D46FA4E00ED4149 /* MJRefreshAutoGifFooter.m in Sources */,
-				16191D6E1D4794D800ED4149 /* ZWMsgGiftCellRight.m in Sources */,
 				16191C851D46FA4E00ED4149 /* MJRefreshFooter.m in Sources */,
 				16EEE1541D45F201007A2B07 /* ZWChatVC.m in Sources */,
 				16191C8C1D46FA4E00ED4149 /* MJRefreshBackStateFooter.m in Sources */,
+				16CB7D8E1D48BA6A008104DA /* ZWMsgVoiceCellLeft.m in Sources */,
 				16191D461D473BDC00ED4149 /* SDWebImageDownloaderOperation.m in Sources */,
-				16191C9D1D47095200ED4149 /* ZWChatSomeDepend.m in Sources */,
 				16191CF21D47393000ED4149 /* M80AttributedLabelURL.m in Sources */,
 				16EEE18A1D45FE7A007A2B07 /* IQToolbar.m in Sources */,
 				16CB7D561D48B270008104DA /* MJPhoto.m in Sources */,
@@ -1298,13 +1296,15 @@
 				16EF71961D485A88002A1E6D /* SVProgressHUD.m in Sources */,
 				16191D4C1D473BDC00ED4149 /* UIImage+MultiFormat.m in Sources */,
 				16EEE1831D45FE7A007A2B07 /* IQUIWindow+Hierarchy.m in Sources */,
+				16CB7D861D48BA6A008104DA /* ZWMsgGiftCellRight.m in Sources */,
 				16CB7D5B1D48B270008104DA /* MJPhotoToolbar.m in Sources */,
 				16191D3F1D473BDC00ED4149 /* MKAnnotationView+WebCache.m in Sources */,
 				16EEE1891D45FE7A007A2B07 /* IQTitleBarButtonItem.m in Sources */,
 				16EEE1821D45FE7A007A2B07 /* IQUIViewController+Additions.m in Sources */,
+				16CB7D881D48BA6A008104DA /* ZWMsgPicCellLeft.m in Sources */,
 				16191CF31D47393000ED4149 /* NSMutableAttributedString+M80.m in Sources */,
-				16191D5A1D475DE800ED4149 /* ZWMsgVoiceCellRight.m in Sources */,
 				16CB7D5C1D48B270008104DA /* MJPhotoView.m in Sources */,
+				16CB7D8A1D48BA6A008104DA /* ZWMsgPicCellRight.m in Sources */,
 				16EEE17E1D45FE7A007A2B07 /* IQNSArray+Sort.m in Sources */,
 				16191D421D473BDC00ED4149 /* SDImageCache.m in Sources */,
 				16EF71941D485A88002A1E6D /* SVProgressAnimatedView.m in Sources */,

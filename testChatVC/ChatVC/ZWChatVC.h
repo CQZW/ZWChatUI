@@ -37,6 +37,9 @@
 //下面的东西用于继承者用...
 
 //消息数据
+#pragma mark 注意消息顺序
+//整个代码 所有消息顺序都是 按照时间排序 0---> 9
+
 @property (nonatomic,strong)    NSMutableArray*     mmsgdata;
 
 //顶部的显示
