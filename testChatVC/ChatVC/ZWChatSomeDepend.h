@@ -37,6 +37,9 @@
 
 @interface ZWMsgObj : NSObject
 
+@property (nonatomic,strong)    NSString*   mMsgID;
+@property (nonatomic,assign)    int         mMsgStatus;//0 正常,1发送中,2发送失败,
+
 @property (nonatomic,strong)    NSString*   mHeadImgUrl;
 @property (nonatomic,assign)    BOOL        mIsSendOut;//是否是发出去的
 @property (nonatomic,assign)    int         mMsgType;//0 时间消息, 1 文字消息, 2,图片消息,3 语音消息,4 礼物
@@ -65,6 +68,7 @@
 @property (nonatomic,assign)    CGFloat     mPicW;
 @property (nonatomic,assign)    CGFloat     mPicH;
 @property (nonatomic,strong)    NSString*   mPicURL;//图片URL
+@property (nonatomic,strong)    UIImage*    mImgObj;//如果有这个就优先显示这个
 
 @end
 

@@ -24,7 +24,10 @@
 #import "ZWChatSomeDepend.h"
 #import "UIImageView+WebCache.h"
 #import "M80AttributedLabel.h"
-@interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate>
+#import "SVProgressHUD.h"
+#import "NIMInputAudioRecordIndicatorView.h"
+
+@interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @end
 
@@ -41,8 +44,7 @@
     
     CGFloat         _lastInputH;
     
-    NSMutableArray* _msgdata;
-
+    NIMInputAudioRecordIndicatorView*   _recshowing;
     
 }
 
@@ -89,7 +91,7 @@
     [self.mvoicebtpress addTarget:self action:@selector(onTouchRecordBtnUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
     
     
-    _msgdata = NSMutableArray.new;
+    self.mmsgdata = NSMutableArray.new;
     
     self.mtableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerStartRefresh)];
 
@@ -137,50 +139,83 @@
 //获取消息,修改这里
 -(void)headerStartRefresh
 {
-    [testMsg getMsgList:_msgdata.firstObject block:^(NSArray *all) {
     
+    [self getMsgBefor:self.mmsgdata.firstObject block:^(NSArray *all) {
+        
         [self.mtableview.mj_header endRefreshing];
         if( all.count )
         {
-            for ( NSInteger j = all.count-1 ; j >=0; j-- ) {
+            for ( NSInteger j = all.count-1 ; j >= 0; j-- ) {
                 ZWMsgObj* one  = all[ j ];
-                [_msgdata insertObject:one atIndex:0];
-                if( (_msgdata.count % 8) == 0 )
+                [self.mmsgdata insertObject:one atIndex:0];
+                if( (self.mmsgdata.count % 8) ==  0)
                 {//每5个就显示一个时间..
                     ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
-                    [_msgdata insertObject:timemsg atIndex:1];
+                    [self.mmsgdata insertObject:timemsg atIndex:1];
                 }
             }
         }
         
         [self.mtableview reloadData];
-
+    
     }];
     
 }
 
 -(void)footerStartRefresh
 {
-    [testMsg getMsgList:_msgdata.lastObject block:^(NSArray *all) {
+    [self getMsgAfter:self.mmsgdata.lastObject block:^(NSArray *all) {
         
         [self.mtableview.mj_footer endRefreshing];
         if( all.count )
         {
             for ( NSInteger j = 0 ; j < all.count; j++ ) {
                 ZWMsgObj* one  = all[ j ];
-                [_msgdata addObject:one];
-                if( (_msgdata.count % 8) ==  0)
+                [self.mmsgdata addObject:one];
+                if( (self.mmsgdata.count % 8) ==  0)
                 {//每5个就显示一个时间..
                     ZWMsgObj* timemsg  = [self makeTimeMsgObj:one];
-                    [_msgdata addObject:timemsg];
+                    [self.mmsgdata addObject:timemsg];
                 }
             }
         }
         
         [self.mtableview reloadData];
-        
+ 
     }];
+    
+   
 }
+
+//获取 msg 之前的消息,,,
+-(void)getMsgBefor:(ZWMsgObj*)msg block:(void(^)(NSArray*all))block
+{
+    if( [self isKindOfClass:[ZWChatVC class]] )
+    {
+    //for test code ,,,子类继承实现这个函数,
+        [testMsg getMsgList:msg block:^(NSArray *all) {
+            
+            block( all );
+            
+        }];
+    }
+}
+
+//获取 msg 之后的消息
+-(void)getMsgAfter:(ZWMsgObj*)msg block:(void(^)(NSArray*all))block
+{
+    //for test code ,,,子类继承实现这个函数,
+    if( [self isKindOfClass:[ZWChatVC class]] )
+    {
+        
+        [testMsg getMsgList:msg block:^(NSArray *all) {
+            
+            block( all );
+            
+        }];
+    }
+}
+
 
 -(ZWMsgObj*)makeTimeMsgObj:(ZWMsgObj*)msg
 {
@@ -189,11 +224,44 @@
     return tt;
 }
 
+
+-(void)willSendThisText:(NSString*)txt
+{
+    self.minputtext.text = nil;
+    
+    if( [self isKindOfClass:[ZWChatVC class]] )
+    {
+        //for test
+        [self sendOneMsg:[testMsg makeTestTextMsg:txt]];
+    }
+}
+
+-(void)willSendThisImg:(UIImage*)img
+{
+    if( [self isKindOfClass:[ZWChatVC class]] )
+    {
+        //for test
+        [self sendOneMsg:[testMsg makeTestPicMsg:img]];
+    }
+    
+}
+
+-(void)sendOneMsg:(ZWMsgObj*)sendMsg
+{
+    [self.mmsgdata addObject:sendMsg];
+    [self.mtableview beginUpdates];
+    
+    [self.mtableview insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.mmsgdata.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.mtableview endUpdates];
+    
+}
+
+
 //获取消息,修改这里
 #pragma mark 消息数据获取主要修改这里结束
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _msgdata.count;
+    return self.mmsgdata.count;
 }
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -206,7 +274,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell* cell = nil;
-    ZWMsgObj* msgobj = _msgdata[ indexPath.row ];
+    ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
     if( msgobj.mMsgType == 0 )
     {//时间
         ZWMsgObjTime* timeobj = (ZWMsgObjTime*)msgobj;
@@ -247,6 +315,7 @@
             else{
                 piccell = [tableView dequeueReusableCellWithIdentifier:@"picleftcell"];
             }
+            
 #pragma mark 图片最宽
             CGFloat picShowW = tableView.bounds.size.width - 150.0f;//这是最大的
             
@@ -256,7 +325,15 @@
             
             CGFloat picShowH = ( picobj.mPicH / picobj.mPicW ) * picShowW;
             
-            [piccell.mtagimg sd_setImageWithURL:[NSURL URLWithString:picobj.mPicURL] placeholderImage:[UIImage imageNamed:@"DefaultImg"]];
+            if( picobj.mImgObj )
+            {
+                piccell.mtagimg.image = picobj.mImgObj;
+            }
+            else
+            {
+                [piccell.mtagimg sd_setImageWithURL:[NSURL URLWithString:picobj.mPicURL] placeholderImage:[UIImage imageNamed:@"DefaultImg"]];
+            }
+            
             piccell.mimgconstH.constant = picShowH;
             piccell.mimgconstW.constant = picShowW;
          
@@ -349,7 +426,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ZWMsgObj* msgobj = _msgdata[ indexPath.row ];
+    ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
     if( msgobj.mMsgType == 3 )
     {//播放语音消息
         
@@ -358,7 +435,6 @@
         [tableView reloadRowsAtIndexPaths:@[ indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
     }
-    
     
 }
 
@@ -378,7 +454,7 @@
         NSRange find = [str rangeOfString:@"\\[[a-z]+[0-9]+\\]" options:NSRegularExpressionSearch range:searchFrom];
         if( find.location == NSNotFound )
         {//最好一次么有找到..
-            [mal appendText:[str substringWithRange:NSMakeRange(searchFrom.location, str.length - searchFrom.location - 1 )]];
+            [mal appendText:[str substringWithRange:NSMakeRange(searchFrom.location, str.length - searchFrom.location)]];
             break;
         }
         
@@ -388,7 +464,7 @@
         [mal appendText:[str substringWithRange:NSMakeRange(searchFrom.location, find.location - searchFrom.location)]];
         [mal appendImage:[UIImage imageNamed:facename] maxSize:CGSizeMake(18, 18)];
 
-        searchFrom.location =   find.location + find.length+1;
+        searchFrom.location =   find.location + find.length;
         searchFrom.length   =   str.length - searchFrom.location;
         
     }while( searchFrom.location < str.length );
@@ -546,6 +622,13 @@
     }
     else if( sender.tag == -2 )
     {
+        if( self.minputtext.text.length == 0 )
+        {
+            [SVProgressHUD showErrorWithStatus:@"请先输入发送内容"];
+            return;
+        }
+        
+        [self willSendThisText:self.minputtext.text];
         
     }
     else
@@ -556,9 +639,60 @@
     }
     else
     {//相册,照片,礼物什么的
-        
+        if ( sender.tag == 1000 )
+        {
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+            {
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.delegate = self;
+                picker.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+            }
+            
+            [self presentViewController:picker animated:YES completion:nil];
+            
+            
+        }else if ( sender.tag == 1001 ){
+            
+            
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            {
+                picker.sourceType=UIImagePickerControllerSourceTypeCamera;
+                picker.delegate = self;
+                picker.modalTransitionStyle=UIModalTransitionStyleFlipHorizontal;
+            }
+            
+            [self presentViewController:picker animated:YES completion:nil];
+            
+        }
     }
 }
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    UIImage* tagimg = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if( tagimg == nil )
+    {
+        [SVProgressHUD showErrorWithStatus:@"图片无效!请重新选择"];
+        return;
+    }
+    [self willSendThisImg:tagimg];
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+
+
+
 
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -576,31 +710,74 @@
     }
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+        if( textView.text.length == 0 )
+        {
+            [SVProgressHUD showErrorWithStatus:@"请先输入发送内容"];
+            return NO;
+        }
+        
+        [self willSendThisText:textView.text];
+        return NO;
+    }
+    return YES;
+}
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self hidenMorePan];
+}
+
 - (IBAction)onTouchRecordBtnDown:(id)sender {
     //self.recordPhase = AudioRecordPhaseStart;
+    [self showRecSV:1];
 }
 - (IBAction)onTouchRecordBtnUpInside:(id)sender {
     // finish Recording
     //self.recordPhase = AudioRecordPhaseEnd;
+    [self showRecSV:4];
 }
 - (IBAction)onTouchRecordBtnUpOutside:(id)sender {
     //TODO cancel Recording
     //self.recordPhase = AudioRecordPhaseEnd;
+    [self showRecSV:4];
 }
 
 - (IBAction)onTouchRecordBtnDragInside:(id)sender {
     //TODO @"手指上滑，取消发送"
     //self.recordPhase = AudioRecordPhaseRecording;
+    [self showRecSV:3];
+    
 }
 - (IBAction)onTouchRecordBtnDragOutside:(id)sender {
     //TODO @"松开手指，取消发送"
     //self.recordPhase = AudioRecordPhaseCancelling;
+    [self showRecSV:2];
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
+//status  1 开始了,,2 显示上滑什么,,,3 显示取消 4 移除..
+-(void)showRecSV:(int)status
 {
-    [self hidenMorePan];
+    if( status == 4 )
+    {
+        [_recshowing removeFromSuperview];
+        _recshowing = nil;
+        return;
+    }
+    
+    if( _recshowing == nil )
+    {
+        _recshowing = [[NIMInputAudioRecordIndicatorView alloc]init];
+        [self.view addSubview:_recshowing];
+        _recshowing.center = self.view.center;
+    }
+    _recshowing.mstatus = status;
+    
 }
+
 
 - (IBAction)voiceclicked:(UIButton*)sender {
     

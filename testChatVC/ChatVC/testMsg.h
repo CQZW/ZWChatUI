@@ -8,11 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class ZWMsgObj;
+#import "ZWChatSomeDepend.h"
 @interface testMsg : NSObject
 
 
 +(void)getMsgList:(ZWMsgObj*)lastMsg block:(void(^)(NSArray* all))block;
 
+
++(ZWMsgObjPic*)makeTestPicMsg:(UIImage*)img;
+
++(ZWMsgObjText*)makeTestTextMsg:(NSString*)text;
 
 @end

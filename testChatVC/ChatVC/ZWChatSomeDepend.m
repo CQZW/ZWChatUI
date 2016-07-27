@@ -224,6 +224,13 @@
 
 @implementation ZWMsgObjPic
 
+-(void)setMImgObj:(UIImage *)mImgObj
+{
+    _mImgObj = mImgObj;
+    self.mPicH = mImgObj.size.height / mImgObj.scale;
+    self.mPicW = mImgObj.size.width / mImgObj.scale;
+    
+}
 
 @end
 
