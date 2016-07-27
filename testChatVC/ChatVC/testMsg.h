@@ -17,6 +17,11 @@
 
 +(ZWMsgObjPic*)makeTestPicMsg:(UIImage*)img;
 
+
 +(ZWMsgObjText*)makeTestTextMsg:(NSString*)text;
+
+
++(ZWMsgObjVoice*)makeTestVoiceMsg:(NSURL*)voicepath duration:(NSTimeInterval)duration;
+
 
 @end

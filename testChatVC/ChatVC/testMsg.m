@@ -225,4 +225,29 @@
     return mmm;
 }
 
++(ZWMsgObjVoice*)makeTestVoiceMsg:(NSURL*)voicepath duration:(NSTimeInterval)duration
+{
+    NSArray* ss = @[@"http://p3.gexing.com/touxiang/20120727/1444/501238c78343b_200x200_3.jpg",@"http://v1.qzone.cc/avatar/201404/03/12/51/533ce8ccb2555295.jpg%21200x200.jpg"];
+    
+    
+    ZWMsgObjVoice* mmm = ZWMsgObjVoice.new;
+    
+    mmm.mMsgID = [NSString stringWithFormat:@"%ld",(NSInteger)[NSDate timeIntervalSinceReferenceDate]*1000];
+    
+    mmm.mIsSendOut = YES;
+    mmm.mHeadImgUrl = ss[ mmm.mIsSendOut ];
+    mmm.mMsgType = 3;
+    mmm.mMsgDate = [NSDate date];
+    
+    
+    mmm.mDurlong = ceil(duration);
+    mmm.mVoiceData = [NSData dataWithContentsOfURL:voicepath];
+    
+    
+    
+    return mmm;
+    
+}
+
+
 @end

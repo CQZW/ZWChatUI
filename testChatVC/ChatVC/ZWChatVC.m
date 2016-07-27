@@ -26,8 +26,9 @@
 #import "M80AttributedLabel.h"
 #import "SVProgressHUD.h"
 #import "NIMInputAudioRecordIndicatorView.h"
+#import <AVFoundation/AVFoundation.h>
 
-@interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 
 @end
 
@@ -46,6 +47,15 @@
     
     NIMInputAudioRecordIndicatorView*   _recshowing;
     
+    AVAudioRecorder*            _recorder;
+    BOOL                        _brecwillsend;
+    NSTimer*                    _timer;
+    NSTimeInterval              _recduration;
+    
+    
+    AVAudioPlayer*              _player;
+    ZWMsgObjVoice*              _nowplayingmsg;
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -53,7 +63,7 @@
     [super viewDidAppear:animated];
     
     [IQKeyboardManager sharedManager].enable = YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     
     
@@ -66,6 +76,10 @@
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 
 
+}
+
+- (IBAction)backclicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad {
@@ -246,6 +260,16 @@
     
 }
 
+-(void)willSendThisVoice:(NSURL*)voicepath duration:(NSTimeInterval)duration
+{
+    if( [self isKindOfClass:[ZWChatVC class]] )
+    {
+        //for test
+        [self sendOneMsg:[testMsg makeTestVoiceMsg:voicepath duration:duration]];
+        
+    }
+}
+
 -(void)sendOneMsg:(ZWMsgObj*)sendMsg
 {
     [self.mmsgdata addObject:sendMsg];
@@ -254,8 +278,9 @@
     [self.mtableview insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.mmsgdata.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     [self.mtableview endUpdates];
     
+    
+    [self.mtableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
-
 
 //获取消息,修改这里
 #pragma mark 消息数据获取主要修改这里结束
@@ -430,7 +455,7 @@
     if( msgobj.mMsgType == 3 )
     {//播放语音消息
         
-        [((ZWMsgObjVoice*)msgobj) startPlayVoice];
+        [self playVoiceMsg:(ZWMsgObjVoice*)msgobj];
         
         [tableView reloadRowsAtIndexPaths:@[ indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
@@ -438,8 +463,60 @@
     
 }
 
+-(void)playVoiceMsg:(ZWMsgObjVoice*)msg
+{
+    [_player stop];
+    _player = nil;
+    if( msg == _nowplayingmsg )
+    {
+        [self stopPlayVoice:msg];
+        _nowplayingmsg = nil;
+        return;//这种就是停止的意思
+    }
+    
+    _player = [[AVAudioPlayer alloc]initWithData:msg.mVoiceData error:nil];
+    _player.delegate = self;
+    _nowplayingmsg = msg;
+    _nowplayingmsg.mIsPlaying = YES;
+    
+    if( _player == nil || ![_player prepareToPlay] || ![_player play] )
+    {
+        [SVProgressHUD showErrorWithStatus:@"播放该消息失败"];
+        [self stopPlayVoice:msg];
+        _nowplayingmsg = nil;
+        return;
+    }
 
+}
 
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [self stopPlayVoice:_nowplayingmsg];
+    _nowplayingmsg = nil;
+}
+
+/* if an error occurs while decoding it will be reported to the delegate. */
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError * __nullable)error
+{
+    [self stopPlayVoice:_nowplayingmsg];
+    _nowplayingmsg = nil;
+}
+
+-(void)stopPlayVoice:(ZWMsgObjVoice*)msg
+{
+    msg.mIsPlaying = NO;
+    NSUInteger ii = [self.mmsgdata indexOfObject: msg ];
+    if( ii == NSNotFound )
+    {
+        
+    }
+    else
+    {
+        NSIndexPath* iiii = [NSIndexPath indexPathForRow:ii inSection:0];
+        [self.mtableview reloadRowsAtIndexPaths:@[ iiii ] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    
+}
 
 -(void)dealFace:(M80AttributedLabel*)mal str:(NSString*)str
 {
@@ -667,6 +744,11 @@
             [self presentViewController:picker animated:YES completion:nil];
             
         }
+        else if( sender.tag == 1002 )
+        {
+            
+        }
+        
     }
 }
 
@@ -682,6 +764,7 @@
         return;
     }
     [self willSendThisImg:tagimg];
+    [self hidenMorePan];
     
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -731,19 +814,25 @@
     [self hidenMorePan];
 }
 
+#pragma mark 录音操作开始
+
 - (IBAction)onTouchRecordBtnDown:(id)sender {
-    //self.recordPhase = AudioRecordPhaseStart;
     [self showRecSV:1];
+    [self startRecordeAudio];
 }
 - (IBAction)onTouchRecordBtnUpInside:(id)sender {
     // finish Recording
     //self.recordPhase = AudioRecordPhaseEnd;
     [self showRecSV:4];
+    _brecwillsend = YES;
+    [self stopRecordeAudio];
 }
 - (IBAction)onTouchRecordBtnUpOutside:(id)sender {
     //TODO cancel Recording
     //self.recordPhase = AudioRecordPhaseEnd;
     [self showRecSV:4];
+    _brecwillsend = NO;
+    [self stopRecordeAudio];
 }
 
 - (IBAction)onTouchRecordBtnDragInside:(id)sender {
@@ -777,6 +866,131 @@
     _recshowing.mstatus = status;
     
 }
+
+#pragma mark 录音API操作这里可能会影响APP
+-(void)startRecordeAudio
+{
+    if( _recorder.recording ) return;
+    
+    
+    if( ![self canRecord] )
+    {
+        [SVProgressHUD showErrorWithStatus:@"获取麦克风权限失败"];
+        return;
+    }
+    
+    AVAudioSession* session = [AVAudioSession sharedInstance];
+    if( ![session.category isEqualToString:AVAudioSessionCategoryPlayAndRecord] ||
+        ![session.category isEqualToString:AVAudioSessionCategoryRecord]
+       )
+    {
+        if( ![session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil] )
+        {
+            [SVProgressHUD showErrorWithStatus:@"录音失败"];
+            return;
+        }
+        if( ![session setActive:YES error:nil] )
+        {
+            [SVProgressHUD showErrorWithStatus:@"录音失败"];
+            return;
+        }
+    }
+    
+    NSMutableDictionary *recordSetting = NSMutableDictionary.new;
+    //设置录音格式  AVFormatIDKey==kAudioFormatLinearPCM
+    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    //设置录音采样率(Hz) 如：AVSampleRateKey==8000/44100/96000（影响音频的质量）
+    [recordSetting setValue:[NSNumber numberWithFloat:44100] forKey:AVSampleRateKey];
+    //录音通道数  1 或 2
+    [recordSetting setValue:[NSNumber numberWithInt:1] forKey:AVNumberOfChannelsKey];
+    //线性采样位数  8、16、24、32
+    [recordSetting setValue:[NSNumber numberWithInt:16] forKey:AVLinearPCMBitDepthKey];
+    //录音的质量
+    [recordSetting setValue:[NSNumber numberWithInt:AVAudioQualityHigh] forKey:AVEncoderAudioQualityKey];
+    
+    NSError* error = nil;
+    _recorder = [[AVAudioRecorder alloc]initWithURL:[self makerecfilepath] settings:recordSetting error:&error];
+    _recorder.delegate  = self;
+    if( _recorder == nil || ![_recorder prepareToRecord] )
+    {
+        [SVProgressHUD showErrorWithStatus:@"录音失败"];
+        return;
+    }
+    
+    if( ![_recorder recordForDuration:60.0f] )
+    {
+        [SVProgressHUD showErrorWithStatus:@"录音失败"];
+        return;
+    }
+    
+    [_timer invalidate];
+    _timer = nil;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(timersel) userInfo:nil repeats:YES];
+    _recduration = 0.0f;
+}
+
+-(void)timersel
+{
+    _recshowing.recordTime = _recorder.currentTime;
+    _recduration += _timer.timeInterval;
+}
+
+- (BOOL)canRecord
+{
+    __block BOOL bCanRecord = YES;
+    
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    if ([audioSession respondsToSelector:@selector(requestRecordPermission:)]) {
+        [audioSession performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
+            if (granted) {
+                bCanRecord = YES;
+            } else {
+                bCanRecord = NO;
+            }
+        }];
+    }
+    
+    return bCanRecord;
+}
+
+-(void)stopRecordeAudio
+{
+    [_recorder stop];
+}
+
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
+{
+    if( _brecwillsend )
+    {
+        [self willSendThisVoice:recorder.url  duration:_recduration];
+    }
+    
+    [recorder deleteRecording];
+    [_timer invalidate];
+    _timer = nil;
+    
+}
+
+/* if an error occurs while encoding it will be reported to the delegate. */
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError * __nullable)error
+{
+    [SVProgressHUD showErrorWithStatus:@"录音失败"];
+    
+    [recorder deleteRecording];
+    [_timer invalidate];
+    _timer = nil;
+    
+}
+
+
+-(NSURL*)makerecfilepath
+{
+    NSString *urlStr=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    urlStr=[urlStr stringByAppendingPathComponent:[NSString stringWithFormat:@"recfile_%ld.acc",(NSInteger)[[NSDate date] timeIntervalSince1970]]];
+    NSURL *url=[NSURL fileURLWithPath:urlStr];
+    return url;
+}
+#pragma mark 录音操作结束
 
 
 - (IBAction)voiceclicked:(UIButton*)sender {

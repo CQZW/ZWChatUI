@@ -79,9 +79,6 @@
 
 @property (nonatomic,assign)    BOOL            mIsPlaying;
 
-//开始播放
--(void)startPlayVoice;
-
 
 @end
 

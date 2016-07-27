@@ -65,7 +65,8 @@
 //将要发送图片 ,,,,..子类实现了
 -(void)willSendThisImg:(UIImage*)img;
 
-
+//将要发送一个语音...,,这个函数一返回 voicepath 的文件机会被删除
+-(void)willSendThisVoice:(NSURL*)voicepath duration:(NSTimeInterval)duration;
 
 
 -(void)sendOneMsg:(ZWMsgObj*)sendMsg;

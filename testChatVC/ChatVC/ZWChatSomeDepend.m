@@ -8,7 +8,7 @@
 
 #import "ZWChatSomeDepend.h"
 #import "ZWChatVC.h"
-#import <AVFoundation/AVFoundation.h>
+
 @implementation ZWChatSomeDepend
 
 
@@ -235,48 +235,8 @@
 @end
 
 
-@interface ZWMsgObjVoice()<AVAudioPlayerDelegate>
-
-@end
 
 @implementation ZWMsgObjVoice
-{
-    AVAudioPlayer * _player;
-}
-
-//开始播放
--(void)startPlayVoice
-{
-    self.mIsPlaying = !self.mIsPlaying;
-    
-    //播放音乐代码....
-    if( _player == nil )
-    {
-        _player = [[AVAudioPlayer alloc] initWithData:self.mVoiceData error:nil];//使用本地URL创建
-        _player.delegate = self;
-    }
-    
-    if( self.mIsPlaying )
-    {
-        if( ![_player prepareToPlay] )
-        {self.mIsPlaying = NO;return;}
-        
-        if( ![_player play] )
-        {self.mIsPlaying = NO;return;}
-    }
-}
-
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
-{
-    self.mIsPlaying = NO;
-}
-
-/* if an error occurs while decoding it will be reported to the delegate. */
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError * __nullable)error
-{
-    self.mIsPlaying = NO;
-}
-
 
 @end
 
