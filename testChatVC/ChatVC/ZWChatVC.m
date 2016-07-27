@@ -843,7 +843,6 @@
 {
     if ([text isEqualToString:@"\n"]) {
         
-        [textView resignFirstResponder];
         if( textView.text.length == 0 )
         {
             [SVProgressHUD showErrorWithStatus:@"请先输入发送内容"];
