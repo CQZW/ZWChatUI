@@ -15,13 +15,13 @@
 +(void)getMsgList:(ZWMsgObj*)lastMsg block:(void(^)(NSArray* all))block;
 
 
-+(ZWMsgObjPic*)makeTestPicMsg:(UIImage*)img;
++(ZWMsgObj*)makeTestPicMsg:(UIImage*)img;
 
 
-+(ZWMsgObjText*)makeTestTextMsg:(NSString*)text;
++(ZWMsgObj*)makeTestTextMsg:(NSString*)text;
 
 
-+(ZWMsgObjVoice*)makeTestVoiceMsg:(NSURL*)voicepath duration:(NSTimeInterval)duration;
++(ZWMsgObj*)makeTestVoiceMsg:(NSURL*)voicepath duration:(NSTimeInterval)duration;
 
 
 @end

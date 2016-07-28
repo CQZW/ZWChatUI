@@ -56,7 +56,7 @@
     
     
     AVAudioPlayer*              _player;
-    ZWMsgObjVoice*              _nowplayingmsg;
+    ZWMsgObj*              _nowplayingmsg;
     
 }
 
@@ -108,10 +108,12 @@
     
     
     self.mmsgdata = NSMutableArray.new;
+    if( !self.mCannotLoadHistoryMsg )
+        self.mtableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerStartRefresh)];
     
-    self.mtableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerStartRefresh)];
-
-    self.mtableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerStartRefresh)];
+    if( !self.mCannotLoadNewestMsg )
+        self.mtableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerStartRefresh)];
+    
     
     UINib* nib = [UINib nibWithNibName:@"ZWMsgCellLeft" bundle:nil];
     [self.mtableview registerNib:nib forCellReuseIdentifier:@"leftcell"];
@@ -142,21 +144,34 @@
     nib = [UINib nibWithNibName:@"ZWMsgGiftCellLeft" bundle:nil];
     [self.mtableview registerNib:nib forCellReuseIdentifier:@"gifleftcell"];
     
-    
-    
-    
     self.mtableview.delegate = self;
     self.mtableview.dataSource =  self;
     
     self.mtableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    if( !self.mDontAutoLoadFrist )
+    {
+        if( !self.mCannotLoadHistoryMsg )
+            [self.mtableview.mj_header beginRefreshing];
+        else if( !self.mCannotLoadNewestMsg )
+            [self.mtableview.mj_footer beginRefreshing];
+    }
 }
 
 #pragma mark 消息数据获取主要修改这里开始
 //获取消息,修改这里
 -(void)headerStartRefresh
 {
+    ZWMsgObj* fmsg = nil;
+    for ( ZWMsgObj* one in self.mmsgdata ) {
+        if( one.mMsgType != 0 )
+        {
+            fmsg = one;
+            break;
+        }
+    }
     
-    [self getMsgBefor:self.mmsgdata.firstObject block:^(NSArray *all) {
+    [self getMsgBefor:fmsg block:^(NSArray *all) {
         
         [self.mtableview.mj_header endRefreshing];
         if( all.count )
@@ -194,7 +209,18 @@
 
 -(void)footerStartRefresh
 {
-    [self getMsgAfter:self.mmsgdata.lastObject block:^(NSArray *all) {
+    ZWMsgObj* findlast = nil;
+    
+    for ( NSInteger j = self.mmsgdata.count-1; j>=0; j--) {
+        ZWMsgObj*one = self.mmsgdata[ j ];
+        if( one.mMsgType != 0 )
+        {
+            findlast = one;
+            break;
+        }
+    }
+    
+    [self getMsgAfter:findlast block:^(NSArray *all) {
         
         [self.mtableview.mj_footer endRefreshing];
         if( all.count )
@@ -225,7 +251,7 @@
 //获取 msg 之前的消息,,,
 -(void)getMsgBefor:(ZWMsgObj*)msg block:(void(^)(NSArray*all))block
 {
-    if( [self isKindOfClass:[ZWChatVC class]] )
+    if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
     {
     //for test code ,,,子类继承实现这个函数,
         [testMsg getMsgList:msg block:^(NSArray *all) {
@@ -240,7 +266,7 @@
 -(void)getMsgAfter:(ZWMsgObj*)msg block:(void(^)(NSArray*all))block
 {
     //for test code ,,,子类继承实现这个函数,
-    if( [self isKindOfClass:[ZWChatVC class]] )
+    if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
     {
         
         [testMsg getMsgList:msg block:^(NSArray *all) {
@@ -254,7 +280,7 @@
 
 -(ZWMsgObj*)makeTimeMsgObj:(ZWMsgObj*)msg
 {
-    ZWMsgObjTime* tt = ZWMsgObjTime.new;
+    ZWMsgObj* tt = ZWMsgObj.new;
     tt.mMsgDate = msg.mMsgDate;
     return tt;
 }
@@ -264,7 +290,7 @@
 {
     self.minputtext.text = nil;
     
-    if( [self isKindOfClass:[ZWChatVC class]] )
+    if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
     {
         //for test
         [self addOneMsg:[testMsg makeTestTextMsg:txt]];
@@ -273,7 +299,7 @@
 
 -(void)willSendThisImg:(UIImage*)img
 {
-    if( [self isKindOfClass:[ZWChatVC class]] )
+    if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
     {
         //for test
         [self addOneMsg:[testMsg makeTestPicMsg:img]];
@@ -283,7 +309,7 @@
 
 -(void)willSendThisVoice:(NSURL*)voicepath duration:(NSTimeInterval)duration
 {
-    if( [self isKindOfClass:[ZWChatVC class]] )
+    if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
     {
         //for test
         [self addOneMsg:[testMsg makeTestVoiceMsg:voicepath duration:duration]];
@@ -315,6 +341,17 @@
     [self.mtableview endUpdates];
 }
 
+//更新一条消息
+-(void)updateOneMsg:(ZWMsgObj*)updMsg
+{
+    NSUInteger xx = [self.mmsgdata indexOfObject:updMsg];
+    if( xx == NSNotFound ) return;
+    
+    [self.mmsgdata replaceObjectAtIndex:xx withObject:updMsg];
+    
+    [self.mtableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:xx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+}
 //获取消息,修改这里
 #pragma mark 消息数据获取主要修改这里结束
 
@@ -332,154 +369,154 @@
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = nil;
     ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
-    if( msgobj.mMsgType == 0 )
-    {//时间
-        ZWMsgObjTime* timeobj = (ZWMsgObjTime*)msgobj;
+    
+    ZWMsgCellRight* retcell = nil;
+    if( msgobj.mMsgType == 1 )
+    {//文字消息
+        ZWMsgObj * textobj = msgobj;
+        if( textobj.mIsSendOut )
+        {
+            retcell = [tableView dequeueReusableCellWithIdentifier:@"rightcell"];
+        }
+        else{
+            retcell = [tableView dequeueReusableCellWithIdentifier:@"leftcell"];
+        }
+        
+        [self dealFace:retcell.mmsglabel str:textobj.mTextMsg];
+        
+        CGSize ss = [retcell.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 73 - 50, CGFLOAT_MAX)];
+        retcell.mlabelconstH.constant = ss.height;
+        retcell.mlabelconstW.constant = ss.width;
+        
+    }
+    else if(  msgobj.mMsgType == 2 )
+    {//图片
+        ZWMsgObj* picobj = msgobj;
+        
+        ZWMsgPicCellRight* piccell = nil;
+        if( picobj.mIsSendOut )
+        {
+            piccell = [tableView dequeueReusableCellWithIdentifier:@"picrightcell"];
+        }
+        else{
+            piccell = [tableView dequeueReusableCellWithIdentifier:@"picleftcell"];
+        }
+        
+#pragma mark 图片最宽
+        CGFloat picShowW = tableView.bounds.size.width - 150.0f;//这是最大的
+        CGFloat screenW = picobj.mPicW/[UIScreen mainScreen].scale;//真正屏幕宽度
+        picShowW = screenW > picShowW ? picShowW  : screenW;
+        picShowW = picShowW == 0.0f ? (100.0f):picShowW;
+        
+        CGFloat picShowH = ( picobj.mPicH / picobj.mPicW ) * picShowW;
+
+        picShowH = picShowH == 0.0f ? (100.0f):picShowH;
+
+        if( picobj.mImgObj )
+        {
+            piccell.mtagimg.image = picobj.mImgObj;
+        }
+        else
+        {
+            [piccell.mtagimg sd_setImageWithURL:[NSURL URLWithString:picobj.mPicURL] placeholderImage:[UIImage imageNamed:@"DefaultImg"]];
+        }
+        
+        piccell.mimgconstH.constant = picShowH;
+        piccell.mimgconstW.constant = picShowW;
+        
+        retcell = piccell;
+    }
+    else if ( msgobj.mMsgType == 3 )
+    {//语音
+        ZWMsgObj* voiceobj = msgobj;
+        ZWMsgVoiceCellRight* vcell = nil;
+        if( voiceobj.mIsSendOut )
+        {
+            vcell = [tableView dequeueReusableCellWithIdentifier:@"voicerightcell"];
+            if( voiceobj.mIsPlaying )
+            {
+                vcell.mvoiceicon.image = nil;
+                vcell.mvoiceicon.image =
+                [UIImage animatedImageWithImages:@[
+                                                   [UIImage imageNamed:@"ic_play_voice_right0"],
+                                                   [UIImage imageNamed:@"ic_play_voice_right1"],
+                                                   [UIImage imageNamed:@"ic_play_voice_right2"],
+                                                   [UIImage imageNamed:@"ic_play_voice_right3"],
+                                                   [UIImage imageNamed:@"ic_play_voice_right4"],
+                                                   [UIImage imageNamed:@"ic_play_voice_right5"],
+                                                   ] duration:1.8f];
+            }
+            else{
+                vcell.mvoiceicon.image = [UIImage imageNamed:@"ic_play_voice_right0"];
+            }
+        }
+        else
+        {
+            vcell = [tableView dequeueReusableCellWithIdentifier:@"voiceleftcell"];
+            if( voiceobj.mIsPlaying )
+            {
+                vcell.mvoiceicon.image = nil;
+                vcell.mvoiceicon.image =
+                [UIImage animatedImageWithImages:@[
+                                                   [UIImage imageNamed:@"ic_play_voice_left0"],
+                                                   [UIImage imageNamed:@"ic_play_voice_left1"],
+                                                   [UIImage imageNamed:@"ic_play_voice_left2"],
+                                                   [UIImage imageNamed:@"ic_play_voice_left3"],
+                                                   [UIImage imageNamed:@"ic_play_voice_left4"],
+                                                   [UIImage imageNamed:@"ic_play_voice_left5"],
+                                                   ] duration:1.8f];
+            }
+            else{
+                vcell.mvoiceicon.image = [UIImage imageNamed:@"ic_play_voice_left0"];
+            }
+        }
+        
+        vcell.mlonglabel.text = [NSString stringWithFormat:@"%d''",voiceobj.mDurlong];
+        CGFloat ff = (voiceobj.mDurlong / 60.0f ) * 150.0f;
+#pragma mark 声音cell最宽,最窄
+        ff = ff < 50?50.0f:ff;
+        ff = ff > 150.0f?150.0f:ff;
+        
+        vcell.mlongrateconstW.constant = ff;
+        
+        
+        retcell = vcell;
+    }
+    else if( msgobj.mMsgType == 4 )
+    {
+        ZWMsgObj*  gifobj =  msgobj;
+        ZWMsgGiftCellRight* giftcell = nil;
+        if( gifobj.mIsSendOut )
+        {
+            giftcell = [tableView dequeueReusableCellWithIdentifier:@"gifrightcell"];
+            giftcell.mjy.text = gifobj.mJyStr;
+        }
+        else{
+            giftcell = [tableView dequeueReusableCellWithIdentifier:@"gifleftcell"];
+        }
+        
+        [giftcell.mgificon sd_setImageWithURL:[NSURL URLWithString:gifobj.mGiftIconURL] placeholderImage:nil];
+        giftcell.mgifdesc.text = gifobj.mGiftDesc;
+        
+        retcell = giftcell;
+    }
+    else
+    {//其他什么鬼...其他所有消息都当真时间消息处理了....
+        
+        ZWMsgObj* timeobj =  msgobj;
         ZWMsgTimeCell* timecell = [tableView dequeueReusableCellWithIdentifier:@"timecell"];
         
         timecell.mtimelabel.text = [timeobj getTimeStr];
-        cell =  timecell;
+        timecell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return timecell;
     }
-    else{
-        ZWMsgCellRight* retcell = nil;
-        if( msgobj.mMsgType == 1 )
-        {//文字消息
-            ZWMsgObjText * textobj = (ZWMsgObjText*)msgobj;
-            if( textobj.mIsSendOut )
-            {
-                retcell = [tableView dequeueReusableCellWithIdentifier:@"rightcell"];
-            }
-            else{
-                retcell = [tableView dequeueReusableCellWithIdentifier:@"leftcell"];
-            }
-            
-            [self dealFace:retcell.mmsglabel str:textobj.mTextMsg];
-            
-            CGSize ss = [retcell.mmsglabel sizeThatFits:CGSizeMake(tableView.bounds.size.width- 73 - 50, CGFLOAT_MAX)];
-            retcell.mlabelconstH.constant = ss.height;
-            retcell.mlabelconstW.constant = ss.width;
-            
-        }
-        else if(  msgobj.mMsgType == 2 )
-        {//图片
-            ZWMsgObjPic* picobj = (ZWMsgObjPic*)msgobj;
-            
-            ZWMsgPicCellRight* piccell = nil;
-            if( picobj.mIsSendOut )
-            {
-                piccell = [tableView dequeueReusableCellWithIdentifier:@"picrightcell"];
-            }
-            else{
-                piccell = [tableView dequeueReusableCellWithIdentifier:@"picleftcell"];
-            }
-            
-#pragma mark 图片最宽
-            CGFloat picShowW = tableView.bounds.size.width - 150.0f;//这是最大的
-            
-            picShowW = picobj.mPicW > picShowW ? picShowW  :  picobj.mPicW;
-            
-            picobj.mPicW = picobj.mPicW == 0.0f ? (picobj.mPicH +1):picobj.mPicW;
-            
-            CGFloat picShowH = ( picobj.mPicH / picobj.mPicW ) * picShowW;
-            
-            if( picobj.mImgObj )
-            {
-                piccell.mtagimg.image = picobj.mImgObj;
-            }
-            else
-            {
-                [piccell.mtagimg sd_setImageWithURL:[NSURL URLWithString:picobj.mPicURL] placeholderImage:[UIImage imageNamed:@"DefaultImg"]];
-            }
-            
-            piccell.mimgconstH.constant = picShowH;
-            piccell.mimgconstW.constant = picShowW;
-         
-            retcell = piccell;
-        }
-        else if ( msgobj.mMsgType == 3 )
-        {//语音
-            ZWMsgObjVoice* voiceobj = (ZWMsgObjVoice*)msgobj;
-            ZWMsgVoiceCellRight* vcell = nil;
-            if( voiceobj.mIsSendOut )
-            {
-                vcell = [tableView dequeueReusableCellWithIdentifier:@"voicerightcell"];
-                if( voiceobj.mIsPlaying )
-                {
-                    vcell.mvoiceicon.image = nil;
-                    vcell.mvoiceicon.image =
-                    [UIImage animatedImageWithImages:@[
-                        [UIImage imageNamed:@"ic_play_voice_right0"],
-                        [UIImage imageNamed:@"ic_play_voice_right1"],
-                        [UIImage imageNamed:@"ic_play_voice_right2"],
-                        [UIImage imageNamed:@"ic_play_voice_right3"],
-                        [UIImage imageNamed:@"ic_play_voice_right4"],
-                        [UIImage imageNamed:@"ic_play_voice_right5"],
-                        ] duration:1.8f];
-                }
-                else{
-                    vcell.mvoiceicon.image = [UIImage imageNamed:@"ic_play_voice_right0"];
-                }
-            }
-            else
-            {
-                vcell = [tableView dequeueReusableCellWithIdentifier:@"voiceleftcell"];
-                if( voiceobj.mIsPlaying )
-                {
-                    vcell.mvoiceicon.image = nil;
-                    vcell.mvoiceicon.image =
-                    [UIImage animatedImageWithImages:@[
-                        [UIImage imageNamed:@"ic_play_voice_left0"],
-                        [UIImage imageNamed:@"ic_play_voice_left1"],
-                        [UIImage imageNamed:@"ic_play_voice_left2"],
-                        [UIImage imageNamed:@"ic_play_voice_left3"],
-                        [UIImage imageNamed:@"ic_play_voice_left4"],
-                        [UIImage imageNamed:@"ic_play_voice_left5"],
-                                                       ] duration:1.8f];
-                }
-                else{
-                    vcell.mvoiceicon.image = [UIImage imageNamed:@"ic_play_voice_left0"];
-                }
-            }
-            
-            vcell.mlonglabel.text = [NSString stringWithFormat:@"%d''",voiceobj.mDurlong];
-            CGFloat ff = (voiceobj.mDurlong / 60.0f ) * 150.0f;
-#pragma mark 声音cell最宽,最窄
-            ff = ff < 50?50.0f:ff;
-            ff = ff > 150.0f?150.0f:ff;
-            
-            vcell.mlongrateconstW.constant = ff;
-           
-            
-            retcell = vcell;
-        }
-        else if( msgobj.mMsgType == 4 )
-        {
-            ZWMsgObjGift* gifobj = (ZWMsgObjGift*)msgobj;
-            ZWMsgGiftCellRight* giftcell = nil;
-            if( gifobj.mIsSendOut )
-            {
-                giftcell = [tableView dequeueReusableCellWithIdentifier:@"gifrightcell"];
-                giftcell.mjy.text = gifobj.mJyStr;
-            }
-            else{
-                giftcell = [tableView dequeueReusableCellWithIdentifier:@"gifleftcell"];
-            }
-            
-            [giftcell.mgificon sd_setImageWithURL:[NSURL URLWithString:gifobj.mGiftIconURL] placeholderImage:nil];
-            giftcell.mgifdesc.text = gifobj.mGiftDesc;
-            
-            retcell = giftcell;
-        }
-        
-        [retcell.mheadimg sd_setImageWithURL:[NSURL URLWithString:msgobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
-        cell = retcell;
-    }
-
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    return cell;
+    
+    [retcell.mheadimg sd_setImageWithURL:[NSURL URLWithString:msgobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
+    retcell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return retcell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -489,7 +526,7 @@
     if( msgobj.mMsgType == 3 )
     {//播放语音消息
         
-        [self playVoiceMsg:(ZWMsgObjVoice*)msgobj];
+        [self playVoiceMsg:(ZWMsgObj*)msgobj];
         
         [tableView reloadRowsAtIndexPaths:@[ indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
@@ -498,7 +535,7 @@
     {//查看大图
         
         MJPhoto* pp =  MJPhoto.new;
-        pp.url = [NSURL URLWithString:  ((ZWMsgObjPic*)msgobj).mPicURL  ];
+        pp.url = [NSURL URLWithString:   msgobj.mPicURL  ];
         pp.srcImageView = nil;
         
         MJPhotoBrowser* browser = [[MJPhotoBrowser alloc]init];
@@ -509,7 +546,7 @@
     }
 }
 
--(void)playVoiceMsg:(ZWMsgObjVoice*)msg
+-(void)playVoiceMsg:(ZWMsgObj*)msg
 {
     [_player stop];
     _player = nil;
@@ -520,7 +557,11 @@
         return;//这种就是停止的意思
     }
     
-    _player = [[AVAudioPlayer alloc]initWithData:msg.mVoiceData error:nil];
+    if( msg.mVoiceData )
+        _player = [[AVAudioPlayer alloc]initWithData:msg.mVoiceData error:nil];
+    else
+        _player = [[AVAudioPlayer alloc]initWithContentsOfURL:msg.mVoiceURL error:nil];
+    
     _player.delegate = self;
     _nowplayingmsg = msg;
     _nowplayingmsg.mIsPlaying = YES;
@@ -548,7 +589,7 @@
     _nowplayingmsg = nil;
 }
 
--(void)stopPlayVoice:(ZWMsgObjVoice*)msg
+-(void)stopPlayVoice:(ZWMsgObj*)msg
 {
     msg.mIsPlaying = NO;
     NSUInteger ii = [self.mmsgdata indexOfObject: msg ];
@@ -1010,7 +1051,6 @@
         [self willSendThisVoice:recorder.url  duration:_recduration];
     }
     
-    [recorder deleteRecording];
     [_timer invalidate];
     _timer = nil;
     
@@ -1021,7 +1061,6 @@
 {
     [SVProgressHUD showErrorWithStatus:@"录音失败"];
     
-    [recorder deleteRecording];
     [_timer invalidate];
     _timer = nil;
     

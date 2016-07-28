@@ -202,54 +202,33 @@
 
 @implementation ZWMsgObj
 
+-(BOOL)isEqual:(id)object
+{
+    BOOL b = [super isEqual:object];
+    if( !b )
+    {
+        return [self.mMsgID isEqualToString:((ZWMsgObj*)object).mMsgID];
+    }
+    return b;
+}
 
-@end
-
-
-@implementation ZWMsgObjTime
 
 -(NSString*)getTimeStr
 {
     return [ZWChatSomeDepend FormartTime:self.mMsgDate];
 }
 
-@end
-
-
-@implementation ZWMsgObjText
-
-
-@end
-
-
-@implementation ZWMsgObjPic
-
 -(void)setMImgObj:(UIImage *)mImgObj
 {
     _mImgObj = mImgObj;
-    self.mPicH = mImgObj.size.height / mImgObj.scale;
-    self.mPicW = mImgObj.size.width / mImgObj.scale;
-    
+    if( _mImgObj != nil )
+    {
+        self.mPicH = mImgObj.size.height / mImgObj.scale;
+        self.mPicW = mImgObj.size.width / mImgObj.scale;
+    }
 }
 
 @end
-
-
-
-@implementation ZWMsgObjVoice
-
-@end
-
-
-@implementation ZWMsgObjGift
-
-
-@end
-
-
-
-
-
 
 
 

@@ -45,7 +45,8 @@
 //顶部的显示
 @property (weak, nonatomic) IBOutlet UILabel *mtoptitle;
 
-
+//不要一进入界面就自动加载
+@property (nonatomic,assign)    BOOL    mDontAutoLoadFrist;//默认 NO ,就是要加载的意思
 
 //加载之前的消息
 -(void)headerStartRefresh;
@@ -54,6 +55,9 @@
 -(void)footerStartRefresh;
 
 #pragma mark 继承主要看这里开始
+
+@property (nonatomic,assign)    BOOL        mCannotLoadHistoryMsg;//不能加载历史消息,就没有顶部的刷新,
+@property (nonatomic,assign)    BOOL        mCannotLoadNewestMsg;//不能加载最新消息,就是没有底部的刷新,
 
 //获取 msg 之前的消息,,,子类实现
 -(void)getMsgBefor:(ZWMsgObj*)msg block:(void(^)(NSArray*all))block;
@@ -69,7 +73,7 @@
 //将要发送图片 ,,,,..子类实现了
 -(void)willSendThisImg:(UIImage*)img;
 
-//将要发送一个语音...,,这个函数一返回 voicepath 的文件机会被删除
+//将要发送一个语音...,,这个函数一返回
 -(void)willSendThisVoice:(NSURL*)voicepath duration:(NSTimeInterval)duration;
 
 //添加条消息到后面
@@ -77,6 +81,9 @@
 
 //删除一条消息
 -(void)delOneMsg:(ZWMsgObj*)delMsg;
+
+//更新一条消息
+-(void)updateOneMsg:(ZWMsgObj*)updMsg;
 
 
 #pragma mark 继承主要看这里结束

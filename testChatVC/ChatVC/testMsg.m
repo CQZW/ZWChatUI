@@ -25,7 +25,7 @@
         int msgid = 1;
         for ( int j = 0; j<10; j++) {
             
-            ZWMsgObjText* mmm = ZWMsgObjText.new;
+            ZWMsgObj* mmm = ZWMsgObj.new;
             
             mmm.mMsgID = [NSString stringWithFormat:@"%d",msgid];
             msgid++;
@@ -45,7 +45,7 @@
         
         for ( int j = 0; j<5; j++) {
             
-            ZWMsgObjVoice* mmm = ZWMsgObjVoice.new;
+            ZWMsgObj* mmm = ZWMsgObj.new;
             
             mmm.mMsgID = [NSString stringWithFormat:@"%d",msgid];
             msgid++;
@@ -91,7 +91,7 @@
         
         for ( int j = 0; j<5; j++) {
             
-            ZWMsgObjPic* mmm = ZWMsgObjPic.new;
+            ZWMsgObj* mmm = ZWMsgObj.new;
             
             mmm.mMsgID = [NSString stringWithFormat:@"%d",msgid];
             msgid++;
@@ -110,7 +110,7 @@
             [tt addObject:mmm];
         }
         
-        ZWMsgObjGift*mmm = ZWMsgObjGift.new;
+        ZWMsgObj*mmm = ZWMsgObj.new;
         mmm.mMsgID = [NSString stringWithFormat:@"%d",msgid];
         msgid++;
         
@@ -125,7 +125,7 @@
         
         [tt addObject:mmm];
         
-        mmm = ZWMsgObjGift.new;
+        mmm = ZWMsgObj.new;
         mmm.mMsgID = [NSString stringWithFormat:@"%d",msgid];
         msgid++;
         
@@ -151,13 +151,13 @@
 
 }
 
-+(ZWMsgObjText*)makeTestTextMsg:(NSString*)text
++(ZWMsgObj*)makeTestTextMsg:(NSString*)text
 {
     NSArray* ss = @[@"http://p3.gexing.com/touxiang/20120727/1444/501238c78343b_200x200_3.jpg",@"http://v1.qzone.cc/avatar/201404/03/12/51/533ce8ccb2555295.jpg%21200x200.jpg"];
     
     NSArray* aa = @[@"asdfad[face1]",@"[face1]阿萨德[face1]发的事",@"[face1]啊撒旦发射点法啊上的浪费那啊 [face1]",@"啧啧啧啧[face1]去啊额烦",@"啊的身份垃圾;啦卷帘大将fl;a家拉屎的风景垃圾谁了解对方拉屎都放假啊是大幅拉升多方了解啊塑料袋积分[face1]拉丝机练腹肌阿隆索多久发啦[face1]姐啊斯蒂芬阿斯蒂芬啊是"];
     
-    ZWMsgObjText* mmm = ZWMsgObjText.new;
+    ZWMsgObj* mmm = ZWMsgObj.new;
     
     mmm.mMsgID = [NSString stringWithFormat:@"%ld",(NSInteger)[NSDate timeIntervalSinceReferenceDate]*1000];
     
@@ -171,7 +171,7 @@
     return mmm;
 }
 
-+(ZWMsgObjPic*)makeTestPicMsg:(UIImage*)img
++(ZWMsgObj*)makeTestPicMsg:(UIImage*)img
 {
     NSArray* ss = @[@"http://p3.gexing.com/touxiang/20120727/1444/501238c78343b_200x200_3.jpg",@"http://v1.qzone.cc/avatar/201404/03/12/51/533ce8ccb2555295.jpg%21200x200.jpg"];
 
@@ -203,7 +203,7 @@
                       ];
     
     
-    ZWMsgObjPic* mmm = ZWMsgObjPic.new;
+    ZWMsgObj* mmm = ZWMsgObj.new;
     
     mmm.mMsgID = [NSString stringWithFormat:@"%ld",(NSInteger)[NSDate timeIntervalSinceReferenceDate]*1000];
     
@@ -228,12 +228,12 @@
     return mmm;
 }
 
-+(ZWMsgObjVoice*)makeTestVoiceMsg:(NSURL*)voicepath duration:(NSTimeInterval)duration
++(ZWMsgObj*)makeTestVoiceMsg:(NSURL*)voicepath duration:(NSTimeInterval)duration
 {
     NSArray* ss = @[@"http://p3.gexing.com/touxiang/20120727/1444/501238c78343b_200x200_3.jpg",@"http://v1.qzone.cc/avatar/201404/03/12/51/533ce8ccb2555295.jpg%21200x200.jpg"];
     
     
-    ZWMsgObjVoice* mmm = ZWMsgObjVoice.new;
+    ZWMsgObj* mmm = ZWMsgObj.new;
     
     mmm.mMsgID = [NSString stringWithFormat:@"%ld",(NSInteger)[NSDate timeIntervalSinceReferenceDate]*1000];
     

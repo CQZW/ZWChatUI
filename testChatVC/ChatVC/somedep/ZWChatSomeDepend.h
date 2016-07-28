@@ -45,49 +45,29 @@
 @property (nonatomic,assign)    int         mMsgType;//0 时间消息, 1 文字消息, 2,图片消息,3 语音消息,4 礼物
 @property (nonatomic,strong)    NSDate*     mMsgDate;//消息时间
 
-@end
-
-
-@interface ZWMsgObjTime : ZWMsgObj
-
-
 -(NSString*)getTimeStr;
 
-
-@end
-
-
-@interface ZWMsgObjText : ZWMsgObj
-
+//文字消息的数据
 @property (nonatomic,strong)    NSString*   mTextMsg;//文字消息内容
 
-@end
-
-@interface ZWMsgObjPic : ZWMsgObj
-
+//图片消息的数据
 @property (nonatomic,assign)    CGFloat     mPicW;
 @property (nonatomic,assign)    CGFloat     mPicH;
 @property (nonatomic,strong)    NSString*   mPicURL;//图片URL
 @property (nonatomic,strong)    UIImage*    mImgObj;//如果有这个就优先显示这个
 
-@end
-
-@interface ZWMsgObjVoice : ZWMsgObj
-
-@property (nonatomic,assign)    int             mDurlong;//11秒
-@property (nonatomic,strong)    NSData*         mVoiceData;
-
+//语音消息的数据
+@property (nonatomic,assign)    int             mDurlong;
+@property (nonatomic,strong)    NSData*         mVoiceData;//如果有这个,优先用这个,
+@property (nonatomic,strong)    NSURL*          mVoiceURL;//声音文件的URL,
 @property (nonatomic,assign)    BOOL            mIsPlaying;
 
 
-@end
-
-@interface ZWMsgObjGift : ZWMsgObj
-
+//礼物消息的数据
+@property (nonatomic,strong)    NSString*       mGiftId;
 @property (nonatomic,strong)    NSString*       mGiftIconURL;//礼物小图标URL
 @property (nonatomic,strong)    NSString*       mGiftDesc;
 @property (nonatomic,strong)    NSString*       mDetailURL;//详情URL
-
 @property (nonatomic,strong)    NSString*       mJyStr;
 
 
