@@ -33,7 +33,7 @@
 
 
 
-@interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
+@interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate,UIGestureRecognizerDelegate>
 
 @end
 
@@ -111,10 +111,35 @@
     
 }
 
+-(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
+    
+    
+    CGPoint pp  =[touch locationInView:self.mtableview];
+    
+    
+    NSLog(@"uiview:%@ pp:%f %f",[touch.view class],pp.x,pp.y);
+    
+
+    
+    return YES;
+    
+}
+
+-(void)taprootview:(UITapGestureRecognizer*)sender
+{
+    
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    UITapGestureRecognizer* tapgusest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taprootview:)];
+    tapgusest.delegate = self;
+    
+    //[self.view addGestureRecognizer:tapgusest];
+    
     
     self.minputtext.layer.borderColor = [UIColor colorWithRed:0.788 green:0.792 blue:0.804 alpha:1.000].CGColor;
     self.minputtext.layer.borderWidth = 1.0f;
