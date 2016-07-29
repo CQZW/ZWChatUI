@@ -72,7 +72,7 @@
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-    
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 0.0f;
     
 }
 
@@ -87,14 +87,33 @@
 
 - (IBAction)backclicked:(id)sender {
     
-    if( self.presentingViewController )
-    {
-        __weak UIViewController* vcvcref = self.presentingViewController;
-        if( [vcvcref isKindOfClass:[UINavigationController class]] )
-        {
-            vcvcref = ((UINavigationController*)vcvcref).topViewController;
-        }
+    
+    if( [self.navigationController topViewController] == self )
+    {//如果有导航控制器,,并且顶部就是自己,,那么应该 返回
+        if( self.navigationController.viewControllers.count == 1 )
+        {//如果只有一个,,,那么
+            if( self.presentingViewController )
+            {//如果有,,那么就dismiss
+                
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
+                    
+                    
+                }];
+                return;
+            }
+            else
+            {
+                NSLog(@"how to back11");
+            }
+            
+        }else
+            [self.navigationController popViewControllerAnimated:YES];
         
+    }
+    else//其他情况,就再判断是否有 presentingViewController
+    if( self.presentingViewController )
+    {//如果有,,那么就dismiss
         [self dismissViewControllerAnimated:YES completion:^{
            
             
@@ -102,8 +121,11 @@
         }];
         return;
     }
+    else
+    {
+        NSLog(@"how to back");
+    }
     
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)clickedtophead:(id)sender {
@@ -437,6 +459,8 @@
 
 -(void)addOneMsg:(ZWMsgObj*)sendMsg
 {
+    if( [self.mmsgdata containsObject:sendMsg] ) return;
+    
     [self.mmsgdata addObject:sendMsg];
     [self.mtableview beginUpdates];
     
