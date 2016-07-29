@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mtagimg;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mimgconstW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mimgconstH;
+@property (weak, nonatomic) IBOutlet UIImageView *mfailedicon;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *msv;
 
 @end

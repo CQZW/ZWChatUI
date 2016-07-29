@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mheadimg;
 @property (weak, nonatomic) IBOutlet UILabel *mlonglabel;
 @property (weak, nonatomic) IBOutlet UIImageView *mvoiceicon;
+@property (weak, nonatomic) IBOutlet UIImageView *mfailedicon;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *msv;
 
 @end

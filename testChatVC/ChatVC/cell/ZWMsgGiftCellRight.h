@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mgificon;
 @property (weak, nonatomic) IBOutlet UILabel *mgifdesc;
 @property (weak, nonatomic) IBOutlet UILabel *mjy;
+@property (weak, nonatomic) IBOutlet UIImageView *mfailedicon;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *msv;
 @end

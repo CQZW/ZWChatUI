@@ -70,6 +70,9 @@
 @property (nonatomic,strong)    NSString*       mDetailURL;//详情URL
 @property (nonatomic,strong)    NSString*       mJyStr;
 
+//需要填充数据,,比如,语音要下载什么的,
+-(void)fetchMsgData:(void(^)(NSString* errmsg))block;
+
 
 @end
 

@@ -161,7 +161,7 @@
                         <constraint firstAttribute="trailing" secondItem="Tn4-wS-T8M" secondAttribute="trailing" id="zMo-KO-Hi4"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQp-WT-trw">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HQp-WT-trw">
                     <rect key="frame" x="0.0" y="600" width="600" height="0.0"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ao5-3l-2J7">

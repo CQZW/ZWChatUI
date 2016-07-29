@@ -32,29 +32,50 @@
                             <constraint firstAttribute="height" constant="122" id="Zyl-UC-Bgs"/>
                         </constraints>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2.0_sixin_lt_!_" translatesAutoresizingMaskIntoConstraints="NO" id="NER-yy-cJa">
+                        <rect key="frame" x="37" y="7" width="18" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="5QI-yj-9KI"/>
+                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="18" id="BcA-BT-Z7C"/>
+                            <constraint firstAttribute="width" constant="18" id="Cxk-5s-uff"/>
+                            <constraint firstAttribute="height" constant="18" id="HP7-Nq-GMs"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18" id="Ogs-Um-rJT"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="18" id="s12-Kt-Blg"/>
+                        </constraints>
+                    </imageView>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wVV-Qm-8g1">
+                        <rect key="frame" x="36" y="6" width="20" height="20"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="cLd-ZR-Jix" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="2Tq-qj-3EI"/>
                     <constraint firstItem="ICQ-Gz-yJ2" firstAttribute="leading" secondItem="E4u-dB-VKQ" secondAttribute="leading" constant="-10" id="B6r-v3-AuD"/>
                     <constraint firstItem="E4u-dB-VKQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="EWo-O6-M2c"/>
+                    <constraint firstItem="wVV-Qm-8g1" firstAttribute="centerX" secondItem="NER-yy-cJa" secondAttribute="centerX" id="Grw-5h-9gQ"/>
+                    <constraint firstItem="wVV-Qm-8g1" firstAttribute="centerY" secondItem="NER-yy-cJa" secondAttribute="centerY" id="LPH-eX-dzH"/>
                     <constraint firstItem="ICQ-Gz-yJ2" firstAttribute="bottom" secondItem="E4u-dB-VKQ" secondAttribute="bottom" constant="8" id="P1C-fC-TCk"/>
                     <constraint firstAttribute="bottom" secondItem="E4u-dB-VKQ" secondAttribute="bottom" constant="15" id="SNQ-g5-AIl"/>
                     <constraint firstAttribute="trailing" secondItem="cLd-ZR-Jix" secondAttribute="trailing" constant="8" id="VBc-Cc-ei7"/>
+                    <constraint firstItem="ICQ-Gz-yJ2" firstAttribute="leading" secondItem="NER-yy-cJa" secondAttribute="trailing" constant="5" id="VvA-WD-gfg"/>
                     <constraint firstItem="ICQ-Gz-yJ2" firstAttribute="top" secondItem="E4u-dB-VKQ" secondAttribute="top" constant="-8" id="ZWL-Xj-u5D"/>
+                    <constraint firstItem="NER-yy-cJa" firstAttribute="top" secondItem="ICQ-Gz-yJ2" secondAttribute="top" id="eZ7-RV-Wk1"/>
                     <constraint firstItem="E4u-dB-VKQ" firstAttribute="trailing" secondItem="cLd-ZR-Jix" secondAttribute="leading" constant="-20" id="ws1-85-Hc6"/>
                     <constraint firstItem="ICQ-Gz-yJ2" firstAttribute="trailing" secondItem="E4u-dB-VKQ" secondAttribute="trailing" constant="15" id="xZI-Mg-emd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="mfailedicon" destination="NER-yy-cJa" id="LLZ-VT-rc8"/>
                 <outlet property="mheadimg" destination="cLd-ZR-Jix" id="xl2-gu-SFE"/>
                 <outlet property="mimgconstH" destination="Zyl-UC-Bgs" id="tfb-AI-6c5"/>
                 <outlet property="mimgconstW" destination="RKX-sR-EtW" id="oF5-N0-pgj"/>
+                <outlet property="msv" destination="wVV-Qm-8g1" id="m1F-GC-0gU"/>
                 <outlet property="mtagimg" destination="E4u-dB-VKQ" id="QyH-Ui-CL3"/>
             </connections>
             <point key="canvasLocation" x="338" y="327.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="2.0_sixin_lt_!_" width="18" height="18"/>
         <image name="2.0_sixin_lt_me_" width="25" height="35"/>
     </resources>
 </document>

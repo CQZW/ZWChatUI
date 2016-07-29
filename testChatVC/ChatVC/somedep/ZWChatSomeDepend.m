@@ -228,6 +228,14 @@
     }
 }
 
+//需要填充数据,,比如,语音要下载什么的,
+-(void)fetchMsgData:(void(^)(NSString* errmsg))block
+{
+    block( @"下载数据失败" );
+}
+
+
+
 @end
 
 

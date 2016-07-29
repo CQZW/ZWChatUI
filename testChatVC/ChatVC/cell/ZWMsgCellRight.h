@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mlabelconstW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mlabelconstH;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *msv;
+@property (weak, nonatomic) IBOutlet UIImageView *mfailedicon;
 
 
 @end

@@ -30,6 +30,9 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 
+
+
+
 @interface ZWChatVC ()<UITextViewDelegate,UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 
 @end
@@ -42,8 +45,10 @@
     
     BOOL    _cgfok;
     
+    BOOL    _doing;
+    
     CGFloat         _moreXpoint;
-    CGFloat         _gitXpoint;
+    CGFloat         _giftXpoint;
     
     CGFloat         _lastInputH;
     
@@ -156,6 +161,7 @@
         else if( !self.mCannotLoadNewestMsg )
             [self.mtableview.mj_footer beginRefreshing];
     }
+    
 }
 
 #pragma mark 消息数据获取主要修改这里开始
@@ -293,7 +299,18 @@
     if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
     {
         //for test
-        [self addOneMsg:[testMsg makeTestTextMsg:txt]];
+        __block ZWMsgObj* msgobj =  [testMsg makeTestTextMsg:txt];
+        msgobj.mMsgStatus = 1;
+        [self addOneMsg:msgobj];
+        
+        //模拟异步发送动作,,2秒完成之后,
+        dispatch_time_t time=dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC);
+        dispatch_after(time, dispatch_get_main_queue(), ^{
+           
+            msgobj.mMsgStatus = 2;
+            [self didSendThisMsg:msgobj];
+            
+        });
     }
 }
 
@@ -316,6 +333,52 @@
         
     }
 }
+
+//发送完成,,当异步发送完成之后,调用该函数
+-(void)didSendThisMsg:(ZWMsgObj*)msg
+{
+    //就是更新下状态
+    [self updateOneMsg:msg];
+    
+    
+}
+
+//需要重新发送
+-(void)willReSendThisMsg:(ZWMsgObj*)msg
+{
+    //开始发送
+    msg.mMsgStatus = 1;
+    [self updateOneMsg:msg];
+    
+    //for testcode
+    if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
+    {
+        __block ZWMsgObj* msgobj =  msg;
+        
+        //模拟异步重新发送,,,
+        dispatch_time_t time=dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC);
+        dispatch_after(time, dispatch_get_main_queue(), ^{
+            
+            //发送成功
+            msgobj.mMsgStatus = 0;
+            [self didSendThisMsg:msgobj];
+            
+            
+        });
+    }
+    
+    
+}
+
+-(void)wantFetchMsg:(ZWMsgObj*)msg block:(void(^)(NSString* errmsg,ZWMsgObj*msg))block
+{
+    [msg fetchMsgData:^(NSString *errmsg) {
+       
+        block( errmsg , msg);
+        
+    }];
+}
+
 
 -(void)addOneMsg:(ZWMsgObj*)sendMsg
 {
@@ -347,9 +410,18 @@
     NSUInteger xx = [self.mmsgdata indexOfObject:updMsg];
     if( xx == NSNotFound ) return;
     
+    [self.mtableview reloadData];
+    return;
+    
     [self.mmsgdata replaceObjectAtIndex:xx withObject:updMsg];
     
-    [self.mtableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:xx inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    CGPoint sss = self.mtableview.contentOffset;
+    
+    [self.mtableview beginUpdates];
+    [self.mtableview reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:xx inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
+    [self.mtableview endUpdates];
+    
+    [self.mtableview setContentOffset:sss];
     
 }
 //获取消息,修改这里
@@ -378,6 +450,16 @@
         if( textobj.mIsSendOut )
         {
             retcell = [tableView dequeueReusableCellWithIdentifier:@"rightcell"];
+            if( msgobj.mMsgStatus == 1 )
+            {
+                [retcell.msv startAnimating];
+            }
+            else
+            {
+                [retcell.msv stopAnimating];
+            }
+            retcell.mfailedicon.hidden = !(msgobj.mMsgStatus == 2);
+            
         }
         else{
             retcell = [tableView dequeueReusableCellWithIdentifier:@"leftcell"];
@@ -398,6 +480,17 @@
         if( picobj.mIsSendOut )
         {
             piccell = [tableView dequeueReusableCellWithIdentifier:@"picrightcell"];
+            
+            if( msgobj.mMsgStatus == 1 )
+            {
+                [piccell.msv startAnimating];
+            }
+            else
+            {
+                [piccell.msv stopAnimating];
+            }
+            piccell.mfailedicon.hidden = !(msgobj.mMsgStatus == 2);
+
         }
         else{
             piccell = [tableView dequeueReusableCellWithIdentifier:@"picleftcell"];
@@ -516,6 +609,7 @@
     [retcell.mheadimg sd_setImageWithURL:[NSURL URLWithString:msgobj.mHeadImgUrl] placeholderImage:[UIImage imageNamed:@"ic_default_head"]];
     retcell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+
     return retcell;
 }
 
@@ -523,12 +617,20 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
+    if( msgobj.mMsgStatus == 2 )
+    {
+        [self willReSendThisMsg:msgobj];
+        return;
+    }
+    
     if( msgobj.mMsgType == 3 )
     {//播放语音消息
         
-        [self playVoiceMsg:(ZWMsgObj*)msgobj];
-        
-        [tableView reloadRowsAtIndexPaths:@[ indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self playVoiceMsg:(ZWMsgObj*)msgobj block:^(BOOL playing) {
+            
+            if( playing )
+                [self.mtableview reloadData];
+        }];
         
     }
     else if( msgobj.mMsgType == 2 )
@@ -546,7 +648,7 @@
     }
 }
 
--(void)playVoiceMsg:(ZWMsgObj*)msg
+-(void)playVoiceMsg:(ZWMsgObj*)msg block:(void(^)( BOOL playing ))block
 {
     [_player stop];
     _player = nil;
@@ -557,10 +659,29 @@
         return;//这种就是停止的意思
     }
     
-    if( msg.mVoiceData )
-        _player = [[AVAudioPlayer alloc]initWithData:msg.mVoiceData error:nil];
-    else
-        _player = [[AVAudioPlayer alloc]initWithContentsOfURL:msg.mVoiceURL error:nil];
+    if ( msg.mVoiceData == nil ) {
+        //数据没有就填充下,,,具体是用URL下载,还是怎么的,自己处理
+        [self wantFetchMsg:msg block:^(NSString *errmsg, ZWMsgObj *msg) {
+            
+            if( errmsg )
+            {
+                [SVProgressHUD showErrorWithStatus:errmsg];
+            }
+            else
+            {
+                block ([self realPlayVoice:msg] );
+            }
+            
+        }];
+        return;
+    }
+    
+    block( [self realPlayVoice:msg] );
+    
+}
+-(BOOL)realPlayVoice:(ZWMsgObj*)msg
+{
+    _player = [[AVAudioPlayer alloc]initWithData:msg.mVoiceData error:nil];
     
     _player.delegate = self;
     _nowplayingmsg = msg;
@@ -571,9 +692,9 @@
         [SVProgressHUD showErrorWithStatus:@"播放该消息失败"];
         [self stopPlayVoice:msg];
         _nowplayingmsg = nil;
-        return;
+        return NO;
     }
-
+    return YES;
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
@@ -599,6 +720,9 @@
     }
     else
     {
+        [self.mtableview reloadData];
+        return;
+        
         NSIndexPath* iiii = [NSIndexPath indexPathForRow:ii inSection:0];
         [self.mtableview reloadRowsAtIndexPaths:@[ iiii ] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
@@ -762,15 +886,18 @@
     
     
     self.mmoremoreview.contentSize = CGSizeMake( contW, self.mmoremoreview.bounds.size.height);
-    _gitXpoint = contW;
+    _giftXpoint = contW;
+  
     
-    
-    //然后是礼物的
-    
-    
+    //for test
+    if( self.mGiftView == nil )
+    {
+        self.mGiftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.mmoremoreview.bounds.size.width, MorePanH)];
+        self.mGiftView.backgroundColor = [UIColor redColor];
+        self.mGiftView.hidden = YES;
+    }
     
 }
-
 
 
 
@@ -833,10 +960,60 @@
         }
         else if( sender.tag == 1002 )
         {
-            
+            [self showGiftView];
         }
-        
     }
+}
+
+-(void)showGiftView
+{
+    if( self.mGiftView == nil ) return;
+    if( !self.mGiftView.hidden ) return;
+    if( _doing ) return;
+    _doing = YES;
+    
+    CGRect ff = self.mGiftView.frame;
+    ff.origin.y = ff.size.height * 1;
+    self.mGiftView.frame = ff;
+    
+    if( self.mGiftView.superview == nil )
+        [self.mmoreinputpan addSubview:self.mGiftView];
+    
+    self.mGiftView.hidden = NO;
+    
+    [UIView animateWithDuration:0.1f animations:^{
+        
+        CGRect fff = self.mGiftView.frame;
+        fff.origin.y = 0.0f;
+        self.mGiftView.frame = fff;
+        
+    } completion:^(BOOL finished) {
+        
+        _doing = NO;
+        
+    }];
+    
+}
+-(void)hidenGiftView
+{
+    if( self.mGiftView == nil ) return;
+    if( self.mGiftView.hidden ) return;
+    if( _doing ) return;
+    _doing = YES;
+    
+    [UIView animateWithDuration:0.1f animations:^{
+        
+        CGRect fff = self.mGiftView.frame;
+        fff.origin.y = fff.size.height * 1;
+        self.mGiftView.frame = fff;
+        
+    } completion:^(BOOL finished) {
+        
+        self.mGiftView.hidden = YES;
+        _doing = NO;
+        
+    }];
+    
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
@@ -1112,6 +1289,7 @@
         
     }];
 }
+
 -(void)clickedfacemore:(BOOL)bface
 {
     if( !bface && _morepanstatus == 2 ) return;//已经是显示的输入更多,就不管了,
@@ -1127,7 +1305,7 @@
         
         [UIView animateWithDuration:0.3f animations:^{
             
-            self.mmorepanconsth.constant = 234;
+            self.mmorepanconsth.constant = MorePanH;
             
             [self.view layoutIfNeeded];
         }];
@@ -1161,7 +1339,8 @@
 {
     [self cfgmoremoreview];
     [self.mmoremoreview setContentOffset:CGPointMake(0, 0)];
-
+    [self hidenGiftView];
+    
 }
 
 -(void)showMorePan
