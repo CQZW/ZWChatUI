@@ -86,8 +86,31 @@
 }
 
 - (IBAction)backclicked:(id)sender {
+    
+    if( self.presentingViewController )
+    {
+        __weak UIViewController* vcvcref = self.presentingViewController;
+        if( [vcvcref isKindOfClass:[UINavigationController class]] )
+        {
+            vcvcref = ((UINavigationController*)vcvcref).topViewController;
+        }
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+           
+            
+            
+        }];
+        return;
+    }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+- (IBAction)clickedtophead:(id)sender {
+    
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -337,6 +360,13 @@
 //发送完成,,当异步发送完成之后,调用该函数
 -(void)didSendThisMsg:(ZWMsgObj*)msg
 {
+    if( msg == nil ) return;
+    
+    if( ![self.mmsgdata containsObject:msg] )
+    {//如果还没有,就添加...
+        [self addOneMsg:msg];
+        return;
+    }
     //就是更新下状态
     [self updateOneMsg:msg];
     

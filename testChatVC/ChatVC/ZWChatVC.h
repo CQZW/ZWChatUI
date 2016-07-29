@@ -58,6 +58,9 @@
 //加载之后的消息
 -(void)footerStartRefresh;
 
+- (IBAction)clickedtophead:(id)sender;
+- (IBAction)backclicked:(id)sender;
+    
 #pragma mark 继承主要看这里开始
 
 @property (nonatomic,strong)    UIView*     mGiftView;//234的高度
