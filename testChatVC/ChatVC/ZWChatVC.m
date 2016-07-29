@@ -135,13 +135,24 @@
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
     
-    
     CGPoint pp  =[touch locationInView:self.mtableview];
+    NSIndexPath * indexpath = [self.mtableview indexPathForRowAtPoint:pp];
+    UITableViewCell* cell =  [self.mtableview cellForRowAtIndexPath:indexpath];
     
+    UIView* msgbodyrect = [cell viewWithTag:99];
+    pp  = [touch locationInView:cell];
     
-    NSLog(@"uiview:%@ pp:%f %f",[touch.view class],pp.x,pp.y);
+    if( CGRectContainsPoint(msgbodyrect.frame,pp) )
+    {//在消息体的范围,就允许响应tableview的 didselectrow...
+        return NO;
+    }
     
-
+    UIView* failedicon = [cell viewWithTag:98];
+    
+    if( CGRectContainsPoint(failedicon.frame,pp) )
+    {
+        [self failedIconTouched:indexpath iconhiden:failedicon.hidden];
+    }
     
     return YES;
     
@@ -149,7 +160,6 @@
 
 -(void)taprootview:(UITapGestureRecognizer*)sender
 {
-    
     
 }
 
@@ -160,7 +170,7 @@
     UITapGestureRecognizer* tapgusest = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taprootview:)];
     tapgusest.delegate = self;
     
-    //[self.view addGestureRecognizer:tapgusest];
+    [self.view addGestureRecognizer:tapgusest];
     
     
     self.minputtext.layer.borderColor = [UIColor colorWithRed:0.788 green:0.792 blue:0.804 alpha:1.000].CGColor;
@@ -692,15 +702,22 @@
     return retcell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)failedIconTouched:(NSIndexPath*)indexPath iconhiden:(BOOL)iconhiden
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if( iconhiden ) return;
+    
     ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
     if( msgobj.mMsgStatus == 2 )
     {
         [self willReSendThisMsg:msgobj];
         return;
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
     
     if( msgobj.mMsgType == 3 )
     {//播放语音消息

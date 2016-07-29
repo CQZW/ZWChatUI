@@ -104,6 +104,9 @@
 //如果不实现 会自动调用 [msg fetchMsgData],,,子类如果继承了 ZWMsgObj 也可以实现 ZWMsgObj fetchMsgData,,
 -(void)wantFetchMsg:(ZWMsgObj*)msg block:(void(^)(NSString* errmsg,ZWMsgObj*msg))block;
 
+//失败按钮点击了
+-(void)failedIconTouched:(NSIndexPath*)indexPath iconhiden:(BOOL)iconhiden;
+
 #pragma mark 继承主要看这里结束
 
 
