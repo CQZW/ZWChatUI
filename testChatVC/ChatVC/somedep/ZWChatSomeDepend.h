@@ -57,7 +57,7 @@
 @property (nonatomic,strong)    UIImage*    mImgObj;//如果有这个就优先显示这个
 
 //语音消息的数据
-@property (nonatomic,assign)    int             mDurlong;
+@property (nonatomic,assign)    NSTimeInterval             mDurlong;//单位,秒..有小数点.
 @property (nonatomic,strong)    NSData*         mVoiceData;//如果有这个,优先用这个,
 @property (nonatomic,strong)    NSURL*          mVoiceURL;//声音文件的URL,
 @property (nonatomic,assign)    BOOL            mIsPlaying;

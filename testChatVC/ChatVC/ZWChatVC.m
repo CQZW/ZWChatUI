@@ -70,9 +70,9 @@
     [super viewDidAppear:animated];
     
     [IQKeyboardManager sharedManager].enable = YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 0.0f;
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 5.0f;
     
 }
 
@@ -135,7 +135,29 @@
 
 -(BOOL)gestureRecognizer:(UIGestureRecognizer*)gestureRecognizer shouldReceiveTouch:(UITouch*)touch {
     
-    CGPoint pp  =[touch locationInView:self.mtableview];
+    CGPoint pp  = [touch locationInView:self.view];
+    if( pp.y > self.minputview.frame.origin.y )
+    {//只要点击了在输入框的下面...这种就放过...
+        return NO;
+    }
+    
+    //下面的点击 都是在 输入框的上面,,,就是点击了tablewview的范围
+    if( self.minputtext.isFirstResponder )
+    {//键盘开启的,就关闭键盘,,,
+        [self.minputtext resignFirstResponder];
+        return YES;
+    }
+    
+    //键盘没有开启,但是,输入其他的,表情,,礼物的什么显示起的,,,
+    if( self.mmorepanconsth.constant > 0 )
+    {
+        [self hidenMorePan];
+        return YES;
+    }
+    
+    //下面是判断 CELL的点击位置..
+    pp = [touch locationInView:self.mtableview];
+    
     NSIndexPath * indexpath = [self.mtableview indexPathForRowAtPoint:pp];
     UITableViewCell* cell =  [self.mtableview cellForRowAtIndexPath:indexpath];
     
@@ -374,7 +396,8 @@
 
 -(void)willSendThisText:(NSString*)txt
 {
-    self.minputtext.text = nil;
+    self.minputtext.text = @"";
+    self.minputbarconsth.constant = 48;
     
     if( [NSStringFromClass([self class]) isEqualToString:NSStringFromClass([ZWChatVC class])] )
     {
@@ -654,7 +677,7 @@
             }
         }
         
-        vcell.mlonglabel.text = [NSString stringWithFormat:@"%d''",voiceobj.mDurlong];
+        vcell.mlonglabel.text = [NSString stringWithFormat:@"%.1f''",voiceobj.mDurlong];
         CGFloat ff = (voiceobj.mDurlong / 60.0f ) * 150.0f;
 #pragma mark 声音cell最宽,最窄
         ff = ff < 50?50.0f:ff;
@@ -702,6 +725,37 @@
     return retcell;
 }
 
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
+
+    if( msgobj.mMsgType == 1 )
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+//每个cell都会点击出现Menu菜单
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(copy:)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if ( action == @selector(copy:) ) {
+        ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
+        [UIPasteboard generalPasteboard].string = msgobj.mTextMsg;
+    }
+}
+
+
 -(void)failedIconTouched:(NSIndexPath*)indexPath iconhiden:(BOOL)iconhiden
 {
     if( iconhiden ) return;
@@ -714,11 +768,19 @@
     }
 }
 
+
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ZWMsgObj* msgobj = self.mmsgdata[ indexPath.row ];
     
+    [self msgClicked:msgobj];
+    
+}
+-(void)msgClicked:(ZWMsgObj*)msgobj
+{
     if( msgobj.mMsgType == 3 )
     {//播放语音消息
         

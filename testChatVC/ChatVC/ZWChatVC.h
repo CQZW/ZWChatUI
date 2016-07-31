@@ -107,6 +107,10 @@
 //失败按钮点击了
 -(void)failedIconTouched:(NSIndexPath*)indexPath iconhiden:(BOOL)iconhiden;
 
+//消息点击了
+-(void)msgClicked:(ZWMsgObj*)msgobj;
+
+
 #pragma mark 继承主要看这里结束
 
 

@@ -49,6 +49,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="vrh-9E-IYo"/>
                             </constraints>
+                            <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="5" maxY="5"/>
                             <state key="normal" image="ic_me_up"/>
                             <connections>
                                 <action selector="backclicked:" destination="-1" eventType="touchUpInside" id="4Pd-Ym-HKN"/>
