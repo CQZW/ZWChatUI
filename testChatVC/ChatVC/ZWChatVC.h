@@ -11,9 +11,17 @@
 
 #define MorePanH 234
 
+@interface ZWTextView : UITextView
+
+-(void)appendFace:(NSInteger)faceIndex;
+
+@end
+
+
 @interface ZWChatVC : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIView *mtopview;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mtopnavconsth;
 
 
 @property (weak, nonatomic) IBOutlet UITableView *mtableview;
@@ -23,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *mfacebt;
 @property (weak, nonatomic) IBOutlet UIButton *mmorebt;
 
-@property (weak, nonatomic) IBOutlet UITextView *minputtext;
+@property (weak, nonatomic) IBOutlet ZWTextView *minputtext;
 @property (weak, nonatomic) IBOutlet UIButton *mvoicebtpress;
 
 @property (weak, nonatomic) IBOutlet UIView *mmoreinputpan;

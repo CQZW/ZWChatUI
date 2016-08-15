@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZWChatVC">
@@ -17,6 +17,7 @@
                 <outlet property="mmoremoreview" destination="ao5-3l-2J7" id="eQM-O3-VRh"/>
                 <outlet property="mmorepanconsth" destination="y2o-V3-xIi" id="wMd-gE-3wH"/>
                 <outlet property="mtableview" destination="MrJ-rM-f3k" id="Ogz-Ja-OSx"/>
+                <outlet property="mtopnavconsth" destination="POL-3f-NyZ" id="YRj-Df-JeT"/>
                 <outlet property="mtoptitle" destination="5l6-Dx-giN" id="WZz-Vq-ltQ"/>
                 <outlet property="mtopview" destination="HJT-9B-ZGU" id="LtK-a5-lhL"/>
                 <outlet property="mvoicebtpress" destination="Xdc-hg-ola" id="YB2-sl-lqX"/>
@@ -122,7 +123,7 @@
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ls3-DZ-gCY">
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ls3-DZ-gCY" customClass="ZWTextView">
                             <rect key="frame" x="46" y="9" width="468" height="31"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>

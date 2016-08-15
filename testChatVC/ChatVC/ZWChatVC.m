@@ -30,6 +30,195 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 
+@interface ZWNSTextAttachment : NSTextAttachment
+
+@property (nonatomic,weak)      UITextView* mTextViewTag;
+@property (nonatomic,strong)    UIImage*    mFaceImg;
+@property (nonatomic,strong)    NSString*   mFaceNmae;
+
+@end
+
+@implementation ZWNSTextAttachment
+
+- (nullable UIImage *)imageForBounds:(CGRect)imageBounds textContainer:(nullable NSTextContainer *)textContainer characterIndex:(NSUInteger)charIndex
+{
+    return self.mFaceImg;
+}
+
+
+// Returns the layout bounds to the layout manager.  The bounds origin is interpreted to match position inside lineFrag.  The NSTextAttachment implementation returns -bounds if not CGRectZero; otherwise, it derives the bounds value from -[image size].  Conforming objects can implement more sophisticated logic for negotiating the frame size based on the available container space and proposed line fragment rect.
+- (CGRect)attachmentBoundsForTextContainer:(nullable NSTextContainer *)textContainer proposedLineFragment:(CGRect)lineFrag glyphPosition:(CGPoint)position characterIndex:(NSUInteger)charIndex
+{
+    CGRect fff = CGRectMake(position.x,0-(self.mTextViewTag.font.lineHeight/3.34f), self.mTextViewTag.font.lineHeight ,  self.mTextViewTag.font.lineHeight );
+    return  fff;
+}
+
+@end
+
+
+@implementation ZWTextView
+
+-(id)init
+{
+    self = [super init];
+    [self morecfg];
+    return self;
+}
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    [self morecfg];
+    return self;
+}
+-(id)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer
+{
+    self = [super initWithFrame:frame textContainer:textContainer];
+    [self morecfg];
+    return self;
+}
+-(id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    [self morecfg];
+    return self;
+}
+-(void)morecfg
+{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
+}
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
+}
+
+-(void)textChanged:(id)sender
+{
+    NSLog(@"id:%@",self.attributedText);
+    
+    
+    
+}
+
+
+//这个要把attribstr 反过来解释处理...艹
+-(NSString*)getSendTextStr
+{
+    NSAttributedString* nowattr = self.attributedText;
+
+    NSMutableString* retstr = [[NSMutableString alloc]initWithString: nowattr.string ];
+
+    NSMutableArray* tttt = NSMutableArray.new;
+    
+    
+    for ( int j = 0 ; j <nowattr.length; j++) {
+        
+        NSRange itrang;
+        NSDictionary* one  = [nowattr attributesAtIndex:j effectiveRange:&itrang];
+        
+        ZWNSTextAttachment * zwattchement = [one objectForKey:@"NSAttachment"];
+        if( zwattchement )
+        {
+            //[retstr replaceCharactersInRange:itrang withString:zwattchement.mFaceNmae];
+            [tttt addObject:@{@"l":@(itrang.location),@"s":@(itrang.length),@"yy":zwattchement.mFaceNmae}];
+        }
+        else
+        {
+            
+        }
+    }
+    
+    NSInteger fix = 0;
+    
+    
+    for ( NSDictionary*one in tttt) {
+        NSRange r;
+        r.location = [[one objectForKey:@"l"] integerValue];
+        r.length = [[one objectForKey:@"s"] integerValue] + fix;
+        fix += r.length-1;
+        
+        NSString* sss = [one objectForKey:@"yy"];
+        NSRange sssrr  =[retstr rangeOfString:@"\U0000fffc"];
+        [retstr replaceCharactersInRange:sssrr withString:sss];
+    }
+    
+    return retstr;
+}
+
+-(void)appendFace:(NSInteger)faceIndex
+{
+    
+    NSAttributedString* nowattrstr = self.attributedText;
+    NSMutableAttributedString* finalstr = nil;
+    
+    if( nowattrstr )
+        finalstr = [[NSMutableAttributedString alloc]initWithAttributedString:nowattrstr];
+    else
+        finalstr = NSMutableAttributedString.new;
+    
+    ZWNSTextAttachment *faceattachment=[[ZWNSTextAttachment alloc] initWithData:nil ofType:nil];
+    faceattachment.mTextViewTag = self;
+    
+    NSString* facePicname = [NSString stringWithFormat:@"face%ld.png",faceIndex];
+    faceattachment.mFaceImg = [UIImage imageNamed:facePicname];
+    faceattachment.mFaceNmae = [NSString stringWithFormat:@"[face%ld]",faceIndex];
+    
+    NSAttributedString *faceattr=[NSAttributedString attributedStringWithAttachment:faceattachment];
+    [finalstr appendAttributedString:faceattr];
+    self.attributedText = finalstr;
+    
+}
+
+-(void)setText:(NSString *)text
+{
+    [super setText:text];
+    //NSLog(@"%@ length:%d",text,text.length);
+    
+    NSRange searchFrom;
+    searchFrom.length = text.length;
+    searchFrom.location = 0;
+    
+    
+    NSMutableAttributedString *finalstr = [[NSMutableAttributedString alloc] initWithString:@"" attributes:nil];
+    
+    do
+    {
+        NSRange find = [text rangeOfString:@"\\[[a-z]+[0-9]+\\]" options:NSRegularExpressionSearch range:searchFrom];
+        if( find.location == NSNotFound )
+        {//最好一次么有找到..
+            
+            [finalstr appendAttributedString:[[NSAttributedString alloc]initWithString:[text substringWithRange:NSMakeRange(searchFrom.location, text.length - searchFrom.location)]]];
+            break;
+            
+        }
+        
+        NSString* facename = [text substringWithRange:find];
+        facename = [facename substringWithRange:NSMakeRange(1, facename.length-2)];
+        
+        [finalstr appendAttributedString: [[NSAttributedString alloc]initWithString: [text substringWithRange:NSMakeRange(searchFrom.location, find.location - searchFrom.location)]] ];
+        
+        ZWNSTextAttachment *faceattachment=[[ZWNSTextAttachment alloc] initWithData:nil ofType:nil];
+        faceattachment.mTextViewTag = self;
+        facename = [facename stringByReplacingOccurrencesOfString:@"[" withString:@""];
+        facename = [facename stringByReplacingOccurrencesOfString:@"]" withString:@""];
+        facename = [facename stringByAppendingString:@".png"];
+        faceattachment.mFaceImg = [UIImage imageNamed:facename];
+        
+        NSAttributedString *faceattr=[NSAttributedString attributedStringWithAttachment:faceattachment];
+        [finalstr appendAttributedString:faceattr];
+        
+        searchFrom.location =   find.location + find.length;
+        searchFrom.length   =   text.length - searchFrom.location;
+        
+    }while( searchFrom.location < text.length );
+
+    [finalstr addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, finalstr.length)];
+    
+    self.attributedText = finalstr;
+ 
+    
+}
+
+@end
 
 
 
@@ -1077,13 +1266,14 @@
             return;
         }
         
-        [self willSendThisText:self.minputtext.text];
+        [self willSendThisText:[self.minputtext getSendTextStr]];
         
     }
     else
     if( sender.tag < 1000 )
     {
-        self.minputtext.text = [self.minputtext.text stringByAppendingString:[NSString stringWithFormat:@"[face%ld]",sender.tag]];
+        //self.minputtext.text = [self.minputtext.text stringByAppendingString:[NSString stringWithFormat:@"[face%ld]",sender.tag]];
+        [self.minputtext appendFace:sender.tag];
         [self textViewDidChange:self.minputtext];
     }
     else
@@ -1225,7 +1415,7 @@
             return NO;
         }
         
-        [self willSendThisText:textView.text];
+        [self willSendThisText:[self.minputtext getSendTextStr]];
         return NO;
     }
     return YES;
