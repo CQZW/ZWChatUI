@@ -30,13 +30,7 @@
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
 
-@interface ZWNSTextAttachment : NSTextAttachment
 
-@property (nonatomic,weak)      UITextView* mTextViewTag;
-@property (nonatomic,strong)    UIImage*    mFaceImg;
-@property (nonatomic,strong)    NSString*   mFaceNmae;
-
-@end
 
 @implementation ZWNSTextAttachment
 
@@ -49,7 +43,7 @@
 // Returns the layout bounds to the layout manager.  The bounds origin is interpreted to match position inside lineFrag.  The NSTextAttachment implementation returns -bounds if not CGRectZero; otherwise, it derives the bounds value from -[image size].  Conforming objects can implement more sophisticated logic for negotiating the frame size based on the available container space and proposed line fragment rect.
 - (CGRect)attachmentBoundsForTextContainer:(nullable NSTextContainer *)textContainer proposedLineFragment:(CGRect)lineFrag glyphPosition:(CGPoint)position characterIndex:(NSUInteger)charIndex
 {
-    CGRect fff = CGRectMake(position.x,0-(self.mTextViewTag.font.lineHeight/3.34f), self.mTextViewTag.font.lineHeight ,  self.mTextViewTag.font.lineHeight );
+    CGRect fff = CGRectMake(position.x,0-(self.mFontH/3.34f), self.mFontH  ,  self.mFontH );
     return  fff;
 }
 
@@ -58,45 +52,67 @@
 
 @implementation ZWTextView
 
--(id)init
+-(void)paste:(id)sender
 {
-    self = [super init];
-    [self morecfg];
-    return self;
-}
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    [self morecfg];
-    return self;
-}
--(id)initWithFrame:(CGRect)frame textContainer:(NSTextContainer *)textContainer
-{
-    self = [super initWithFrame:frame textContainer:textContainer];
-    [self morecfg];
-    return self;
-}
--(id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    [self morecfg];
-    return self;
-}
--(void)morecfg
-{
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(textChanged:) name:UITextViewTextDidChangeNotification object:nil];
-}
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
-}
+    [super paste:sender];
+    
+    NSString* text = self.attributedText.string;
+    
+    NSRange searchFrom;
+    searchFrom.length = text.length;
+    searchFrom.location = 0;
+    
+    
+    NSMutableArray* findarr = NSMutableArray.new;
+    do
+    {
+        NSRange find = [text rangeOfString:@"\\[[a-z]+[0-9]+\\]" options:NSRegularExpressionSearch range:searchFrom];
+        if( find.location == NSNotFound )
+        {//最好一次么有找到..
+            break;
+        }
+        //找到了
+        [findarr addObject:@{ @"l":@(find.location),@"s":@(find.length), @"yy":[text substringWithRange:find] }];
+        
+        searchFrom.location =   find.location + find.length;
+        searchFrom.length   =   text.length - searchFrom.location;
+        
+    }while( searchFrom.location < text.length );
+    
+    NSMutableAttributedString *finalstr = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
 
--(void)textChanged:(id)sender
-{
-    NSLog(@"id:%@",self.attributedText);
+    NSInteger fix = 0;
     
+    for ( NSDictionary*one in findarr) {
+        
+        NSRange r;
+        r.location = [[one objectForKey:@"l"] integerValue] - fix;
+        r.length = [[one objectForKey:@"s"] integerValue];
+        fix += r.length-1;
+        
+        NSString* facename = [one objectForKey:@"yy"];
+        
+        NSString*   facenamepng = [facename substringWithRange:NSMakeRange(1, facename.length-2)];
+        facenamepng = [facename stringByReplacingOccurrencesOfString:@"[" withString:@""];
+        facenamepng = [facenamepng stringByReplacingOccurrencesOfString:@"]" withString:@""];
+        facenamepng = [facenamepng stringByAppendingString:@".png"];
+        
+        ZWNSTextAttachment *faceattachment=[[ZWNSTextAttachment alloc] initWithData:nil ofType:nil];
+        faceattachment.mFontH = self.font.lineHeight;
+
+        faceattachment.mFaceImg = [UIImage imageNamed:facenamepng];
+        faceattachment.mFaceNmae = facename;
+        
+        NSAttributedString *faceattr = [NSAttributedString attributedStringWithAttachment:faceattachment];
+        
+        [finalstr replaceCharactersInRange:r withAttributedString:faceattr];
+        
+    }
     
+    [finalstr addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, finalstr.length)];
     
+    self.attributedText = finalstr;
+
 }
 
 
@@ -156,7 +172,7 @@
         finalstr = NSMutableAttributedString.new;
     
     ZWNSTextAttachment *faceattachment=[[ZWNSTextAttachment alloc] initWithData:nil ofType:nil];
-    faceattachment.mTextViewTag = self;
+    faceattachment.mFontH = self.font.lineHeight;
     
     NSString* facePicname = [NSString stringWithFormat:@"face%ld.png",faceIndex];
     faceattachment.mFaceImg = [UIImage imageNamed:facePicname];
@@ -164,57 +180,10 @@
     
     NSAttributedString *faceattr=[NSAttributedString attributedStringWithAttachment:faceattachment];
     [finalstr appendAttributedString:faceattr];
-    self.attributedText = finalstr;
     
-}
-
--(void)setText:(NSString *)text
-{
-    [super setText:text];
-    //NSLog(@"%@ length:%d",text,text.length);
-    
-    NSRange searchFrom;
-    searchFrom.length = text.length;
-    searchFrom.location = 0;
-    
-    
-    NSMutableAttributedString *finalstr = [[NSMutableAttributedString alloc] initWithString:@"" attributes:nil];
-    
-    do
-    {
-        NSRange find = [text rangeOfString:@"\\[[a-z]+[0-9]+\\]" options:NSRegularExpressionSearch range:searchFrom];
-        if( find.location == NSNotFound )
-        {//最好一次么有找到..
-            
-            [finalstr appendAttributedString:[[NSAttributedString alloc]initWithString:[text substringWithRange:NSMakeRange(searchFrom.location, text.length - searchFrom.location)]]];
-            break;
-            
-        }
-        
-        NSString* facename = [text substringWithRange:find];
-        facename = [facename substringWithRange:NSMakeRange(1, facename.length-2)];
-        
-        [finalstr appendAttributedString: [[NSAttributedString alloc]initWithString: [text substringWithRange:NSMakeRange(searchFrom.location, find.location - searchFrom.location)]] ];
-        
-        ZWNSTextAttachment *faceattachment=[[ZWNSTextAttachment alloc] initWithData:nil ofType:nil];
-        faceattachment.mTextViewTag = self;
-        facename = [facename stringByReplacingOccurrencesOfString:@"[" withString:@""];
-        facename = [facename stringByReplacingOccurrencesOfString:@"]" withString:@""];
-        facename = [facename stringByAppendingString:@".png"];
-        faceattachment.mFaceImg = [UIImage imageNamed:facename];
-        
-        NSAttributedString *faceattr=[NSAttributedString attributedStringWithAttachment:faceattachment];
-        [finalstr appendAttributedString:faceattr];
-        
-        searchFrom.location =   find.location + find.length;
-        searchFrom.length   =   text.length - searchFrom.location;
-        
-    }while( searchFrom.location < text.length );
-
     [finalstr addAttribute:NSFontAttributeName value:self.font range:NSMakeRange(0, finalstr.length)];
-    
+
     self.attributedText = finalstr;
- 
     
 }
 
@@ -1254,7 +1223,7 @@
     {
         if( self.minputtext.text.length > 0 )
         {
-            self.minputtext.text = [self.minputtext.text substringToIndex: self.minputtext.text.length - 2 ];
+            self.minputtext.text = [self.minputtext.text substringToIndex: self.minputtext.text.length - 1 ];
             [self textViewDidChange:self.minputtext];
         }
     }
@@ -1509,7 +1478,7 @@
     
     NSMutableDictionary *recordSetting = NSMutableDictionary.new;
     //设置录音格式  AVFormatIDKey==kAudioFormatLinearPCM
-    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatLinearPCM] forKey:AVFormatIDKey];
     //设置录音采样率(Hz) 如：AVSampleRateKey==8000/44100/96000（影响音频的质量）
     [recordSetting setValue:[NSNumber numberWithFloat:44100] forKey:AVSampleRateKey];
     //录音通道数  1 或 2
@@ -1640,7 +1609,18 @@
 
 -(void)clickedfacemore:(BOOL)bface
 {
-    if( !bface && _morepanstatus == 2 ) return;//已经是显示的输入更多,就不管了,
+    if( !bface && _morepanstatus == 2 )
+    {
+        if( !self.mGiftView.hidden )
+        {
+            [self hidenGiftView];
+        }
+        else
+        {
+            [self hidenMorePan];
+        }
+        return;//已经是显示的输入更多,就不管了,
+    }
     
        
     if( self.mmorepanconsth.constant == 0 )

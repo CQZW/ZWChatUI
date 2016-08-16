@@ -88,7 +88,7 @@
                               @(1440),@(900)
                               ]
                           ];
-        
+        /*
         for ( int j = 0; j<5; j++) {
             
             ZWMsgObj* mmm = ZWMsgObj.new;
@@ -109,7 +109,7 @@
             [NSThread sleepForTimeInterval:0.1];
             [tt addObject:mmm];
         }
-        
+        */
         ZWMsgObj*mmm = ZWMsgObj.new;
         mmm.mMsgID = [NSString stringWithFormat:@"%d",msgid];
         msgid++;

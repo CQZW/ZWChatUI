@@ -11,6 +11,14 @@
 
 #define MorePanH 234
 
+@interface ZWNSTextAttachment : NSTextAttachment
+
+@property (nonatomic,assign)    CGFloat     mFontH;
+@property (nonatomic,strong)    UIImage*    mFaceImg;
+@property (nonatomic,strong)    NSString*   mFaceNmae;
+
+@end
+
 @interface ZWTextView : UITextView
 
 -(void)appendFace:(NSInteger)faceIndex;
