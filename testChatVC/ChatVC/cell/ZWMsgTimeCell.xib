@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G7a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,23 +12,21 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="29.5"/>
+                <frame key="frameInset" width="320" height="29"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alE-z5-ZkC">
-                        <rect key="frame" x="139" y="3" width="42" height="21"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPf-oD-B4n">
-                                <rect key="frame" x="4" y="1" width="34" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="qVF-XH-3LP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.79607843140000001" green="0.78823529410000004" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.79607843140000001" green="0.78823529410000004" blue="0.79215686269999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fPf-oD-B4n" firstAttribute="leading" secondItem="alE-z5-ZkC" secondAttribute="leading" constant="4" id="6Ed-Xh-JHi"/>
                             <constraint firstAttribute="trailing" secondItem="fPf-oD-B4n" secondAttribute="trailing" constant="4" id="JjT-bY-WUx"/>
@@ -36,7 +35,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="alE-z5-ZkC" secondAttribute="bottom" constant="3" id="3Sp-Pj-ohM"/>
                     <constraint firstItem="alE-z5-ZkC" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Wub-h4-DU7"/>
@@ -44,7 +43,7 @@
                     <constraint firstItem="alE-z5-ZkC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="p3e-Lx-dpE"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="mbgview" destination="alE-z5-ZkC" id="XOo-4u-z49"/>
                 <outlet property="mtimelabel" destination="fPf-oD-B4n" id="C5X-E3-Rwr"/>

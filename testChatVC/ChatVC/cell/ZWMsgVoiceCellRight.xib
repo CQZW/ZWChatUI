@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G7a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,41 +12,36 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="56.5"/>
+                <frame key="frameInset" width="320" height="56"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hM3-tB-Znc">
-                        <rect key="frame" x="272" y="8" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="GD6-X3-5KW"/>
                             <constraint firstAttribute="width" constant="40" id="W6b-IN-2PJ"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2.0_sixin_lt_me_" translatesAutoresizingMaskIntoConstraints="NO" id="Sdh-LE-Iw4">
-                        <rect key="frame" x="127" y="8" width="137" height="40"/>
                         <rect key="contentStretch" x="0.20000000000000001" y="0.83999999999999997" width="0.01" height="0.01"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="137" id="9BV-zt-sXZ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12''" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tsz-0N-aUR">
-                        <rect key="frame" x="100" y="27" width="22" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="2re-cD-pPQ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.58431372550000005" green="0.58431372550000005" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_play_voice_right0" translatesAutoresizingMaskIntoConstraints="NO" id="cLi-iu-RUl">
-                        <rect key="frame" x="226" y="18" width="23" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="THu-um-483"/>
                             <constraint firstAttribute="width" constant="23" id="xdS-GR-9vN"/>
                         </constraints>
                     </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" tag="98" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2.0_sixin_lt_!_" translatesAutoresizingMaskIntoConstraints="NO" id="Qec-Ev-MMb">
-                        <rect key="frame" x="104" y="8" width="18" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="18" id="7dn-2B-fTp"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="18" id="C7j-U4-DFi"/>
@@ -57,9 +53,7 @@
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="18" id="yFZ-pJ-v5s"/>
                         </constraints>
                     </imageView>
-                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Olr-au-4se">
-                        <rect key="frame" x="103" y="7" width="20" height="20"/>
-                    </activityIndicatorView>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Olr-au-4se"/>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Qec-Ev-MMb" firstAttribute="top" secondItem="Sdh-LE-Iw4" secondAttribute="top" id="4tR-CI-KRB"/>
